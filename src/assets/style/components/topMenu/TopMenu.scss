@@ -1,0 +1,210 @@
+@import "@/assets/style/theme.scss";
+
+.titleBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  align-items: center;
+  padding: 20px 40px;
+
+  .logobox {
+    width: 15%;
+
+    img {
+      width: 100px;
+      display: block;
+    }
+  }
+
+  .menubox {
+    width: 15%;
+    color: $white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    .home {
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .home:hover {
+      color: white;
+    }
+
+    .tabBox {
+      width: 75%;
+      display: flex;
+      font-size: 12px;
+      justify-content: center;
+      align-items: center;
+      background: $blue;
+      border-radius: 20px;
+      border: 1px solid $border_blue;
+
+      .tab {
+        width: 50%;
+        padding: 8px 4px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 20px;
+        transition: 0.2s;
+        font-weight: 400;
+        position: relative;
+      }
+     
+      .onOff{
+        font-weight: 600 ;
+        color: white;
+        background: $primary;
+        
+      }
+
+      .tab:hover {
+        color: white;
+      }
+
+      .select {
+        background: $primary;
+        color: white;
+      }
+    }
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+    font-weight: 900;
+  }
+
+  .time {
+    width: 15%;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: flex-end;
+    color: $white;
+  }
+}
+
+.infoBox {
+  width: 100%;
+  display: flex;
+  height: 100px;
+  border-top: 1px solid $border_blue;
+  border-bottom: 1px solid $border_blue;
+
+  .tikerBox {
+    width: 88%;
+    background: $blue;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .tiker {
+      height: 48.5px;
+      width: 100%;
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .title {
+        font-size: 14px;
+        width: 8%;
+        text-align: center;
+        background: $blue2;
+        padding: 8px;
+        font-weight: 700;
+        border-radius: 10px;
+        color: $primary;
+      }
+      .content {
+        width: 90%;
+        font-size: 14px;
+        height: 100%;
+        overflow: hidden;
+        height: 30px;
+        color: white;
+        padding-left: 16px;
+
+        .newsList {
+          .news {
+            list-style: none;
+            height: 100%;
+            line-height: 30px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            b {
+              color: $primary;
+            }
+          }
+          .news:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+    .tikerline {
+      height: 1px;
+      width: 100%;
+      background: $border_blue2;
+    }
+  }
+
+  .weatherBox {
+    width: 12%;
+    background: $blue2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .title {
+      font-size: 12px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: white;
+    }
+    .weatherContent {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .weather {
+        font-size: 44px;
+        color: white;
+        i {
+          text-shadow: 2px 2px 6px rgba(220, 220, 221, 0.315);
+          cursor: pointer;
+          transition: 0.3s;
+        }
+        i:hover {
+          color: white;
+          transform: translate(-1px, -1px);
+        }
+      }
+      .weatherInfo {
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+
+        span {
+          font-size: 12px;
+          color: white;
+        }
+
+        .temp {
+          font-size: 22px;
+          font-weight: 600;
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+}

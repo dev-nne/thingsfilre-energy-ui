@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap");
+
+@import "./reset.css";
+
+@import "./components/topMenu/TopMenu.scss";
+
+@import "./theme.scss";
+
+@import "./dashboard.scss";
+
+@import './steam.scss';
+
+@import './electronic.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: $black;
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  background: black;
+}
+
+#app {
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+// ::-webkit-scrollbar{
+//   width: 6px;
+//   padding: 0 1px;
+// }
+
+// /* 스크롤바 막대 설정*/
+// ::-webkit-scrollbar-thumb{
+//   height: 17%;
+//   background-color: #2f6dff93;
+//   border-radius: 10px;
+// }
+
+// /* 스크롤바 뒷 배경 설정*/
+// ::-webkit-scrollbar-track{
+//   background-color: rgba(0,0,0,0);
+// }

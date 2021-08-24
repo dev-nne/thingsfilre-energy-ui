@@ -1,0 +1,353 @@
+.energy{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    .content{
+        flex:1;
+        position: relative;
+
+        //왼쪽 그래프
+        .chartBox {
+            position: absolute;
+            height: 100%;
+            width: 20%;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            justify-content: space-between;
+      
+            .charts {
+              width: 100%;
+              height: 24%;
+              border-radius: 15px;
+              box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.452);
+              background: $blue3;
+              padding: 15px;
+              position: relative;
+              border: 1px solid $border_blue;
+              transition: 0.2s;
+      
+              .title {
+                font-size: 14px;
+                color: white;
+                display: flex;
+                align-items: center;
+                z-index: 10;
+      
+                i {
+                  color: $primary;
+                  margin-right: 6px;
+                  transform: rotate(45deg);
+                  font-size: 10px;
+                }
+              }
+      
+              .chart {
+                position: absolute;
+                top: 50%;
+                left: 10px;
+                transform: translateY(-50%);
+                padding: 10px;
+                width: 70%;
+                z-index: 1;
+              }
+              .chart2 {
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                padding: 10px;
+                width: 100%;
+              }
+
+              .status-box{
+                width: 100%;
+                height: 80%;
+                display: flex;
+                margin-top: 10px;
+                justify-content: space-between;
+                padding: 0.8rem 0.5rem;
+                
+                .status{
+                  width: 25%;
+                  text-align: center;
+                  position: relative;
+
+                  .label{
+                   color: white;
+                   font-size: 14px;
+                  }
+
+                  .numbering{
+                    font-size: 55px;
+                    font-weight: 800;
+                    margin: 0.8rem 0;
+                    color:#D1D1D1;
+                  }
+
+                  .normal{
+                    color:#1067FE;
+                  }
+
+                  .warn{
+                    color: #dfbe08;
+                  }
+                  .error{
+                    color: #e63030;
+                  }
+
+                  .line{
+                    width: 50%;
+                    height: 2px;
+                    background: #afb7da71;
+                    margin:  0 auto;
+                  }
+                }
+
+                .status::after{
+                  content: '';
+                  width: 1px ;
+                  height: 60%;
+                  background: rgba(255,255,255,0.07);
+                  position: absolute;
+                  top: 50%;
+                  right: 0;
+                  transform: translateY(-50%);
+                }
+
+                .status:last-child::after{
+                  width: 0;
+                }
+              }
+            }
+      
+            .charts:hover {
+              transform: translate(-3px, -3px);
+            }
+          }
+
+        //오른쪽 스팀기계
+        .steamsBox{
+            position: absolute;
+            height: calc(100% - 30px);
+            width: calc(18% - 30px);
+            z-index: 1;
+            top: 15px;
+            right: 15px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.452);
+            border-radius: 15px;
+            border: 1px solid $border_blue;
+            display: flex;
+            flex-direction: column;
+
+            .title {
+                font-size: 14px;
+                color: white;
+                display: flex;
+                align-items: center;
+                z-index: 10;
+                margin-bottom: 10px;
+        
+                i {
+                  color: $primary;
+                  margin-right: 6px;
+                  transform: rotate(45deg);
+                  font-size: 10px;
+                }
+              }
+
+             .steams::-webkit-scrollbar {display:none;}
+             .steams{
+              flex: 1;
+              width: 100%;
+              justify-content: space-between;
+              overflow-y: auto;
+              overflow-x: hidden;
+              -ms-overflow-style: none;
+             
+
+              .steam{
+                width: 100%;
+                height: 15%;
+                background: $blue;
+                border: 1px solid #213a60;
+                border-radius: 15px;
+                display: flex;
+                transition: 0.2s;
+                cursor: pointer;
+                justify-content: space-around;
+                position: relative;
+                overflow: hidden;
+                margin-bottom: 10px;
+
+                .steamImgbox {
+                  width: 35%;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+      
+                  img {
+                    width: 100%;
+                    display: block;
+                    opacity: 0.9;
+                  }
+                }
+
+
+                .steamInfo {
+                  width:60%;
+                  display: flex;
+                  flex-direction: column;
+                  padding: 8px;
+      
+                  .titlebox {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 4px;
+                    margin-bottom: 8px;
+      
+                    .title {
+                      font-size: 14px;
+                      font-weight: 600;
+                      margin: 0;
+                    }
+      
+                    .status {
+                      display: flex;
+                      align-items: center;
+                      margin-right: 10px;
+      
+                      .circle {
+                        width: 10px;
+                        height: 10px;
+                        background: $primary;
+                        border-radius: 5px;
+                        margin-right: 4px;
+                      }
+                      span {
+                        color: white;
+                        font-size: 12px;
+                      }
+                    }
+                  }
+      
+                  .energyBox {
+                    width: 100%;
+                    margin: 2px 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+      
+                    .energyname {
+                      width: 40%;
+                      font-size: 12px;
+                      padding: 2px;
+                      border-radius: 12px;
+                     color: $white;
+                    }
+                    .enerygyStatus {
+                      width: 58%;
+                      background: #040B17;
+                      border-radius: 6px;
+                      padding: 6px;
+                      text-align: center;
+                      font-size: 14px;
+                      color: white;
+                    }
+                    .nameColor{
+                      color: $primary;
+                    }
+                  }
+                  
+                }
+
+                .errBlurBox {
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  background: radial-gradient(
+                    rgba(255, 0, 0, 0),
+                    rgba(255, 0, 0, 0.096),
+                    rgba(241, 12, 12, 0.336)
+                  );
+                  z-index: 20;
+                  animation: errAnimation 1.5s infinite both;
+                }
+
+                .warnBlurBox {
+                  width: 100%;
+                  height: 100%;
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  background: radial-gradient(
+                    rgba(255, 0, 0, 0),
+                    rgba(255, 217, 0, 0.068),
+                    rgba(241, 188, 12, 0.13)
+                  );
+                  z-index: 20;
+                  animation: errAnimation 1.5s infinite both;
+                }
+              }
+
+              .steam.errInSteam {
+                border: 2px solid #ca2323a6;
+                position: relative;
+                overflow: hidden;
+
+                .steamInfo{
+                  .titlebox{
+                    .status{
+                      .circle{
+                        background: $red;
+                      }
+                    }
+                  }
+                }
+
+                .energyBox{
+                    .nameColor{
+                      color: $red;
+                    }
+                }
+                   
+              }      
+
+              .steam.warnInSteam {
+                border: 2px solid #f18b05a6;
+                position: relative;
+                overflow: hidden;
+
+                .steamInfo{
+                  .titlebox{
+                    .status{
+                      .circle{
+                        background: $orange;
+                      }
+                    }
+                  }
+                }
+
+                .energyBox{
+                    .nameColor{
+                      color: $orange;
+                    }
+                }
+                   
+              }      
+             }
+        }
+        
+    }
+}
