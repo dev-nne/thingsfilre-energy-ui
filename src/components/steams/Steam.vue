@@ -87,7 +87,7 @@ export default {
           error: false,
           warn: false,
           value: 3,
-          steamStatus: "양호"
+          steamStatus: "정상"
         },
         {
            id: 3,
@@ -98,7 +98,7 @@ export default {
           error: false,
           warn: false,
           value: 1,
-          steamStatus: "양호"
+          steamStatus: "정상"
         },
         {
           id: 4,
@@ -109,7 +109,7 @@ export default {
           error: false,
           warn: false,
           value: 2,
-          steamStatus: "양호"
+          steamStatus: "정상"
         },
         {
          id: 5,
@@ -120,7 +120,7 @@ export default {
           error: false,
           warn: false,
           value: 3,
-          steamStatus: "양호"
+          steamStatus: "정상"
         }, {
           id: 6,
           title: "AA-01",
@@ -152,7 +152,7 @@ export default {
           error: false,
           warn: false,
           value: 3,
-          steamStatus: "양호"
+          steamStatus: "정상"
         },
         {
            id: 9,
@@ -163,7 +163,7 @@ export default {
           error: false,
           warn: false,
           value: 1,
-          steamStatus: "양호"
+          steamStatus: "정상"
         },
         {
           id: 10,
@@ -174,7 +174,7 @@ export default {
           error: false,
           warn: false,
           value: 2,
-          steamStatus: "양호"
+          steamStatus: "정상"
         },
         {
          id: 11,
@@ -185,15 +185,34 @@ export default {
           error: false,
           warn: false,
           value: 3,
-          steamStatus: "양호"
+          steamStatus: "정상"
         }
       ]
     });
 
 
    onMounted(() => {
+    steamSorting();
       store.state.steams = state.steams;
     });
+
+    const steamSorting = () => {
+     const error = state.steams.filter((steam) => steam.error);
+     const warn = state.steams.filter((steam) => steam.warn);
+     const normal = state.steams.filter((steam) => !steam.error && !steam.warn);
+      state.steams = [];
+     for(let i = 0; i < error.length; i++) {
+       state.steams.push(error[i]);
+     }
+
+     for(let i = 0; i < warn.length; i++) {
+       state.steams.push(warn[i]);
+     }
+
+     for(let i = 0; i < normal.length; i++) {
+       state.steams.push(normal[i]);
+     }
+    };
 
     const linkFactory = (target) => {
       sessionStorage.setItem("factory", JSON.stringify(target));

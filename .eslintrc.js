@@ -25,7 +25,8 @@ module.exports = {
     "no-use-before-define": ["error", { "variables": false }],
     "no-underscore-dangle": 'off',
     "eol-last": 0,
-    "no-tabs": 0,
+      'import/extensions': [ 'off', ],
+      "no-tabs": 0,
     "comma-dangle": ["error", "never"],
     "operator-linebreak": [
       "error",
@@ -34,7 +35,7 @@ module.exports = {
         overrides: {
           ":": "before"
         }
-      }
+      },
     ]
   },
   overrides: [
