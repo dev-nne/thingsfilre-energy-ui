@@ -1,6 +1,12 @@
 <template>
 <div class="energy elec">
-    <TopComp :title="state.title" /></div>
+    <TopComp :title="state.title" />
+
+  <div class="main">
+    <img src="@/assets/ex.png" alt="">
+
+    </div>
+  </div>
 </template>
 
 <script>

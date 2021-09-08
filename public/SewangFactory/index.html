@@ -20,11 +20,11 @@
         WebGL builds are not supported on mobile devices.
       </div> -->
       <!-- 아래 풀스크린 주석은 삭제x -->
-      <!-- <div id="unity-footer">
-        <button class="oneButton">1</button>
-        <button class="twoButton">2</button>
+      <div id="unity-footer">
+        <!-- <button class="oneButton">1</button>
+        <button class="twoButton">2</button> -->
         <div id="unity-fullscreen-button"></div> 
-      </div> -->
+      </div>
     </div>
     <script>
       var buildUrl = "Build";
@@ -74,6 +74,8 @@
       }
       loadingBar.style.display = "block";
 
+      let instance;
+
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
@@ -81,13 +83,13 @@
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
-          // fullscreenButton.onclick = () => {
-          //   unityInstance.SetFullscreen(1);
-          // };
-          // oneButton.onclick=()=>{
-          //   unityInstance.SendMessage('SceneManager','ctrl', '1');
-          //   aaa(unityInstance, 'SceneManager','ctrl', '1')
-          // }
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+            instance = unityInstance;
+            // unityInstance.SendMessage('SceneManager','ctrl', '1');
+            // aaa(unityInstance, 'SceneManager','ctrl', '1')
+
           // towButton.onclick=()=>{
           //   unityInstance.SendMessage('SceneManager','ctrl', '0');
           // }
@@ -99,7 +101,14 @@
       function aaa(instance, message, ctrl, num) {
           instance.SendMessage(message,ctrl, num);
         }
+
       document.body.appendChild(script);
+
+      function handelSteamView(value){
+        instance.SendMessage('SceneManager','ctrl', JSON.stringify(value));
+        aaa(instance, 'SceneManager','ctrl', JSON.stringify(value))
+
+      }
     </script>
   </body>
 </html>

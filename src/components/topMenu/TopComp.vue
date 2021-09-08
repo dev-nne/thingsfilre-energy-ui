@@ -21,14 +21,14 @@
         <div class="tiker">
           <div class="title">시화산단 뉴스</div>
           <div class="content">
-            <ul class="newsList">
+            <ul class="newsList ticker">
               <li
                 v-for="(searchData, index) in state.searchData"
                 :key="index"
                 @click="golink(searchData.url)"
                 class="news"
               >
-                {{ searchData.contents }}
+                {{ searchData.title }}
               </li>
             </ul>
           </div>
@@ -37,8 +37,19 @@
         <div class="tiker">
           <div class="title">AI 공지</div>
           <div class="content">
-            씨앤티 j-014 스팀트랩의 상태가 **스팀누수**로 판단(67%)됩니다.. 티앨비전기 에너지 보고서
-            생성이
+            <ul class="newsList ticker2">
+              <li
+                v-for="(searchData, index) in state.searchData"
+                :key="index"
+                @click="golink(searchData.url)"
+                class="news"
+              >
+                {{ searchData.title }}
+              </li>
+            </ul>
+          </div>
+          <div class="listBtn">
+            <i class="fas fa-list"></i>
           </div>
         </div>
       </div>
@@ -93,6 +104,7 @@ export default {
       await weatherIcon();
       await translate();
       await newsAnimation();
+      await newsAnimation2();
     });
 
     const dashboardView = () => {
@@ -116,46 +128,226 @@ export default {
     };
 
     const newsAnimation = () => {
-      gsap.from(".news", {
-        keyframes: [
-          { y: 0, duration: 1.5, ease: "circ.out" },
-          {
- y: -30, duration: 1.5, delay: 2, ease: "circ.out"
-},
-          {
- y: -60, duration: 1.5, delay: 2, ease: "circ.out"
-},
-          {
- y: -90, duration: 1.5, delay: 2, ease: "circ.out"
-},
-          {
- y: -120, duration: 1.5, delay: 2, ease: "circ.out"
-},
-          {
- y: -150, duration: 1.5, delay: 2, ease: "circ.out"
-},
-          {
- y: -180, duration: 1.5, delay: 2, ease: "circ.out"
-},
-          {
- y: -210, duration: 1.5, delay: 2, ease: "circ.out"
-},
-          {
- y: -240, duration: 1.5, delay: 2, ease: "circ.out"
-},
-          {
- y: -270, duration: 1.5, delay: 2, ease: "circ.out"
-},
-          { y: -300, ease: "circ.out", duration: 1 }
-        ],
-        repeat: -1,
-        onComplete: newsAnimationReset()
-      });
+      gsap.registerEffect({
+    	name: "ticker",
+	    effect(targets, config) {
+		  const master = gsap.timeline();
+		  buildTickers(targets, config);
+
+	  	function clone(el) {
+			const clone = el.cloneNode(true);
+			el.parentNode.insertBefore(clone, el);
+			clone.style.position = "absolute";
+			return clone;
+		  }
+	  	function nestChildren(el, className) {
+			const div = document.createElement("div");
+			while (el.firstChild) {
+				div.appendChild(el.firstChild);
+			}
+			el.appendChild(div);
+			className && div.setAttribute("class", className);
+			div.style.display = "inline-block";
+			div.style.boxSizing = "border-box";
+			return div;
+	  	}
+		function buildTickers(targets, config, isResize) {
+			if (isResize) {
+				targets.clones.forEach((el) => el && el.parentNode && el.parentNode.removeChild(el));
+				gsap.set(targets.chunks, { x: 0 });
+			} else {
+				targets.clones = [];
+				targets.chunks = [];
+			}
+			master.clear();
+			const { clones } = targets;
+				const { chunks } = targets;
+			targets.forEach((el, index) => {
+				const chunk = chunks[index] || (chunks[index] = nestChildren(el, config.className));
+					const chunkWidth = chunk.offsetWidth + (config.padding || 0);
+					const cloneCount = Math.ceil(el.offsetWidth / chunkWidth);
+					const chunkBounds = chunk.getBoundingClientRect();
+					const elBounds = el.getBoundingClientRect();
+					const right = (el.dataset.direction || config.direction) === "right";
+					const tl = gsap.timeline();
+					const speed = parseFloat(el.dataset.speed) || config.speed || 100;
+					let i; let offsetX; let offsetY; let bounds; let cloneChunk; let all;
+			  	el.style.overflow = "hidden";
+				  gsap.getProperty(el, "position") !== "absolute" && (el.style.position = "relative"); // avoid scrollbars
+			    for (i = 0; i < cloneCount; i++) {
+					cloneChunk = clones[i] = clone(chunk);
+					if (!i) {
+						bounds = cloneChunk.getBoundingClientRect();
+						offsetX = bounds.left - chunkBounds.left;
+						offsetY = bounds.top - chunkBounds.top;
+					}
+					gsap.set(cloneChunk, { x: offsetX + (right ? -chunkWidth : chunkWidth) * (i + 1), y: offsetY });
+			  	}
+			  	all = clones.slice(0);
+				  all.unshift(chunk);
+				  tl.fromTo(all, {
+					x: right ? `-=${chunkBounds.right - elBounds.left}` : `+=${elBounds.right - chunkBounds.left}`
+				}, {
+					x: (right ? "+=" : "-=") + elBounds.width,
+					ease: "none",
+					duration: elBounds.width / speed,
+					overwrite: "auto"
+				}).to(all, {
+					x: (right ? "+=" : "-=") + chunkWidth,
+					ease: "none",
+					duration: chunkWidth / speed,
+					repeat: -1
+				});
+				master.add(tl, 0);
+			});
+			// rerun on window resizes, otherwise there could be gaps if the user makes the window bigger.
+			isResize || window.addEventListener("resize", () => buildTickers(targets, config, true));
+		}
+		return master;
+	}
+});
+
+const tl = gsap.effects.ticker(".ticker", {
+  speed: 80,
+  className: "ticker-content"
+  // direction: "right"
+});
+
+
+const container = document.querySelector(".ticker");
+container.addEventListener("mouseenter", () => gsap.to(tl, { timeScale: 0, overwrite: true }));
+container.addEventListener("mouseleave", () => gsap.to(tl, { timeScale: 1, overwrite: true }));
+
+//       gsap.from(".news", {
+//         keyframes: [
+//           { y: 0, duration: 1.5, ease: "circ.out" },
+//           {
+//  y: -30, duration: 1.5, delay: 2, ease: "circ.out"
+// },
+//           {
+//  y: -60, duration: 1.5, delay: 2, ease: "circ.out"
+// },
+//           {
+//  y: -90, duration: 1.5, delay: 2, ease: "circ.out"
+// },
+//           {
+//  y: -120, duration: 1.5, delay: 2, ease: "circ.out"
+// },
+//           {
+//  y: -150, duration: 1.5, delay: 2, ease: "circ.out"
+// },
+//           {
+//  y: -180, duration: 1.5, delay: 2, ease: "circ.out"
+// },
+//           {
+//  y: -210, duration: 1.5, delay: 2, ease: "circ.out"
+// },
+//           {
+//  y: -240, duration: 1.5, delay: 2, ease: "circ.out"
+// },
+//           {
+//  y: -270, duration: 1.5, delay: 2, ease: "circ.out"
+// },
+//           { y: -300, ease: "circ.out", duration: 1 }
+//         ],
+//         repeat: -1,
+//         onComplete: newsAnimationReset()
+//       });
     };
 
-    const newsAnimationReset = () => {
-      gsap.set(".news", { y: 30, duration: 1 });
+     const newsAnimation2 = () => {
+      gsap.registerEffect({
+    	name: "ticker2",
+	    effect(targets, config) {
+		  const master = gsap.timeline();
+		  buildTickers(targets, config);
+
+	  	function clone(el) {
+			const clone = el.cloneNode(true);
+			el.parentNode.insertBefore(clone, el);
+			clone.style.position = "absolute";
+			return clone;
+		  }
+	  	function nestChildren(el, className) {
+			const div = document.createElement("div");
+			while (el.firstChild) {
+				div.appendChild(el.firstChild);
+			}
+			el.appendChild(div);
+			className && div.setAttribute("class", className);
+			div.style.display = "inline-block";
+			div.style.boxSizing = "border-box";
+			return div;
+	  	}
+		function buildTickers(targets, config, isResize) {
+			if (isResize) {
+				targets.clones.forEach((el) => el && el.parentNode && el.parentNode.removeChild(el));
+				gsap.set(targets.chunks, { x: 0 });
+			} else {
+				targets.clones = [];
+				targets.chunks = [];
+			}
+			master.clear();
+			const { clones } = targets;
+				const { chunks } = targets;
+			targets.forEach((el, index) => {
+				const chunk = chunks[index] || (chunks[index] = nestChildren(el, config.className));
+					const chunkWidth = chunk.offsetWidth + (config.padding || 0);
+					const cloneCount = Math.ceil(el.offsetWidth / chunkWidth);
+					const chunkBounds = chunk.getBoundingClientRect();
+					const elBounds = el.getBoundingClientRect();
+					const right = (el.dataset.direction || config.direction) === "right";
+					const tl = gsap.timeline();
+					const speed = parseFloat(el.dataset.speed) || config.speed || 100;
+					let i; let offsetX; let offsetY; let bounds; let cloneChunk; let all;
+			  	el.style.overflow = "hidden";
+				  gsap.getProperty(el, "position") !== "absolute" && (el.style.position = "relative"); // avoid scrollbars
+			    for (i = 0; i < cloneCount; i++) {
+					cloneChunk = clones[i] = clone(chunk);
+					if (!i) {
+						bounds = cloneChunk.getBoundingClientRect();
+						offsetX = bounds.left - chunkBounds.left;
+						offsetY = bounds.top - chunkBounds.top;
+					}
+					gsap.set(cloneChunk, { x: offsetX + (right ? -chunkWidth : chunkWidth) * (i + 1), y: offsetY });
+			  	}
+			  	all = clones.slice(0);
+				  all.unshift(chunk);
+				  tl.fromTo(all, {
+					x: right ? `-=${chunkBounds.right - elBounds.left}` : `+=${elBounds.right - chunkBounds.left}`
+				}, {
+					x: (right ? "+=" : "-=") + elBounds.width,
+					ease: "none",
+					duration: elBounds.width / speed,
+					overwrite: "auto"
+				}).to(all, {
+					x: (right ? "+=" : "-=") + chunkWidth,
+					ease: "none",
+					duration: chunkWidth / speed,
+					repeat: -1
+				});
+				master.add(tl, 0);
+			});
+			// rerun on window resizes, otherwise there could be gaps if the user makes the window bigger.
+			isResize || window.addEventListener("resize", () => buildTickers(targets, config, true));
+		}
+		return master;
+	}
+});
+
+const tl = gsap.effects.ticker(".ticker2", {
+  speed: 80,
+  className: "ticker-content"
+  // direction: "right"
+});
+
+
+const container = document.querySelector(".ticker2");
+container.addEventListener("mouseenter", () => gsap.to(tl, { timeScale: 0, overwrite: true }));
+container.addEventListener("mouseleave", () => gsap.to(tl, { timeScale: 1, overwrite: true }));
     };
+
+
     // 뉴스 API
     const kakaoAPI = () => {
       const options = {

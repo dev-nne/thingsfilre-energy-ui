@@ -167,12 +167,26 @@
           .factoryImg {
             width: 30%;
             display: flex;
-            justify-content: center;
             align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8px;
 
             img {
               width: 60%;
               display: block;
+            }
+            .titlebox {
+              width: 100%;
+              margin-top: 8px;
+
+              .title {
+                font-size: 14px;
+                font-weight: 600;
+                text-align: center;
+                width: 100%;
+                margin: 0;
+              }
             }
           }
 
@@ -182,37 +196,7 @@
             flex-direction: column;
             padding: 10px;
 
-            .titlebox {
-              width: 100%;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin-bottom: 8px;
-
-              .title {
-                font-size: 14px;
-                font-weight: 600;
-                margin: 0;
-              }
-
-              .status {
-                display: flex;
-                align-items: center;
-                margin-right: 10px;
-
-                .circle {
-                  width: 10px;
-                  height: 10px;
-                  background: $primary;
-                  border-radius: 5px;
-                  margin-right: 4px;
-                }
-                span {
-                  color: white;
-                  font-size: 12px;
-                }
-              }
-            }
+          
 
             .energyBox {
               width: 100%;

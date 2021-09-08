@@ -9,16 +9,13 @@
     <div class="errBlurBox" v-if="!factory.err"></div>
     <div class="factoryImg">
       <img src="@/assets/factory.svg" alt="" />
+        <div class="titlebox">
+        <div class="title">{{ factory.title }}</div>
+      </div>
     </div>
 
     <div class="factoryInfo">
-      <div class="titlebox">
-        <div class="title">{{ factory.title }}</div>
-        <div class="status">
-          <div class="circle"></div>
-          <span>{{ factory.status }}</span>
-        </div>
-      </div>
+
 
       <div class="energyBox">
         <div class="energyname">

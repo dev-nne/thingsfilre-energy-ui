@@ -4,6 +4,7 @@
     v-for="steam in state.steams"
     :key="steam.id"
     :class="[{ errInSteam: steam.error },{warnInSteam: steam.warn }]"
+    @click="$emit('click', steam.id)"
   >
     <div class="errBlurBox" v-if="steam.error"></div>
     <div class="warnBlurBox" v-if="steam.warn"></div>
@@ -52,8 +53,6 @@ export default {
   setup() {
     const router = useRouter();
     const store = useStore();
-
-
     const state = reactive({
      steams: [
         {
@@ -219,6 +218,8 @@ export default {
       store.state.selectedFac = target;
       router.push("elec");
     };
+
+
 
     return {
       state,

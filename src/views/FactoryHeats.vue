@@ -14,13 +14,13 @@
      <div class="title"><i class="fas fa-circle-notch"></i>스팀트랩 별 상태</div>
 
      <div class="steams">
-       <Steam />
+       <Steam v-on:click="moveSteamView" />
      </div>
 
   </div>
 
   <div class="unity-view">
-      <iframe src="./SewangFactory/index.html" class="unity"/>
+      <iframe src="./SewangFactory/index.html" class="unity" id="unityIFrame"/>
   </div>
   </div>
 
@@ -58,9 +58,18 @@ Status,
       sessionStorage.setItem("page", "steam");
     });
 
+     const moveSteamView = (value) => {
+      const unity = document.getElementById("unityIFrame");
+      const steamView = unity.contentWindow || unity.contentDocument;
+
+      steamView.handelSteamView(value);
+    };
+
 
     return {
-      state, factory
+      state,
+factory,
+      moveSteamView
     };
   }
 };
