@@ -19,13 +19,13 @@ module.exports = {
     "no-unused-vars": 1,
     "no-multiple-empty-lines": 0,
     "space-before-function-paren": 0,
-    'no-plusplus': 'off',
+    "no-plusplus": "off",
     quotes: [2, "double"],
-    "camelcase":  'off',
-    "no-use-before-define": ["error", { "variables": false }],
-    "no-underscore-dangle": 'off',
+    camelcase: "off",
+    "no-use-before-define": ["error", { variables: false }],
+    "no-underscore-dangle": "off",
     "eol-last": 0,
-      'import/extensions': [ 'off', ],
+      "import/extensions": ["off"],
       "no-tabs": 0,
     "comma-dangle": ["error", "never"],
     "operator-linebreak": [
@@ -35,7 +35,7 @@ module.exports = {
         overrides: {
           ":": "before"
         }
-      },
+      }
     ]
   },
   overrides: [

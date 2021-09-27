@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="title"><i class="fas fa-circle-notch"></i>에너지 효율 현황</div>
     <v-chart class="chart" :option="option" />
     <div class="chartLabel">
       <div class="label">
@@ -34,7 +33,7 @@ export default defineComponent({
         formatter: "{a} <br/>{b} : {c} ({d}%)",
         position: "right",
         textStyle: {
-          fontSize: 12,
+          fontSize: 15,
           color: "#fff"
         },
         backgroundColor: "#12131a",
@@ -46,7 +45,7 @@ export default defineComponent({
         bottom: 0,
         data: ["전기", "스팀"],
         textStyle: {
-          fontSize: 10
+          fontSize: 14
         },
         itemHeight: 2,
         itemWidth: 14,

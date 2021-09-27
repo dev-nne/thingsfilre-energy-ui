@@ -1,37 +1,380 @@
 .elec{
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+  .main{
     width: 100%;
-    height: 100vh;
-    overflow: hidden;
+    height: calc(100% - 160px);
+    position: relative;
+    display: flex;
 
-    .main{
-        flex:1;
-        width: 100%;
-        overflow-y: scroll;
+    .mainBG{
+      position: absolute;
+      width: 102%;
+      height: 102%;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      opacity: 0.8;
+      z-index: -1;
 
-        img{
-            width: 100%;
-            display: block;
-        }
     }
 
+    .mainContent{
+      width: 50%;
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+    }
     
-::-webkit-scrollbar{
-  width: 6px;
-  padding: 0 1px;
-}
+    .mainContentL{
+      
 
-/* 스크롤바 막대 설정*/
-::-webkit-scrollbar-thumb{
-  height: 17%;
-  background-color: #2f6dff93;
-  border-radius: 10px;
-}
+      //토탈사용량
+      .total-status{
+        width: 100%;
+        padding: 20px;
+        height: 20%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-/* 스크롤바 뒷 배경 설정*/
-::-webkit-scrollbar-track{
-  background-color: rgba(0,0,0,0);
-}
+        .elec-box{
+          padding: 20px;
+          background: $blue;
+          width: 32%;
+          border-radius: 10px;
+          border: 1px solid $border_blue2;
+          color: white;
+          .title{
+            color: $primary;
+
+          }
+          .num{
+            width: 100%;
+            align-items:flex-end;
+            display: flex;
+            justify-content: space-between;
+
+            .used{
+              font-size: 30px;
+              font-weight: 700;
+              margin-top: 10px;
+              span{
+                font-size: 20px;
+              }
+            }
+
+            .blue{
+              color: $primary;
+            }
+            .red{
+              color: red;
+            }
+            .variation{
+              display: flex;
+              align-items: center;
+
+              i{
+                margin-right: 6px;
+              }
+            }
+          }
+        }
+      }
+
+      .table-status{
+        padding:20px;
+        height: 80%;
+        padding-top: 0;
+        position: relative;
+      
+
+        img{
+          width: 100%;
+          height: 100%;
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          padding: 20px;
+          padding-top: 0;
+          z-index: -1;
+        }
+
+        .content-box{
+         padding: 15px;
+         width: 100%;
+         height: 100%;
+         display: flex;
+         flex-direction: column;
+
+        .title{
+          color: white;
+          font-size: 18px;
+        }
+
+        .toggle{
+          width: 100%;
+          display: flex;
+          justify-content: end;
+          padding: 4px 10px 0 10px;
+          
+          .ant-switch{
+            border: 1px solid $border_blue3 ;
+          }
+          .ant-switch-inner{
+            font-size: 16px;
+          }
+
+          .ant-switch-checked{
+            background: $primary;
+          }
+        }
+
+        .table-box{
+          width: 100%;
+          flex:1;
+          border: 1px solid $border_blue4;
+          margin-top: 12px;
+          border-radius: 10px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+
+          .thead{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background:#2c497a7c ;
+            padding-right: 6px;
+
+            .th{
+              color: white;
+              width: 20%;
+              padding: 16px;
+              text-align: center;
+              position: relative;
+            }
+
+            .two{
+              width: 40%
+            }
+
+            .th::after{
+              content: '';
+              position: absolute;
+              top: 50%;
+              right: 0;
+              transform: translateY(-50%);
+              width: 1px;
+              height: 50%;
+              background: rgba(255,255,255,0.3);
+            }
+
+            .th:last-child::after{
+              width: 0;
+            }
+          }
+
+          .tbody{
+            width: 100%;
+            flex:1;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            background: #1d395a42;
+
+            
+            .tr{
+              width: 100%;
+              display: flex;
+              color: white;
+              border-bottom: 1px solid #4562867c;
+
+              .td{
+                width: 20%;
+                padding: 16px 10px;
+                text-align: center;
+                border-right: 1px solid #4562867c;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+              
+              }
+              .tdbox{
+                width: 60%;
+                display: flex;
+                flex-direction: column;
+
+                .childtr{
+                  display: flex;
+                  width: 100%;
+                  text-align: center;
+                  border-bottom: 1px solid #384c647c;
+                  align-items: center;
+                  
+                  .childtd{
+                    padding: 16px 10px;
+                    border-right: 1px solid #384c647c;
+                    width: calc(100% / 3);
+                  }
+                  .childtd:last-child{
+                    border-right: none;
+                  }
+
+                }
+            
+              }
+
+              .td:last-child{
+                border-right: none;
+              }
+
+             
+              .ant-progress-line{
+                width: 80%;
+              }
+              .ant-progress-text{
+                color: white;
+                opacity: 0.7;
+              }
+
+              .right{
+                text-align: right;
+              }
+            }
+
+            .tr:last-child{
+              border-bottom: none;
+            }
+
+           
+          }
+        }
+
+        .chart-box{
+          width: 100%;
+          flex:1;
+          border: 1px solid $border_blue4;
+          margin-top: 12px;
+          background: #0d1b2ea9;
+          border-radius: 10px;
+          position: relative;
+
+          .chart-title{
+            color: white;
+            padding: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            i{
+              color: $primary;
+              margin-right: 4px;
+              font-size: 14px;
+            }
+          }
+
+            .chart{
+              width: 100%;
+              padding: 10px;
+              width: 100%;
+              height: 100%;
+          }
+         
+        }
+       }
+      }
+    }
+
+    .mainContentR{
+      .topCon{
+        width: 100%;
+        display: flex;
+        padding: 20px;
+        padding-left: 0;
+        height: 40%;
+        padding-bottom: 0;
+        gap: 20px;
+
+        .content{
+          height: 100%;
+          width: 100%;
+          position: relative;
+          img{
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+          }
+          .elecChart{
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+
+            .title{
+              color: white;
+              font-size: 18px;
+              display: flex;
+              align-items: center;
+              i {
+                color: $primary;
+                margin-right: 6px;
+                transform: rotate(45deg);
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+
+      .bottom{
+        height: 60%;
+        padding: 20px;
+        padding-left: 0;
+        width: 100%;
+        position: relative;
+        
+        img{
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          padding: 20px;
+          padding-left: 0;
+          z-index: -1;
+        }
+
+        .elecChart{
+          width: 100%;
+          height: 100%;
+          padding: 15px;
+
+          .title{
+            color: white; 
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            i {
+              color: $primary;
+              margin-right: 6px;
+              transform: rotate(45deg);
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  
 
 }

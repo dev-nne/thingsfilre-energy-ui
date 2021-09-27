@@ -34,25 +34,25 @@ export default {
       let setWeek = "";
       switch (week) {
         case 0:
-          setWeek = "Sun";
+          setWeek = "일요일";
           break;
         case 1:
-          setWeek = "Mon";
+          setWeek = "월요일";
           break;
         case 2:
-          setWeek = "Tue";
+          setWeek = "화요일";
           break;
         case 3:
-          setWeek = "Wed";
+          setWeek = "수요일";
           break;
         case 4:
-          setWeek = "Thu";
+          setWeek = "목요일";
           break;
         case 5:
-          setWeek = "Fri";
+          setWeek = "금요일";
           break;
         case 6:
-          setWeek = "Sat";
+          setWeek = "토요일";
           break;
         default:
           setWeek = "";

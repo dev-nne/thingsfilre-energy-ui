@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <div class="title"><i class="fas fa-circle-notch"></i>스팀스랩 상태이력</div>
     <v-chart class="chart2" :option="option" />
-  </div>
 </template>
 
 <script>
@@ -55,9 +52,10 @@ export default defineComponent({
       backgroundColor: "rgba(0,0,0,0)",
       legend: {
         right: 0,
+top: 10,
         data: ["전기", "스팀"],
         textStyle: {
-          fontSize: 10
+          fontSize: 12
         },
         itemHeight: 2,
         itemWidth: 14,
@@ -89,7 +87,7 @@ export default defineComponent({
             }
         },
         axisLabel: {
-            color: "#fff", fontSize: 9
+            color: "#ccc", fontSize: 12
         },
         splitLine: {
             show: false
@@ -117,7 +115,7 @@ export default defineComponent({
             show: false,
             margin: 20,
             textStyle: {
-              fontSize: 10,
+              fontSize: 12,
               color: "rgba(255,255,255,0.5)"
             }
         },
@@ -169,7 +167,7 @@ export default defineComponent({
                 position: "top",
                 textStyle: {
                     color: "#ccc",
-                    fontSize: 10
+                    fontSize: 12
                 }
             },
             itemStyle: {

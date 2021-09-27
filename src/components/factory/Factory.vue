@@ -8,29 +8,28 @@
   >
     <div class="errBlurBox" v-if="!factory.err"></div>
     <div class="factoryImg">
-      <img src="@/assets/factory.svg" alt="" />
+      <img :src="factoryImg" alt="" />
         <div class="titlebox">
         <div class="title">{{ factory.title }}</div>
       </div>
     </div>
 
     <div class="factoryInfo">
-
-
       <div class="energyBox">
         <div class="energyname">
-          전기에너지 상태
+          전기에너지
           <div class="enerygyStatus" :class="{ errStatus: !factory.electronic }">
-            {{ factory.electronic ? "양호" : "이상" }}
+             <i class="fas" :class="factory.electronic ? `fa-smile` : `fa-frown`"></i>
           </div>
         </div>
       </div>
 
       <div class="energyBox">
         <div class="energyname">
-          열에너지 상태
+          열에너지
           <div class="enerygyStatus" :class="{ errStatus: !factory.heats }">
-            {{ factory.heats ? "양호" : "이상" }}
+             <i class="fas" :class="factory.heats ? `fa-smile` : `fa-frown`"></i>
+            <!-- {{ factory.heats ? "양호"  : "이상" }} -->
           </div>
         </div>
       </div>
@@ -39,6 +38,7 @@
 </template>
 
 <script>
+import factoryImg from "@/assets/factory.svg";
 import {
  onMounted, reactive
 } from "vue";
@@ -123,7 +123,8 @@ export default {
 
     return {
       state,
-      linkFactory
+      linkFactory,
+ factoryImg
     };
   }
 };

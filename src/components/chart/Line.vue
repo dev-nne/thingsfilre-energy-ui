@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <div class="title"><i class="fas fa-circle-notch"></i>월별 에너지 사용량 분석</div>
     <v-chart class="chart2" :option="option" />
-  </div>
 </template>
 
 <script>
@@ -26,7 +23,7 @@ export default defineComponent({
         padding: 4,
         position: "right",
         textStyle: {
-          fontSize: 12,
+          fontSize: 14,
           color: "#fff"
         },
         axisPointer: {
@@ -41,12 +38,12 @@ export default defineComponent({
         right: 0,
         data: ["전기", "스팀"],
         textStyle: {
-          fontSize: 10
+          fontSize: 14
         },
         itemHeight: 2,
         itemWidth: 14,
         itemGap: 6,
-        orient: "vertical"
+        orient: "horizontal"
       },
       grid: {
         left: "3%",
@@ -65,7 +62,7 @@ export default defineComponent({
           type: "category",
           boundaryGap: false,
           data: ["23", "24", "01", "02", "03", "04", "05", "06"],
-          axisLabel: { fontSize: 9 },
+          axisLabel: { fontSize: 14 },
           axisLine: { lineStyle: { width: 0.5 } },
           axisTick: {
             length: 2
@@ -75,7 +72,7 @@ export default defineComponent({
       yAxis: [
         {
           type: "value",
-          axisLabel: { fontSize: 9 }
+          axisLabel: { fontSize: 14 }
         }
       ],
       color: ["#316FFF", "#00BD56", "#85EF47", "#F9FD50"],

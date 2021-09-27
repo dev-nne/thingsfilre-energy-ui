@@ -37,7 +37,7 @@ export default {
         container: "map",
         style: "mapbox://styles/coco-wapplab/ckra0nx4z2dl418qg6a54mh60",
         center: [126.7903013, 37.312074],
-        zoom: 14
+        zoom: 14.2
       });
       map.getCanvas().style.cursor = "default";
 
@@ -90,7 +90,7 @@ export default {
                 "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
                 "text-offset": [0, 2.25],
                 "text-anchor": "top",
-                "text-size": 12
+                "text-size": 14
               },
               paint: {
                 "text-color": "#ffffff",
@@ -183,7 +183,7 @@ export default {
                   "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
                   "text-offset": [0, 2.25],
                   "text-anchor": "top",
-                  "text-size": 12
+                  "text-size": 14
                 },
                 paint: {
                   "text-color": "#F92929",

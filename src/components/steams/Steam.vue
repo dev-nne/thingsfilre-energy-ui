@@ -4,52 +4,61 @@
     v-for="steam in state.steams"
     :key="steam.id"
     :class="[{ errInSteam: steam.error },{warnInSteam: steam.warn }]"
-    @click="$emit('click', steam.id)"
   >
     <div class="errBlurBox" v-if="steam.error"></div>
     <div class="warnBlurBox" v-if="steam.warn"></div>
-    <div class="steamImgbox">
+    <div class="steamImgbox" @click="$emit('click', steam.id)">
       <img :src="require(`@/assets/steamTrap${steam.value}.png`)" alt="" class="steamImg"/>
+       <div class="titlebox">
+        <div class="title">{{ steam.title }}</div>
+      </div>
     </div>
 
-    <div class="steamInfo">
-      <div class="titlebox">
-        <div class="title">{{ steam.title }}</div>
-        <div class="status">
-          <div class="circle"></div>
-          <span>{{ steam.status }}</span>
-        </div>
-      </div>
 
-      <div class="energyBox">
+    <div class="steamInfo">
+      <div class="energyBox tempClick" @click="showModal(steam.title)">
         <div class="energyname">
         In/Out
-        </div>
           <div class="enerygyStatus" >
          {{steam.temp}}
           </div>
+        </div>
       </div>
+
 
       <div class="energyBox">
         <div class="energyname">
           동작상태
-        </div>
           <div class="enerygyStatus nameColor" >
-           {{ steam.steamStatus}}
+          <i class="fas"
+          :class="[{ 'fa-smile': steam.steamStatus === '정상'},
+          { 'fa-frown': steam.steamStatus === '이상'},
+          { 'fa-dizzy': steam.steamStatus === '고장'}]"></i>
           </div>
+        </div>
       </div>
     </div>
+
   </div>
+
+  <a-modal dialogClass="Modal"
+  v-model:visible="visible"
+  @ok="handleOk" :footer="null">
+  <EX />
+  </a-modal>
+
 </template>
 
 <script>
 import {
- onMounted, reactive
+ onMounted, reactive, ref
 } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import EX from "@/components/chart/ex.vue";
 
 export default {
+  components: { EX },
   setup() {
     const router = useRouter();
     const store = useStore();
@@ -219,11 +228,29 @@ export default {
       router.push("elec");
     };
 
+    // 스팀트랩별 온도 그래프 모달
+    const visible = ref(false);
+
+    const showModal = (value) => {
+      const modal = document.querySelector(".steamModal");
+      console.log(modal);
+      store.state.steamsModalTitle = value;
+      visible.value = true;
+    };
+
+    const handleOk = (e) => {
+      console.log(e);
+      visible.value = false;
+    };
+
 
 
     return {
       state,
-      linkFactory
+      linkFactory,
+       showModal,
+      handleOk,
+      visible
     };
   }
 };

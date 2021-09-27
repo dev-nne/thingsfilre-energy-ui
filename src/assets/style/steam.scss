@@ -1,68 +1,199 @@
 .energy{
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 
-    .content{
-        flex:1;
-        position: relative;
+  .content{
+      flex:1;
+      position: relative;
 
-        //왼쪽 그래프
-        .chartBox {
-            position: absolute;
-            height: 100%;
-            width: 20%;
-            z-index: 1;
-            top: 0;
-            left: 0;
+      //왼쪽 그래프
+      .chartBox {
+          position: absolute;
+          height: 100%;
+          width: 20%;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          display: flex;
+          flex-direction: column;
+          padding: 15px;
+          justify-content: space-between;
+    
+          .charts {
+            width: 100%;
+            height: 24%;
+            border-radius: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.452);
+            background: #12131acb;
+            padding: 15px;
+            position: relative;
+            border: 1px solid $border_blue;
+            transition: 0.2s;
             display: flex;
             flex-direction: column;
-            padding: 15px;
-            justify-content: space-between;
-      
-            .charts {
-              width: 100%;
-              height: 24%;
-              border-radius: 15px;
-              box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.452);
-              background: #12131acb;
-              padding: 15px;
-              position: relative;
-              border: 1px solid $border_blue;
-              transition: 0.2s;
-      
-              .title {
+
+            .title {
+              color: white;
+              display: flex;
+              align-items: center;
+              z-index: 10;
+    
+              i {
+                color: $primary;
+                margin-right: 6px;
+                transform: rotate(45deg);
                 font-size: 14px;
+              }
+            }
+            
+            .titlebox{
+              display: flex;
+              justify-content: space-between;
+          
+            .toggle{
+              .ant-switch{
+                border: 1px solid $border_blue3 ;
+              }
+              .ant-switch-inner{
+                font-size: 16px;
+              }
+  
+              .ant-switch-checked{
+                background: $primary;
+              }
+            }
+          }
+    
+            .chart {
+              width: 100%;
+              flex:1
+            }
+            .chart2 {
+              width: 100%;
+              flex:1
+            }
+
+           //토글 테이블 설정
+           .table-box{
+            width: 100%;
+            flex:1;
+            border: 1px solid $border_blue4;
+            margin-top: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+
+            .table{
+              height: 100%;
+            .thead{
+              height: 30%;
+              width: 100%;
+              display: flex;
+              align-items: center;
+              background:#2c497a7c ;
+              padding-right: 6px;
+
+              .th{
                 color: white;
+                width: 50%;
+                padding: 8px;
+                text-align: center;
+                position: relative;
+              }
+
+
+              .th::after{
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: 0;
+                transform: translateY(-50%);
+                width: 1px;
+                height: 50%;
+                background: rgba(255,255,255,0.3);
+              }
+
+              .th:last-child::after{
+                width: 0;
+              }
+            }
+
+            .tbody{
+              width: 100%;
+              height: 70%;
+              overflow-y: scroll;
+              overflow-x: hidden;
+              background: #1d395a42;
+              display: flex;
+
+              
+              .tr{
+                width: 100%;
                 display: flex;
-                align-items: center;
-                z-index: 10;
-      
-                i {
-                  color: $primary;
-                  margin-right: 6px;
-                  transform: rotate(45deg);
-                  font-size: 10px;
+                color: white;
+                flex-direction: column;
+                flex: 1;
+                
+                .td{
+                  width: 100%;
+                  padding: 8px;
+                  text-align: center;
+                  border-right: 1px solid #4562867c;
+                  border-bottom: 1px solid #4562867c;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  flex-direction: column;
+                }
+                .td:last-child{
+                  border-bottom: none;
+                }
+
+              }
+              .lasttr{
+                .td{
+                border-right: none;
+
                 }
               }
-      
-              .chart {
-                position: absolute;
-                top: 50%;
-                left: 10px;
-                transform: translateY(-50%);
-                padding: 10px;
-                width: 70%;
-                z-index: 1;
-              }
-              .chart2 {
-                position: absolute;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-                padding: 10px;
-                width: 100%;
+            }}
+          }
+
+          }
+           
+            .statusInfo{
+              display: flex;
+              flex-direction: column;
+              .title-box{
+                height: 15%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .toggle{
+                  width: 24px;
+                  height: 24px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  border-radius: 20px;
+                  border: 1px solid $white;
+                  color: $white;
+                  transition: 0.2s;
+                  i{
+                    font-size: 12px;
+                  }
+                }
+                .toggle:hover{
+                  border: 1px solid $primary;
+                  color: $primary;
+                  cursor: pointer;
+                }
+
+          
               }
 
               .status-box{
@@ -72,22 +203,66 @@
                 margin-top: 10px;
                 justify-content: space-between;
                 padding: 0.8rem 0.5rem;
+                align-items: center;
                 
                 .status{
                   width: 25%;
                   text-align: center;
                   position: relative;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between;
+                  height: 100%;
 
                   .label{
                    color: white;
-                   font-size: 14px;
                   }
 
                   .numbering{
-                    font-size: 55px;
+                    font-size: 40px;
                     font-weight: 800;
-                    margin: 0.8rem 0;
                     color:#D1D1D1;
+                    cursor: pointer;
+                    opacity: 0.7;
+                    transition: 0.2s;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                  }
+
+                  .numbering::after{
+                    content: '';
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    transform:translateX(-50%);
+                    width: 0;
+                    height: 1.5px;
+                    transition: 0.2s;
+                    opacity: 0.5;
+                  }
+
+                  .numbering:hover{
+                    opacity: 1;
+                  }
+
+                  .numbering:hover::after{
+                    width: 50%;
+                  }
+
+                  .normal::after{
+                    background:#1067FE;
+                  }
+                  .warn::after{
+                    background:#dfbe08;
+                  }
+                  .error::after{
+                    background:#e63030;
+                  }
+                  .info::after{
+                    background:white;
                   }
 
                   .normal{
@@ -106,13 +281,15 @@
                     height: 2px;
                     background: #afb7da71;
                     margin:  0 auto;
+                    margin-top: 20px;
+                  
                   }
                 }
 
                 .status::after{
                   content: '';
                   width: 1px ;
-                  height: 60%;
+                  height: 80%;
                   background: rgba(255,255,255,0.07);
                   position: absolute;
                   top: 50%;
@@ -124,250 +301,381 @@
                   width: 0;
                 }
               }
-            }
-      
-            .charts:hover {
-              transform: translate(-3px, -3px);
-              background: #12131af8;
+             
+            .table-status{
+              height: 85%;
+              overflow: hidden;
+              width: 100%;
+              border: 1px solid $border_blue2;
+              margin-top: 10px;
+              border-radius: 10px;
+              
+                .table{
+                height: 100%;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                
+                .thead{
+                   display: flex;
+                    color: white;
+                    border-bottom: 1px solid $border_blue;
+                    padding: 10px;
+
+                    .no{
+                      width: 35%;
+                    }
+                    .name{
+                      width: 65%;
+                    }
+                  }
+
+                  .tbody{
+                    color: white;
+                    height: 100%;
+                    overflow-y: scroll;
+                    
+                    .tr{
+                      display: flex;
+                      width: 100%;
+                      padding: 10px;
+                      overflow-y: scroll;
+                   
+                      .num{
+                        width: 35%;
+                      }
+
+                      .name{
+                        width: 65%;
+                      }
+                    }
+                    .tr:hover{
+                      background: $blue2
+                    }
+                }
+               
+              }
+
+              }
             }
           }
-          //유니티뷰
-          .unity-view{
-            position: absolute;
+    
+          .charts:hover {
+            transform: translate(-1px, -1px);
+            background: #12131af8;
+          }
+        }
+        //유니티뷰
+        .unity-view{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+
+          .unity{
             width: 100%;
             height: 100%;
-            overflow: hidden;
-
-            .unity{
-              width: 100%;
-              height: 100%;
-              
-            }
+            
           }
-        //오른쪽 스팀기계
-        .steamsBox{
-            position: absolute;
-            height: calc(100% - 30px);
-            width: calc(18% - 30px);
-            z-index: 1;
-            top: 15px;
-            right: 15px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.623);
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.452);
-            border-radius: 15px;
-            border: 1px solid $border_blue;
-            display: flex;
-            flex-direction: column;
+        }
+      //오른쪽 스팀기계
+      .steamsBox{
+          position: absolute;
+          height: calc(100% - 30px);
+          width: calc(18% - 30px);
+          z-index: 1;
+          top: 15px;
+          right: 15px;
+          padding: 15px;
+          background: rgba(0, 0, 0, 0.623);
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.452);
+          border-radius: 15px;
+          border: 1px solid $border_blue;
+          display: flex;
+          flex-direction: column;
 
-            .title {
+          .title {
+              color: white;
+              display: flex;
+              align-items: center;
+              z-index: 10;
+              margin-bottom: 10px;
+      
+              i {
+                color: $primary;
+                margin-right: 6px;
+                transform: rotate(45deg);
                 font-size: 14px;
-                color: white;
-                display: flex;
-                align-items: center;
-                z-index: 10;
-                margin-bottom: 10px;
-        
-                i {
-                  color: $primary;
-                  margin-right: 6px;
-                  transform: rotate(45deg);
-                  font-size: 10px;
+              }
+            }
+           
+           .steams::-webkit-scrollbar {display:none;}
+           .steams{
+            flex: 1;
+            width: 100%;
+            justify-content: space-between;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -ms-overflow-style: none;
+           
+
+            .steam{
+              width: 100%;
+              height: 15%;
+              background: #0e192ca4;
+              border: 1px solid #213a60;
+              border-radius: 15px;
+              display: flex;
+              transition: 0.2s;
+              justify-content: space-around;
+              position: relative;
+              overflow: hidden;
+              margin-bottom: 10px;
+              
+              .steamImgbox {
+                width: 35%;
+               display: flex;
+              align-items: center;
+              flex-direction: column;
+              justify-content: center;
+              gap: 4px;
+              cursor: pointer;
+
+                img {
+                  width: 65%;
+                  display: block;
+                  opacity: 0.9;
+                }
+                
+                .titlebox {
+                  width: 100%;
+    
+                  .title {
+                    font-weight: 600;
+                    text-align: center;
+                    width: 100%;
+                    margin: 0 ;
+                    display: block;
+                    opacity: 0.8;
+                  }
                 }
               }
-             
-             .steams::-webkit-scrollbar {display:none;}
-             .steams{
-              flex: 1;
-              width: 100%;
-              justify-content: space-between;
-              overflow-y: auto;
-              overflow-x: hidden;
-              -ms-overflow-style: none;
-             
 
-              .steam{
-                width: 100%;
-                height: 15%;
-                background: #0e192ca4;
-                border: 1px solid #213a60;
-                border-radius: 15px;
+              .steamInfo {
+                width:65%;
                 display: flex;
-                transition: 0.2s;
-                cursor: pointer;
-                justify-content: space-around;
-                position: relative;
-                overflow: hidden;
-                margin-bottom: 10px;
-
-                .steamImgbox {
-                  width: 35%;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-      
-                  img {
-                    width: 100%;
-                    display: block;
-                    opacity: 0.9;
-                  }
-                }
-
-
-                .steamInfo {
-                  width:60%;
-                  display: flex;
-                  flex-direction: column;
-                  padding: 8px;
-      
-                  .titlebox {
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-top: 4px;
-                    margin-bottom: 8px;
-      
-                    .title {
-                      font-size: 14px;
-                      font-weight: 600;
-                      margin: 0;
-                    }
-      
-                    .status {
-                      display: flex;
-                      align-items: center;
-                      margin-right: 10px;
-      
-                      .circle {
-                        width: 10px;
-                        height: 10px;
-                        background: $primary;
-                        border-radius: 5px;
-                        margin-right: 4px;
-                      }
-                      span {
-                        color: white;
-                        font-size: 12px;
-                      }
-                    }
-                  }
-      
-                  .energyBox {
-                    width: 100%;
-                    margin: 2px 0;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-      
-                    .energyname {
-                      width: 40%;
-                      font-size: 12px;
-                      padding: 2px;
-                      border-radius: 12px;
-                     color: $white;
-                    }
-                    .enerygyStatus {
-                      width: 58%;
-                      background: #040B17;
-                      border-radius: 6px;
-                      padding: 6px;
-                      text-align: center;
-                      font-size: 14px;
-                      color: white;
-                    }
-                    .nameColor{
-                      color: $primary;
-                    }
-                  }
+                flex-direction: column;
+                padding: 10px;
+                gap: 8px;
+               
+    
+                .tempClick{
+                  cursor: pointer;
+                  z-index: 1;
                   
                 }
-
-                .errBlurBox {
-                  width: 100%;
-                  height: 100%;
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  background: radial-gradient(
-                    rgba(255, 0, 0, 0),
-                    rgba(255, 0, 0, 0.096),
-                    rgba(241, 12, 12, 0.336)
-                  );
-                  z-index: 20;
-                  animation: errAnimation 1.5s infinite both;
+               
+               
+                .tempClick:hover .enerygyStatus{
+                  color: white;
                 }
-
-                .warnBlurBox {
+                .energyBox {
                   width: 100%;
-                  height: 100%;
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  background: radial-gradient(
-                    rgba(255, 0, 0, 0),
-                    rgba(255, 217, 0, 0.068),
-                    rgba(241, 188, 12, 0.13)
-                  );
-                  z-index: 20;
-                  animation: errAnimation 1.5s infinite both;
-                }
-              }
+                  height: 50%;
 
-              .steam:hover {
-                transform: translate(0, 2px);
-                background: rgb(14, 25, 44);
-              }
-
-              .steam.errInSteam {
-                border: 2px solid #ca2323a6;
-                position: relative;
-                overflow: hidden;
-
-                .steamInfo{
-                  .titlebox{
-                    .status{
-                      .circle{
-                        background: $red;
-                      }
+                 
+                  .energyname {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                    background:$blue2;
+                    padding: 2px;
+                    align-items: center;
+                    border-radius: 10px;
+                    padding-left: 8px;
+                    height: 100%;
+                    color: white;
+                  }
+                  .enerygyStatus {
+                    color: $primary;
+                    border-radius: 10px;
+                    padding: 4px;
+                    text-align: center;
+                    font-weight: 600;
+                    position: relative;
+                    transition: 0.2s;
+                    i{
+                      font-size: 20px;
+                      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
                     }
                   }
                 }
+              }
 
-                .energyBox{
-                    .nameColor{
-                      color: $red;
-                    }
-                }
-                   
-              }      
+              .errBlurBox {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: radial-gradient(
+                  rgba(255, 0, 0, 0),
+                  rgba(255, 0, 0, 0.096),
+                  rgba(241, 12, 12, 0.418)
+                );
+                z-index: 0;
+                animation: errAnimation 1.5s infinite both;
+              }
 
-              .steam.warnInSteam {
-                border: 2px solid #f18b05a6;
-                position: relative;
-                overflow: hidden;
+              .warnBlurBox {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: radial-gradient(
+                  rgba(255, 0, 0, 0),
+                  rgba(255, 217, 0, 0.068),
+                  rgba(241, 188, 12, 0.192)
+                );
+                z-index: 0;
+                animation: errAnimation 1.5s infinite both;
+              }
+            }
 
-                .steamInfo{
-                  .titlebox{
-                    .status{
-                      .circle{
-                        background: $orange;
-                      }
+            .steam:hover {
+              transform: translate(0, 2px);
+              background: rgb(14, 25, 44);
+            }
+
+            .steam.errInSteam {
+              border: 2px solid #ca2323a6;
+              position: relative;
+              overflow: hidden;
+
+              .steamInfo{
+                .titlebox{
+                  .status{
+                    .circle{
+                      background: $red;
                     }
                   }
                 }
+              }
 
-                .energyBox{
-                    .nameColor{
-                      color: $orange;
+              .energyBox{
+                  .nameColor{
+                    color: $red;
+                  }
+              }
+                 
+            }      
+
+            .steam.warnInSteam {
+              border: 2px solid #f18b05a6;
+              position: relative;
+              overflow: hidden;
+
+              .steamInfo{
+                .titlebox{
+                  .status{
+                    .circle{
+                      background: $orange;
                     }
+                  }
                 }
-                   
-              }      
-             }
+              }
 
-             
-        }
-        
+              .energyBox{
+                  .nameColor{
+                    color: $orange;
+                  }
+              }
+                 
+            }      
+           }
+
+           
+      }
+      
+  }
+
+.Modal{
+
+.ant-modal-close{
+  color: white;
+}
+.ant-modal-header{
+  background: black;
+  border-bottom: 1px solid $border_blue2;
+
+  .ant-modal-title{
+    color: white
+  }
+}
+.ant-modal-content{
+background: black;
+  height:40vh;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid $border_blue2;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.title {
+  color: white;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  font-weight: 600;
+  padding: 15px;
+
+
+  i {
+    color: $primary;
+    margin-right: 6px;
+    transform: rotate(45deg);
+    font-size: 14px;
+  }
+}
+
+.chart {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  width: 100%;
+  z-index: 1;
+  height: 90%;
+}
+
+.ant-modal-body{
+ flex:1;
+  overflow-y: auto;
+  padding: 0;
+
+  li{
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    line-height: 40px;
+    background: $blue;
+    padding: 0 20px;
+
+    i{
+      font-size: 12px;
+      color: $primary;
     }
+  }
+  li:nth-child(2n){
+    background: $blue2;
+  }
+
+  li:hover{
+    color: $primary;
+  }
+}
+
 }

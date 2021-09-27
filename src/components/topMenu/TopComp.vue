@@ -2,7 +2,7 @@
   <div>
     <div div class="titleBox">
       <div class="logobox" v-if="state.dashboard">
-        <img src="@/assets/logo.png" alt="" />
+        <img :src="logoImg" alt="" />
       </div>
       <div class="menubox" v-else>
         <i class="fas fa-home home" @click="goHome"></i>
@@ -35,24 +35,37 @@
         </div>
         <div class="tikerline"></div>
         <div class="tiker">
-          <div class="title">AI 공지</div>
+          <div class="title">AI 공지
+            <i class="fas fa-list-alt" @click="showModal"></i>
+          </div>
           <div class="content">
             <ul class="newsList ticker2">
               <li
-                v-for="(searchData, index) in state.searchData"
+                v-for="(ai, index) in AIdata"
                 :key="index"
-                @click="golink(searchData.url)"
+                @click="goAlertPage(ai.location, ai.id)"
                 class="news"
               >
-                {{ searchData.title }}
+                {{ ai.title }}
               </li>
             </ul>
           </div>
-          <div class="listBtn">
-            <i class="fas fa-list"></i>
-          </div>
+
         </div>
       </div>
+
+      <a-modal v-model:visible="visible" title="AI 공지" @ok="handleOk" :footer="null" dialogClass="Modal">
+        <ul>
+                  <li
+                v-for="(ai, index) in AIdata"
+                :key="index"
+                @click="goAlertPage(ai.location, ai.id)"
+                class="news"
+              >
+                {{ ai.title }}
+              </li>
+        </ul>
+    </a-modal>
 
       <div class="weatherBox">
         <div class="title">오늘 날씨</div>
@@ -69,9 +82,10 @@
 </template>
 
 <script>
+import logoImg from "@/assets/logo.png";
 import Time from "@/components/topMenu/Time.vue";
 import {
- reactive, onMounted
+ reactive, onMounted, ref
 } from "vue";
 import axios from "axios";
 import gsap from "gsap";
@@ -451,6 +465,38 @@ const goElec = () => {
     const goSteam = () => {
       router.push("/steam");
     };
+
+    // AI공지 가라데이터
+    const AIdata = [
+      { title: "세광염직공장에서 스팀알람발생", location: "steam", id: 1 },
+      { title: "티앨비공장에서 전기알람발생", location: "elec", id: 0 },
+      { title: "YH교역공장에서 전기알람발생", location: "elec", id: 2 },
+      { title: "동환무역공장에서 전기알람발생", location: "elec", id: 3 },
+      { title: "우성염직공장에서 스팀알람발생", location: "steam", id: 5 }
+    ];
+
+    const goAlertPage = (link, id) => {
+      console.log(id);
+       const select = store.state.factorys.filter((x) => x.id === id);
+
+       sessionStorage.setItem("factory", JSON.stringify(select[0]));
+       store.state.selectedFac = select[0];
+       router.push(link);
+    };
+
+
+    // AI뉴스공지 모달
+    const visible = ref(false);
+
+    const showModal = () => {
+      console.log(visible);
+      visible.value = true;
+    };
+
+    const handleOk = (e) => {
+      console.log(e);
+      visible.value = false;
+    };
     return {
       kakaoAPI,
       state,
@@ -459,7 +505,13 @@ const goElec = () => {
       goHome,
  goElec,
  goSteam,
- store
+ store,
+  showModal,
+      handleOk,
+ visible,
+ logoImg,
+ AIdata,
+ goAlertPage
     };
   }
 };

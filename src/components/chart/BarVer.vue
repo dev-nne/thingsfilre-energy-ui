@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <div class="title"><i class="fas fa-circle-notch"></i>월별 스팀 상태 분석</div>
     <v-chart class="chart2" :option="option" />
-  </div>
 </template>
 
 <script>
@@ -26,7 +23,7 @@ export default defineComponent({
         padding: 4,
         position: "right",
         textStyle: {
-          fontSize: 12,
+          fontSize: 14,
           color: "#fff"
         },
         axisPointer: {
@@ -40,7 +37,7 @@ export default defineComponent({
       legend: {
         right: 0,
         textStyle: {
-          fontSize: 10
+          fontSize: 14
         },
         itemHeight: 2,
         itemWidth: 12,
@@ -62,9 +59,8 @@ export default defineComponent({
       xAxis: [
         {
           type: "category",
-          boundaryGap: false,
           data: ["23", "24", "01", "02", "03", "04", "05"],
-          axisLabel: { fontSize: 9 },
+          axisLabel: { fontSize: 14 },
           axisLine: { lineStyle: { width: 0.5 } },
           axisTick: {
             show: false
@@ -75,7 +71,7 @@ export default defineComponent({
       yAxis: [
         {
           type: "value",
-          axisLabel: { fontSize: 9 }
+          axisLabel: { fontSize: 14 }
         }
       ],
       color: ["#316FFF", "#00BD56", "#85EF47", "#F9FD50"],
