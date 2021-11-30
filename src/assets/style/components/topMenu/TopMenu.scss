@@ -22,7 +22,8 @@
     color: $white;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    padding-left: 10px;
+    gap: 20px;
 
     .home {
       font-size: 20px;
@@ -143,30 +144,39 @@
         white-space: nowrap;
         overflow: hidden;
         display: inline-block;
+        position: relative;
+
 
         .newsList {
-
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding-left: 100%;
+          width: fit-content;
+          display: flex;
+          box-sizing: content-box;
+ 
           .news {
-            list-style: none;
             height: 100%;
-            line-height: 30px;
             white-space: nowrap;
-            display: inline-block;
-            cursor: pointer;
+            box-sizing: content-box;
+            display: flex;
+            align-items: center;
             position: relative;
-            margin-right: 50px;
-            font-size: 18px;
+            margin-right: 40px;
+            cursor: Default;
 
             b {
               color: $primary;
             }
           }
-
           .news::after{
             content: "";
             position: absolute;
             top: 50%;
-            right: -25px;
+            right: -20px;
             width: 1px;
             height: 50%;
             background: rgba(255,255,255,0.5);
@@ -175,10 +185,39 @@
           .news:hover {
             opacity: 0.5;
           }
+
+          .news:last-child:after{
+            width: 0;
+          }
+        }
+
+      @keyframes ticker {
+        from{
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            visibility: visible;
+        }
+        to{
+            -webkit-transform: translate3d(-200%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
         }
       }
 
-      
+        .list1{
+          animation: ticker 35s linear infinite;
+          .news{
+            cursor: pointer;
+          }
+        }
+        .list2{
+          animation: ticker linear infinite;
+          animation-duration: 20s;
+        }
+        .newsList:hover{
+          animation-play-state: paused;
+        }
+
+      }
     }
     .tikerline {
       height: 1px;
@@ -187,6 +226,34 @@
     }
   }
 
+  .tickerPopover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: white;
+    z-index: 10000;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    background: rgba(0,0,0,0.7);
+    border-radius: 10px;
+    border: 1px solid $primary;
+    padding: 8px;
+
+    .item{
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      .label{
+        font-size: 12px;
+      }
+    }
+  }
+  .showPop{
+    display: flex;
+  }
   .weatherBox {
     width: 12%;
     background: $blue2;
@@ -235,4 +302,57 @@
       }
     }
   }
+  
 }
+
+.Modal{
+
+  .ant-modal-close{
+    color: white;
+  }
+  .ant-modal-header{
+    background: black;
+    border-bottom: 1px solid $border_blue2;
+  
+  .ant-modal-title{
+      color: white
+    }
+  }
+  .ant-modal-content{
+  background: black;
+    height:40vh;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid $border_blue2;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .ant-modal-body{
+   flex:1;
+    overflow-y: auto;
+    padding: 0;
+  
+    li{
+      color: white;
+      cursor: default;
+      transition: 0.2s;
+      line-height: 40px;
+      background: $blue;
+      padding: 0 20px;
+  
+      i{
+        font-size: 12px;
+        color: $primary;
+      }
+    }
+    li:nth-child(2n){
+      background: $blue2;
+    }
+  
+    li:hover{
+      color: $primary;
+    }
+  }
+  
+  }

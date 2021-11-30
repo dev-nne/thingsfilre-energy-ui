@@ -7,18 +7,12 @@
 </template>
 
 <script>
-import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, defineComponent } from "vue";
+
+import { ref } from "vue";
 import { useStore } from "vuex";
 
-export default defineComponent({
-  name: "HelloWorld",
-  components: {
-    VChart
-  },
-  provide: {
-    [THEME_KEY]: "dark"
-  },
+export default {
+
   setup() {
     const store = useStore();
     const option = ref({
@@ -101,7 +95,7 @@ export default defineComponent({
 
     return { option, store };
   }
-});
+};
 </script>
 
 <style scoped></style>

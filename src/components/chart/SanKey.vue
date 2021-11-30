@@ -4,17 +4,9 @@
 </template>
 
 <script>
-import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, defineComponent } from "vue";
+import { ref } from "vue";
 
-export default defineComponent({
-  name: "HelloWorld",
-  components: {
-    VChart
-  },
-  provide: {
-    [THEME_KEY]: "dark"
-  },
+export default {
   setup() {
         const datalist = [
                 {
@@ -256,7 +248,7 @@ export default defineComponent({
 
     return { option };
   }
-});
+};
 </script>
 
 <style scoped></style>

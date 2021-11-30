@@ -4,17 +4,21 @@ import store from "@/store";
 import router from "@/router/index";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import ECharts from "vue-echarts";
 
+import ECharts from "vue-echarts";
 import { use } from "echarts/core";
+import { CanvasRenderer } from "echarts/renderers";
+import MarqueeText from "vue-marquee-text-component";
+
+
 import {
   TitleComponent,
   TooltipComponent,
   LegendComponent,
   GridComponent,
-  ToolboxComponent
+  ToolboxComponent,
+  DataZoomComponent
 } from "echarts/components";
-import { CanvasRenderer } from "echarts/renderers";
 
 import "ant-design-vue/dist/antd.css";
 import "@/assets/style/common.scss";
@@ -22,16 +26,15 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 // Echart 설정
 import {
- BarChart, LineChart, PieChart, SankeyChart, ScatterChart
+ BarChart, LineChart, PieChart, SankeyChart, ScatterChart, EffectScatterChart
 } from "echarts/charts";
 
-
 import App from "./App.vue";
-
 
 use([
   CanvasRenderer,
   BarChart,
+  EffectScatterChart,
   LineChart,
   PieChart,
   GridComponent,
@@ -41,21 +44,17 @@ use([
   CanvasRenderer,
   TooltipComponent,
   SankeyChart,
-  ToolboxComponent, ScatterChart
+  ToolboxComponent,
+  ScatterChart,
+  DataZoomComponent
 ]);
 
-const app = createApp(App);
-app.component("v-chart", ECharts);
-app.use(router);
-app.use(Antd);
-app.use(store);
-app.use(VueAxios, axios);
 
-app.mount("#app");
-
-// createApp(App)
-// .use(router)
-// .use(store)
-// .use(VueAxios, axios)
-// .mount("#app");
-
+createApp(App)
+    .use(Antd)
+    .use(store)
+    .use(router)
+    .use(VueAxios, axios)
+    .component("marquee-text", MarqueeText)
+    .component("v-chart", ECharts)
+    .mount("#app");

@@ -3,79 +3,90 @@
 </template>
 
 <script>
-import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, defineComponent } from "vue";
 
-export default defineComponent({
-  name: "HelloWorld",
-  components: {
-    VChart
-  },
-  provide: {
-    [THEME_KEY]: "dark"
-  },
-  setup() {
-    const option = ref({
+import {
+  reactive, computed, watch
+} from "vue";
+
+export default {
+  props: ["trapType", "count"],
+  setup(props) {
+    const state = reactive({
+      trapType: computed(() => props.trapType),
+      count: computed(() => props.count)
+    });
+
+    watch(state, () => {
+      option.yAxis[0].data = state.trapType;
+      option.series[0].data = state.count;
+    });
+
+    const option = reactive({
       tooltip: {
-        trigger: "item",
-        formatter: "{a} <br/>{b} : {c} ({d}%)",
+        trigger: "axis",
+        formatter (params) {
+          const rander = params.map((item) => `<div><span style="font-size:12px; color:#ddd">${item.seriesName}:</span> ${item.value}`);
+
+          return `<span style="color:#84a9ff; font-size:16px; font-weight:bold">${params[0].axisValue}</span> ${rander}`;
+        },
+        axisPointer: {
+      type: "shadow"
+    },
         backgroundColor: "#12131a",
         padding: 4,
+        borderColor: "#1543AF",
         position: "right",
         textStyle: {
           fontSize: 14,
           color: "#fff"
-        },
-        axisPointer: {
-          type: "cross",
-          label: {
-            show: false
-          }
         }
       },
       backgroundColor: "rgba(0,0,0,0)",
-      legend: {
-        right: 0,
-        top: 10,
-        data: ["a", "b", "c", "d"],
-        textStyle: {
-          fontSize: 14
-        },
-        itemHeight: 2,
-        itemWidth: 12,
-        itemGap: 8,
-        orient: "horizontal"
-      },
-      grid: {
-        left: "3%",
-        right: "3%",
+       grid: {
+        left: "10",
+        right: "5",
         bottom: "0",
-        top: "20%",
+        top: "15",
         containLabel: true
-      },
-      polar: {
-        tooltip: {
-          show: false
-        }
       },
       xAxis: [
         {
           type: "value",
-          axisLabel: { fontSize: 14 },
+          axisLabel: {
+                        show: true,
+                        interval: 0,
+                        textStyle: {
+                            color: "#5D96C4",
+                            padding: 2,
+                            fontSize: 10
+                        }
+                    },
           axisLine: {
             show: true,
             lineStyle: {
-              width: 0.5
+                color: "#31526d"
             }
+          },
+          splitLine: {
+              show: true,
+              lineStyle: {
+                  color: "#31526d"
+              }
           }
         }
       ],
       yAxis: [
         {
           type: "category",
-          data: ["22", "23"],
-          axisLabel: { fontSize: 14 },
-          boundaryGap: ["10%", "10%"],
+          data: state.trapType,
+          axisLabel: {
+          interval: 0,
+          textStyle: {
+                            color: "#5D96C4",
+                            padding: 2,
+                            fontSize: 10
+                        }
+},
           axisTick: {
             show: false
           },
@@ -89,40 +100,18 @@ export default defineComponent({
       color: ["#316FFF", "#00BD56", "#85EF47", "#F9FD50"],
       series: [
         {
-          name: "a",
+          name: "count",
           type: "bar",
-          symbol: "emptyCircle",
-          data: [20, 50],
-          barWidth: "15%",
+          data: state.count,
+          barWidth: "40%",
           barGap: "30%"
-        },
-        {
-          name: "b",
-          type: "bar",
-          symbol: "emptyCircle",
-          data: [100, 85],
-          barWidth: "15%"
-        },
-        {
-          name: "c",
-          type: "bar",
-          symbol: "emptyCircle",
-          data: [23, 52],
-          barWidth: "15%"
-        },
-        {
-          name: "d",
-          type: "bar",
-          symbol: "emptyCircle",
-          data: [56, 125],
-          barWidth: "15%"
         }
       ]
     });
 
     return { option };
   }
-});
+};
 </script>
 
 <style scoped></style>

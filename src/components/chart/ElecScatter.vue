@@ -6,17 +6,10 @@
 </template>
 
 <script>
-import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, defineComponent } from "vue";
 import dataArr from "@/components/data/data.json";
 
-export default defineComponent({
-  components: {
-    VChart
-  },
-  provide: {
-    [THEME_KEY]: "dark"
-  },
+export default {
+
   setup() {
             const normalArr = [];
             const cautionArr = [];
@@ -24,8 +17,11 @@ export default defineComponent({
             const criticalArr = [];
             const faultArr = [];
 
-            for (let i = 0; i < dataArr.length; i++) {
-                const obj = dataArr[i];
+            const result = dataArr.filter((item, idx) => {
+              if(idx % 10 === 0) return item;
+            });
+            for (let i = 0; i < result.length; i++) {
+                const obj = result[i];
 
                 const l_arr = [parseFloat(obj.Feature1), parseFloat(obj.Feature2), obj.State];
                 if (obj.State === "0") normalArr.push(l_arr);
@@ -151,7 +147,7 @@ animationThreshold: 10000
 
     return { option };
   }
-});
+};
 </script>
 
 <style scoped></style>

@@ -89,7 +89,8 @@
             .table{
               height: 100%;
             .thead{
-              height: 30%;
+              padding: 6px 0;
+              height: 12%;
               width: 100%;
               display: flex;
               align-items: center;
@@ -98,7 +99,6 @@
 
               .th{
                 color: white;
-                width: 50%;
                 padding: 8px;
                 text-align: center;
                 position: relative;
@@ -123,45 +123,63 @@
 
             .tbody{
               width: 100%;
-              height: 70%;
-              overflow-y: scroll;
-              overflow-x: hidden;
+              height: 88%;
               background: #1d395a42;
-              display: flex;
-
+              overflow: hidden;
               
-              .tr{
-                width: 100%;
+              .body-box{
                 display: flex;
-                color: white;
-                flex-direction: column;
-                flex: 1;
-                
-                .td{
-                  width: 100%;
-                  padding: 8px;
-                  text-align: center;
-                  border-right: 1px solid #4562867c;
-                  border-bottom: 1px solid #4562867c;
+                width: 100%;
+                overflow-y: scroll;
+                height: 100%;
+
+                .tr{
                   display: flex;
-                  align-items: center;
-                  justify-content: center;
+                  color: white;
                   flex-direction: column;
+                  
+                  .td{
+                    width: 100%;
+                    padding: 8px;
+                    text-align: center;
+                    border-right: 1px solid #4562867c;
+                    border-bottom: 1px solid #4562867c;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                  }
+                  .errTd{
+                    font-weight: 600;
+                    color: $red;
+                  }
+                  .td:last-child{
+                    border-bottom: none;
+                  }
+  
                 }
-                .td:last-child{
-                  border-bottom: none;
+                .lasttr{
+                  .td{
+                    border-right: none;
+                  }
                 }
-
               }
-              .lasttr{
-                .td{
-                border-right: none;
+              
+            }
 
-                }
-              }
-            }}
+            .name{
+              width: 60%;
+            }
+            .status{
+              width: 40%;
+            }
+          }
           }
 
+          }
+
+          .chartTwo{
+            height: 48%;
           }
            
             .statusInfo{
@@ -442,7 +460,7 @@
               cursor: pointer;
 
                 img {
-                  width: 65%;
+                  width: 50%;
                   display: block;
                   opacity: 0.9;
                 }
@@ -451,12 +469,16 @@
                   width: 100%;
     
                   .title {
-                    font-weight: 600;
+                    font-weight: 500;
                     text-align: center;
                     width: 100%;
                     margin: 0 ;
                     display: block;
                     opacity: 0.8;
+                    font-size: 14px;
+                    padding: 4px;
+                    line-height: 18px;
+                    padding-top: 0;
                   }
                 }
               }
@@ -465,7 +487,7 @@
                 width:65%;
                 display: flex;
                 flex-direction: column;
-                padding: 10px;
+                padding: 10px 10px 10px 0;
                 gap: 8px;
                
     
@@ -490,6 +512,7 @@
                     justify-content: space-between;
                     background:$blue2;
                     padding: 2px;
+                    font-size: 14px;
                     align-items: center;
                     border-radius: 10px;
                     padding-left: 8px;
@@ -504,6 +527,33 @@
                     font-weight: 600;
                     position: relative;
                     transition: 0.2s;
+                    font-size: 18px;
+
+                    span{
+                      font-size: 12px;
+                      color: rgba(255, 255, 255, 0.493);
+                      margin-right: 16px;
+                      margin-left: 4px;
+                      position: relative;
+                    }
+                    span::after{
+                      position: absolute;
+                      top: 50%;
+                      right: -8px;
+                      content: "";
+                      width: 1px;
+                      height: 90%;
+                      transform: translateY(-50%);
+                      background: rgba(255, 255, 255, 0.253);
+                    }
+
+                    span:last-child:after{
+                      width: 0;
+                    }
+
+                    span:last-child{
+                      margin-right: 0;
+                    }
                     i{
                       font-size: 20px;
                       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
@@ -600,82 +650,3 @@
       
   }
 
-.Modal{
-
-.ant-modal-close{
-  color: white;
-}
-.ant-modal-header{
-  background: black;
-  border-bottom: 1px solid $border_blue2;
-
-  .ant-modal-title{
-    color: white
-  }
-}
-.ant-modal-content{
-background: black;
-  height:40vh;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid $border_blue2;
-  display: flex;
-  flex-direction: column;
-}
-
-
-.title {
-  color: white;
-  display: flex;
-  align-items: center;
-  z-index: 10;
-  font-weight: 600;
-  padding: 15px;
-
-
-  i {
-    color: $primary;
-    margin-right: 6px;
-    transform: rotate(45deg);
-    font-size: 14px;
-  }
-}
-
-.chart {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 10px;
-  width: 100%;
-  z-index: 1;
-  height: 90%;
-}
-
-.ant-modal-body{
- flex:1;
-  overflow-y: auto;
-  padding: 0;
-
-  li{
-    color: white;
-    cursor: pointer;
-    transition: 0.2s;
-    line-height: 40px;
-    background: $blue;
-    padding: 0 20px;
-
-    i{
-      font-size: 12px;
-      color: $primary;
-    }
-  }
-  li:nth-child(2n){
-    background: $blue2;
-  }
-
-  li:hover{
-    color: $primary;
-  }
-}
-
-}

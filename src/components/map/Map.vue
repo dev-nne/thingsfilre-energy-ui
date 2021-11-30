@@ -105,6 +105,7 @@ export default {
               sessionStorage.setItem("factory", JSON.stringify(target[0]));
 
               store.state.selectedFac = JSON.parse(JSON.stringify(target[0]));
+              store.state.factoryID = id;
               router.push("elec");
             });
 
@@ -198,6 +199,7 @@ export default {
               sessionStorage.setItem("factory", JSON.stringify(target[0]));
 
               store.state.selectedFac = JSON.parse(JSON.stringify(target[0]));
+              store.state.factoryID = id;
               router.push("elec");
               });
 

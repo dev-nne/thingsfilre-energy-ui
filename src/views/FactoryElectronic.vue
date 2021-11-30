@@ -11,12 +11,12 @@
     <div class="mainContentR mainContent">
       <div class="topCon">
         <div class="content">
-          <img :src="ElecChartBG" alt="">
-          <ElecLine />
+          <img src="@/assets/electable2.png" alt="">
+          <ElecLine :data="state.lineElec" />
         </div>
         <div class="content">
-          <img :src="ElecChartBG" alt="">
-           <ElecLine2 />
+          <img src="@/assets/electable2.png" alt="">
+           <ElecLine2 :data="state.dailyData"/>
         </div>
       </div>
       <div class="bottom">
@@ -30,8 +30,9 @@
 
 <script>
 import TopComp from "@/components/topMenu/TopComp.vue";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 import TotalStatus from "@/components/elec/TotalStatus.vue";
 import ElecTable from "@/components/elec/ElecTable.vue";
 import ElecLine from "@/components/chart/ElecLine.vue";
@@ -39,7 +40,6 @@ import ElecLine2 from "@/components/chart/ElecLine2.vue";
 import ElecScatter from "@/components/chart/ElecScatter.vue";
 
 import ElecBG from "@/assets/eneryBG.png";
-import ElecChartBG from "@/assets/electable2.png";
 import ElecChartBG2 from "@/assets/electable3.png";
 
 export default {
@@ -48,19 +48,26 @@ export default {
 },
   setup() {
       const store = useStore();
-       const factory = JSON.parse(sessionStorage.getItem("factory"));
-         const state = reactive({
-      title: `${factory.title} 전기 에너지 효율화 대시보드`
-    });
+      const factory = JSON.parse(sessionStorage.getItem("factory"));
 
      onMounted(() => {
-        console.log(`dd${JSON.stringify(store.state.selectedFac)}`);
       sessionStorage.setItem("page", "elec");
+      store.state.loadPage = "elec";
+      store.dispatch("elec/getElecData");
+      setInterval(() => {
+         store.dispatch("elec/getElecData");
+       }, (15 * 60 * 1000));
+    });
+
+    const state = reactive({
+      title: `${factory.title} 전기 에너지 효율화 대시보드`,
+       lineElec: computed(() => store.getters["elec/lineElec"]),
+       dailyData: computed(() => store.getters["elec/dailyData"])
     });
 
 
     return {
-      state, factory, ElecBG, ElecChartBG, ElecChartBG2
+      state, factory, ElecBG, ElecChartBG2
     };
   }
 };

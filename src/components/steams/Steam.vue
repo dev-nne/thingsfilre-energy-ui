@@ -1,26 +1,26 @@
 <template>
   <div
     class="steam"
-    v-for="steam in state.steams"
-    :key="steam.id"
-    :class="[{ errInSteam: steam.error },{warnInSteam: steam.warn }]"
+    v-for="steam in store.state.steam.steamStatus"
+    :key="steam.devId"
   >
-    <div class="errBlurBox" v-if="steam.error"></div>
-    <div class="warnBlurBox" v-if="steam.warn"></div>
-    <div class="steamImgbox" @click="$emit('click', steam.id)">
-      <img :src="require(`@/assets/steamTrap${steam.value}.png`)" alt="" class="steamImg"/>
+      <!-- :class="[{ errInSteam: steam.error },{warnInSteam: steam.warn }]" -->
+    <!-- <div class="errBlurBox" v-if="steam.error"></div>
+    <div class="warnBlurBox" v-if="steam.warn"></div> -->
+    <div class="steamImgbox" @click="$emit('click', steam.devId)">
+      <img :src="require(`@/assets/steamTrap${steam.trapType}.png`)" alt="" class="steamImg"/>
        <div class="titlebox">
-        <div class="title">{{ steam.title }}</div>
+        <div class="title">{{ steam.pointName }}</div>
       </div>
     </div>
 
 
     <div class="steamInfo">
-      <div class="energyBox tempClick" @click="showModal(steam.title)">
+      <div class="energyBox tempClick">
         <div class="energyname">
         In/Out
           <div class="enerygyStatus" >
-         {{steam.temp}}
+         {{steam.inTemp}}<span>°C</span>{{steam.outTemp}}<span>°C</span>
           </div>
         </div>
       </div>
@@ -66,29 +66,32 @@ export default {
      steams: [
         {
           id: 0,
-          title: "AA-01",
+          num: "0401",
+          title: "R-04",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam1",
           error: true,
           warn: false,
-          value: 1,
+          value: 3,
           steamStatus: "고장"
         },
         {
           id: 1,
-          title: "AA-02",
+          num: "0402",
+          title: "V-14",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam2",
           error: false,
           warn: true,
-          value: 2,
+          value: 3,
           steamStatus: "이상"
         },
         {
           id: 2,
-          title: "AD-07",
+          num: "0403",
+          title: "V-20",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam3",
@@ -99,39 +102,43 @@ export default {
         },
         {
            id: 3,
-          title: "AJ-08",
+           num: "0404",
+          title: "V-25",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam4",
           error: false,
           warn: false,
-          value: 1,
+          value: 3,
           steamStatus: "정상"
         },
         {
           id: 4,
-          title: "AA-01",
+          num: "0405",
+          title: "V-30",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam5",
           error: false,
           warn: false,
-          value: 2,
+          value: 3,
           steamStatus: "정상"
         },
         {
          id: 5,
-          title: "AD-10",
+         num: "0406",
+          title: "텀블러 03",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam6",
           error: false,
           warn: false,
-          value: 3,
+          value: 2,
           steamStatus: "정상"
         }, {
           id: 6,
-          title: "AA-01",
+          num: "0407",
+          title: "VR-01",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam1",
@@ -142,29 +149,32 @@ export default {
         },
         {
           id: 7,
-          title: "AA-02",
+          num: "0408",
+          title: "VR-06",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam2",
           error: false,
           warn: true,
-          value: 2,
+          value: 3,
           steamStatus: "이상"
         },
         {
           id: 8,
-          title: "AD-07",
+          num: "0409",
+          title: "VR-07",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam3",
           error: false,
           warn: false,
-          value: 3,
+          value: 1,
           steamStatus: "정상"
         },
         {
            id: 9,
-          title: "AJ-08",
+           num: "0410",
+          title: "VR-08",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam4",
@@ -175,24 +185,61 @@ export default {
         },
         {
           id: 10,
-          title: "AA-01",
+          num: "0411",
+          title: "염색기 12",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam5",
           error: false,
           warn: false,
-          value: 2,
+          value: 3,
           steamStatus: "정상"
         },
         {
          id: 11,
-          title: "AD-10",
+         num: "0412",
+          title: "염색기 16",
           status: "가동중",
           temp: "110℃/53℃",
           link: "steam6",
           error: false,
           warn: false,
           value: 3,
+          steamStatus: "정상"
+        },
+        {
+         id: 12,
+         num: "0413",
+          title: "염색기 17",
+          status: "가동중",
+          temp: "110℃/53℃",
+          link: "steam6",
+          error: false,
+          warn: false,
+          value: 3,
+          steamStatus: "정상"
+        },
+        {
+         id: 13,
+         num: "0414",
+          title: "염색기 19",
+          status: "가동중",
+          temp: "110℃/53℃",
+          link: "steam6",
+          error: false,
+          warn: false,
+          value: 3,
+          steamStatus: "정상"
+        }, {
+         id: 14,
+         num: "0415",
+          title: "텀블러 01",
+          status: "가동중",
+          temp: "110℃/53℃",
+          link: "steam6",
+          error: false,
+          warn: false,
+          value: 1,
           steamStatus: "정상"
         }
       ]
@@ -250,7 +297,8 @@ export default {
       linkFactory,
        showModal,
       handleOk,
-      visible
+      visible,
+      store
     };
   }
 };

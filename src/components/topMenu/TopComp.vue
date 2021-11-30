@@ -4,12 +4,12 @@
       <div class="logobox" v-if="state.dashboard">
         <img :src="logoImg" alt="" />
       </div>
-      <div class="menubox" v-else>
+      <div class="menubox" v-else >
         <i class="fas fa-home home" @click="goHome"></i>
-        <div class="tabBox">
+        <div class="tabBox" v-if="store.state.factoryID !== '2005007005' && !state.dashboard">
           <div class="tab1 tab"
           :class="{onOff : state.elec}" @click="goElec">전기에너지</div>
-          <div class="tab2 tab" :class="{onOff : state.steam}" @click="goSteam">스팀트랩</div>
+          <div class="tab2 tab" :class="{onOff : state.steam}" @click="goSteam" >스팀트랩</div>
         </div>
       </div>
       <div class="title">{{ title }}</div>
@@ -21,7 +21,7 @@
         <div class="tiker">
           <div class="title">시화산단 뉴스</div>
           <div class="content">
-            <ul class="newsList ticker">
+              <ul class="newsList list1">
               <li
                 v-for="(searchData, index) in state.searchData"
                 :key="index"
@@ -30,7 +30,7 @@
               >
                 {{ searchData.title }}
               </li>
-            </ul>
+              </ul>
           </div>
         </div>
         <div class="tikerline"></div>
@@ -39,28 +39,45 @@
             <i class="fas fa-list-alt" @click="showModal"></i>
           </div>
           <div class="content">
-            <ul class="newsList ticker2">
-              <li
-                v-for="(ai, index) in AIdata"
-                :key="index"
-                @click="goAlertPage(ai.location, ai.id)"
-                class="news"
-              >
+              <ul class="newsList list2">
+                  <li
+                  v-for="(ai, index) in state.aiData"
+                  :key="index"
+                  class="news"
+                  @mouseenter="handleTickerEnter(index)"
+                  @mouseleave="handleTickerLeave"
+                >
                 {{ ai.title }}
-              </li>
-            </ul>
+                </li>
+              </ul>
           </div>
 
         </div>
       </div>
 
-      <a-modal v-model:visible="visible" title="AI 공지" @ok="handleOk" :footer="null" dialogClass="Modal">
+      <div class="tickerPopover">
+        <div class="item">
+          <div class="label">발생 시간 :</div>
+          <div class="value" >{{ state.time }}</div>
+        </div>
+        <div class="item" v-if="store.state.loadPage === 'home'">
+          <div class="label">발생 장소 :</div>
+          <div class="value" >{{ state.site }}</div>
+        </div>
+        <div class="item">
+          <div class="label">발생 장치 :</div>
+          <div class="value" >{{ state.devId }}</div>
+        </div>
+      </div>
+
+      <a-modal v-model:visible="visible" title="AI 공지" @ok="handleOk" :footer="null" dialogClass="Modal" :width="650">
         <ul>
                   <li
-                v-for="(ai, index) in AIdata"
+                v-for="(ai, index) in state.aiData"
                 :key="index"
-                @click="goAlertPage(ai.location, ai.id)"
                 class="news"
+                @mouseenter="handleTickerEnter(index)"
+                @mouseleave="handleTickerLeave"
               >
                 {{ ai.title }}
               </li>
@@ -85,12 +102,14 @@
 import logoImg from "@/assets/logo.png";
 import Time from "@/components/topMenu/Time.vue";
 import {
- reactive, onMounted, ref
+ reactive, onMounted, ref, computed
 } from "vue";
 import axios from "axios";
-import gsap from "gsap";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+
+
+
 
 export default {
   components: {
@@ -107,7 +126,25 @@ export default {
       temp: "",
       dashboard: true,
       elec: false,
-      steam: false
+      steam: false,
+      time: "",
+      site: "",
+      devId: "",
+      aiData: computed(() => {
+        let data = [];
+        if(store.state.loadPage === "home") {
+          data = JSON.parse(JSON.stringify(store.state.main.alarm));
+        }
+        if(store.state.loadPage === "elec") {
+          data = JSON.parse(JSON.stringify(store.state.elec.alarm));
+        }
+        if(store.state.loadPage === "steam") {
+          data = JSON.parse(JSON.stringify(store.state.steam.alarm));
+        }
+        return data;
+      }),
+      idx: 0,
+      alarm: store.state.main.alarm
     });
 
     const router = useRouter();
@@ -117,8 +154,10 @@ export default {
       await weather();
       await weatherIcon();
       await translate();
-      await newsAnimation();
-      await newsAnimation2();
+
+      const listDuration = document.querySelector(".list2").style;
+      const num = state.aiData.length;
+      listDuration.animationDuration = `${5 * num}s`;
     });
 
     const dashboardView = () => {
@@ -140,227 +179,6 @@ export default {
         state.steam = false;
       }
     };
-
-    const newsAnimation = () => {
-      gsap.registerEffect({
-    	name: "ticker",
-	    effect(targets, config) {
-		  const master = gsap.timeline();
-		  buildTickers(targets, config);
-
-	  	function clone(el) {
-			const clone = el.cloneNode(true);
-			el.parentNode.insertBefore(clone, el);
-			clone.style.position = "absolute";
-			return clone;
-		  }
-	  	function nestChildren(el, className) {
-			const div = document.createElement("div");
-			while (el.firstChild) {
-				div.appendChild(el.firstChild);
-			}
-			el.appendChild(div);
-			className && div.setAttribute("class", className);
-			div.style.display = "inline-block";
-			div.style.boxSizing = "border-box";
-			return div;
-	  	}
-		function buildTickers(targets, config, isResize) {
-			if (isResize) {
-				targets.clones.forEach((el) => el && el.parentNode && el.parentNode.removeChild(el));
-				gsap.set(targets.chunks, { x: 0 });
-			} else {
-				targets.clones = [];
-				targets.chunks = [];
-			}
-			master.clear();
-			const { clones } = targets;
-				const { chunks } = targets;
-			targets.forEach((el, index) => {
-				const chunk = chunks[index] || (chunks[index] = nestChildren(el, config.className));
-					const chunkWidth = chunk.offsetWidth + (config.padding || 0);
-					const cloneCount = Math.ceil(el.offsetWidth / chunkWidth);
-					const chunkBounds = chunk.getBoundingClientRect();
-					const elBounds = el.getBoundingClientRect();
-					const right = (el.dataset.direction || config.direction) === "right";
-					const tl = gsap.timeline();
-					const speed = parseFloat(el.dataset.speed) || config.speed || 100;
-					let i; let offsetX; let offsetY; let bounds; let cloneChunk; let all;
-			  	el.style.overflow = "hidden";
-				  gsap.getProperty(el, "position") !== "absolute" && (el.style.position = "relative"); // avoid scrollbars
-			    for (i = 0; i < cloneCount; i++) {
-					cloneChunk = clones[i] = clone(chunk);
-					if (!i) {
-						bounds = cloneChunk.getBoundingClientRect();
-						offsetX = bounds.left - chunkBounds.left;
-						offsetY = bounds.top - chunkBounds.top;
-					}
-					gsap.set(cloneChunk, { x: offsetX + (right ? -chunkWidth : chunkWidth) * (i + 1), y: offsetY });
-			  	}
-			  	all = clones.slice(0);
-				  all.unshift(chunk);
-				  tl.fromTo(all, {
-					x: right ? `-=${chunkBounds.right - elBounds.left}` : `+=${elBounds.right - chunkBounds.left}`
-				}, {
-					x: (right ? "+=" : "-=") + elBounds.width,
-					ease: "none",
-					duration: elBounds.width / speed,
-					overwrite: "auto"
-				}).to(all, {
-					x: (right ? "+=" : "-=") + chunkWidth,
-					ease: "none",
-					duration: chunkWidth / speed,
-					repeat: -1
-				});
-				master.add(tl, 0);
-			});
-			// rerun on window resizes, otherwise there could be gaps if the user makes the window bigger.
-			isResize || window.addEventListener("resize", () => buildTickers(targets, config, true));
-		}
-		return master;
-	}
-});
-
-const tl = gsap.effects.ticker(".ticker", {
-  speed: 80,
-  className: "ticker-content"
-  // direction: "right"
-});
-
-
-const container = document.querySelector(".ticker");
-container.addEventListener("mouseenter", () => gsap.to(tl, { timeScale: 0, overwrite: true }));
-container.addEventListener("mouseleave", () => gsap.to(tl, { timeScale: 1, overwrite: true }));
-
-//       gsap.from(".news", {
-//         keyframes: [
-//           { y: 0, duration: 1.5, ease: "circ.out" },
-//           {
-//  y: -30, duration: 1.5, delay: 2, ease: "circ.out"
-// },
-//           {
-//  y: -60, duration: 1.5, delay: 2, ease: "circ.out"
-// },
-//           {
-//  y: -90, duration: 1.5, delay: 2, ease: "circ.out"
-// },
-//           {
-//  y: -120, duration: 1.5, delay: 2, ease: "circ.out"
-// },
-//           {
-//  y: -150, duration: 1.5, delay: 2, ease: "circ.out"
-// },
-//           {
-//  y: -180, duration: 1.5, delay: 2, ease: "circ.out"
-// },
-//           {
-//  y: -210, duration: 1.5, delay: 2, ease: "circ.out"
-// },
-//           {
-//  y: -240, duration: 1.5, delay: 2, ease: "circ.out"
-// },
-//           {
-//  y: -270, duration: 1.5, delay: 2, ease: "circ.out"
-// },
-//           { y: -300, ease: "circ.out", duration: 1 }
-//         ],
-//         repeat: -1,
-//         onComplete: newsAnimationReset()
-//       });
-    };
-
-     const newsAnimation2 = () => {
-      gsap.registerEffect({
-    	name: "ticker2",
-	    effect(targets, config) {
-		  const master = gsap.timeline();
-		  buildTickers(targets, config);
-
-	  	function clone(el) {
-			const clone = el.cloneNode(true);
-			el.parentNode.insertBefore(clone, el);
-			clone.style.position = "absolute";
-			return clone;
-		  }
-	  	function nestChildren(el, className) {
-			const div = document.createElement("div");
-			while (el.firstChild) {
-				div.appendChild(el.firstChild);
-			}
-			el.appendChild(div);
-			className && div.setAttribute("class", className);
-			div.style.display = "inline-block";
-			div.style.boxSizing = "border-box";
-			return div;
-	  	}
-		function buildTickers(targets, config, isResize) {
-			if (isResize) {
-				targets.clones.forEach((el) => el && el.parentNode && el.parentNode.removeChild(el));
-				gsap.set(targets.chunks, { x: 0 });
-			} else {
-				targets.clones = [];
-				targets.chunks = [];
-			}
-			master.clear();
-			const { clones } = targets;
-				const { chunks } = targets;
-			targets.forEach((el, index) => {
-				const chunk = chunks[index] || (chunks[index] = nestChildren(el, config.className));
-					const chunkWidth = chunk.offsetWidth + (config.padding || 0);
-					const cloneCount = Math.ceil(el.offsetWidth / chunkWidth);
-					const chunkBounds = chunk.getBoundingClientRect();
-					const elBounds = el.getBoundingClientRect();
-					const right = (el.dataset.direction || config.direction) === "right";
-					const tl = gsap.timeline();
-					const speed = parseFloat(el.dataset.speed) || config.speed || 100;
-					let i; let offsetX; let offsetY; let bounds; let cloneChunk; let all;
-			  	el.style.overflow = "hidden";
-				  gsap.getProperty(el, "position") !== "absolute" && (el.style.position = "relative"); // avoid scrollbars
-			    for (i = 0; i < cloneCount; i++) {
-					cloneChunk = clones[i] = clone(chunk);
-					if (!i) {
-						bounds = cloneChunk.getBoundingClientRect();
-						offsetX = bounds.left - chunkBounds.left;
-						offsetY = bounds.top - chunkBounds.top;
-					}
-					gsap.set(cloneChunk, { x: offsetX + (right ? -chunkWidth : chunkWidth) * (i + 1), y: offsetY });
-			  	}
-			  	all = clones.slice(0);
-				  all.unshift(chunk);
-				  tl.fromTo(all, {
-					x: right ? `-=${chunkBounds.right - elBounds.left}` : `+=${elBounds.right - chunkBounds.left}`
-				}, {
-					x: (right ? "+=" : "-=") + elBounds.width,
-					ease: "none",
-					duration: elBounds.width / speed,
-					overwrite: "auto"
-				}).to(all, {
-					x: (right ? "+=" : "-=") + chunkWidth,
-					ease: "none",
-					duration: chunkWidth / speed,
-					repeat: -1
-				});
-				master.add(tl, 0);
-			});
-			// rerun on window resizes, otherwise there could be gaps if the user makes the window bigger.
-			isResize || window.addEventListener("resize", () => buildTickers(targets, config, true));
-		}
-		return master;
-	}
-});
-
-const tl = gsap.effects.ticker(".ticker2", {
-  speed: 80,
-  className: "ticker-content"
-  // direction: "right"
-});
-
-
-const container = document.querySelector(".ticker2");
-container.addEventListener("mouseenter", () => gsap.to(tl, { timeScale: 0, overwrite: true }));
-container.addEventListener("mouseleave", () => gsap.to(tl, { timeScale: 1, overwrite: true }));
-    };
-
 
     // 뉴스 API
     const kakaoAPI = () => {
@@ -454,7 +272,6 @@ container.addEventListener("mouseleave", () => gsap.to(tl, { timeScale: 1, overw
       weatherImg.innerHTML = state.weatherIcon;
     };
 
-
     const goHome = () => {
       router.push("/");
     };
@@ -466,15 +283,6 @@ const goElec = () => {
       router.push("/steam");
     };
 
-    // AI공지 가라데이터
-    const AIdata = [
-      { title: "세광염직공장에서 스팀알람발생", location: "steam", id: 1 },
-      { title: "티앨비공장에서 전기알람발생", location: "elec", id: 0 },
-      { title: "YH교역공장에서 전기알람발생", location: "elec", id: 2 },
-      { title: "동환무역공장에서 전기알람발생", location: "elec", id: 3 },
-      { title: "우성염직공장에서 스팀알람발생", location: "steam", id: 5 }
-    ];
-
     const goAlertPage = (link, id) => {
       console.log(id);
        const select = store.state.factorys.filter((x) => x.id === id);
@@ -483,7 +291,6 @@ const goElec = () => {
        store.state.selectedFac = select[0];
        router.push(link);
     };
-
 
     // AI뉴스공지 모달
     const visible = ref(false);
@@ -496,6 +303,24 @@ const goElec = () => {
     const handleOk = (e) => {
       console.log(e);
       visible.value = false;
+    };
+
+    // ticker popover
+    const handleTickerEnter = (index) => {
+      state.time = state.aiData[index].time;
+      state.site = state.aiData[index].site;
+      state.devId = state.aiData[index].devId;
+      const popover = document.querySelector(".tickerPopover");
+      popover.classList.add("showPop");
+      const positionX = event.clientX;
+      const positionY = event.clientY;
+      popover.style.top = `${positionY + 10}px`;
+      popover.style.left = `${positionX + 10}px`;
+    };
+
+    const handleTickerLeave = () => {
+      const popover = document.querySelector(".tickerPopover");
+      popover.classList.remove("showPop");
     };
     return {
       kakaoAPI,
@@ -510,8 +335,9 @@ const goElec = () => {
       handleOk,
  visible,
  logoImg,
- AIdata,
- goAlertPage
+ goAlertPage,
+ handleTickerEnter,
+ handleTickerLeave
     };
   }
 };

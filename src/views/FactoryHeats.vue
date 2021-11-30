@@ -8,79 +8,56 @@
 
        <div class="charts">
          <div class="titlebox">
-         <div class="title"><i class="fas fa-circle-notch"></i>스팀스랩 상태이력</div>
+         <div class="title"><i class="fas fa-circle-notch"></i>스팀 설비 분류</div>
          <div class="toggle">
     <a-switch  v-model:checked="state.checked1" size="small" />
   </div>
          </div>
-          <SteamLine v-if="state.checked1"/>
+          <SteamBar v-if="state.checked1" :count="state.getCount.count" :trapType="state.getCount.trapType"/>
            <div class="table-box" v-else>
           <div class="table">
      <div class="thead">
-       <div class="th">시간</div>
-       <div class="th">사용량</div>
+       <div class="th">트랩명</div>
+       <div class="th">개수</div>
      </div>
    <div class="tbody">
      <div  class="tr">
-       <div class="num td" v-for="(data,index) in data.chartOne.time" :key="index">{{data}}</div>  </div>
+       <div class="num td" v-for="(data,index) in state.getCount.trapType" :key="index">{{data}}</div>  </div>
         <div  class="tr lasttr">
-       <div class="name td" v-for="(data,index) in data.chartOne.mount" :key="index">{{data}}</div>
+       <div class="name td" v-for="(data,index) in state.getCount.count" :key="index">{{data}}</div>
         </div>
    </div>
    </div>
   </div>
        </div>
-
-
-       <div class="charts">
+       <div class="charts chartTwo">
          <div class="titlebox">
-         <div class="title"><i class="fas fa-circle-notch"></i>스팀스랩 진단분석</div>
+         <div class="title"><i class="fas fa-circle-notch"></i>스팀트랩 진단분석</div>
          <div class="toggle">
     <a-switch  v-model:checked="state.checked2" size="small" />
   </div>
          </div>
-          <SteamChart3 v-if="state.checked2"/>
+          <SteamScatterChart v-if="state.checked2" :data="store.state.steam.diagnosticData" :errData="store.state.steam.errorDiagnosticData" />
            <div class="table-box" v-else>
    <div class="table">
      <div class="thead">
-       <div class="th">시간</div>
-       <div class="th">사용량</div>
+       <div class="th name">설비명</div>
+       <div class="th status">상태</div>
      </div>
    <div class="tbody">
-     <div class="tr">
-       <div class="num td" v-for="(data,index) in data.chartTwo.time" :key="index">{{data}}</div>
-     </div>  <div  class="tr lasttr">
-       <div class="name td" v-for="(data,index) in data.chartTwo.mount" :key="index">{{data}}</div>
+     <div class="body-box">
+       <div class="tr name">
+       <div class="td" v-for="(data,index) in store.state.steam.diagnosticTableData.name" :key="index">{{data}}</div>
+     </div>
+     <div  class="tr lasttr status">
+       <div class="td" :class="{errTd: data}" v-for="(data,index) in store.state.steam.diagnosticTableData.status" :key="index">{{data ? '이상' : '정상'}}</div>
+     </div>
      </div>
    </div>
    </div>
   </div>
        </div>
 
-
-       <div class="charts">
-         <div class="titlebox">
-         <div class="title"><i class="fas fa-circle-notch"></i>월별 스팀 상태 분석</div>
-         <div class="toggle">
-    <a-switch  v-model:checked="state.checked3" size="small" />
-  </div>
-         </div>
-          <BarHor v-if="state.checked3"/>
-           <div class="table-box" v-else>
-   <div class="table">
-     <div class="thead">
-       <div class="th">시간</div>
-       <div class="th">사용량</div>
-     </div>
-   <div class="tbody">
-     <div class="tr">
-       <div class="num td"  v-for="(data,index) in data.chartThree.time" :key="index">{{data}}</div></div>  <div  class="tr lasttr">
-       <div class="name td" v-for="(data,index) in data.chartThree.mount" :key="index">{{data}}</div>
-     </div>
-   </div>
-   </div>
-  </div>
-       </div>
     </div>
 
      <div class="steamsBox">
@@ -104,20 +81,18 @@
 <script>
 import TopComp from "@/components/topMenu/TopComp.vue";
 import Status from "@/components/chart/Status.vue";
-import SteamLine from "@/components/chart/SteamLine.vue";
-import SteamChart3 from "@/components/chart/SteamChart3.vue";
-import BarHor from "@/components/chart/BarHor.vue";
+import SteamBar from "@/components/chart/SteamLine.vue";
+import SteamScatterChart from "@/components/chart/SteamScatterChart.vue";
 import Steam from "@/components/steams/Steam.vue";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, computed } from "vue";
 import { useStore } from "vuex";
 
 export default {
     components: {
- TopComp,
-Status,
-    SteamLine,
-    SteamChart3,
-    BarHor,
+    TopComp,
+    Status,
+    SteamBar,
+    SteamScatterChart,
  Steam
 },
   setup() {
@@ -127,16 +102,21 @@ Status,
       title: `${factory.title} 스팀트랩 상태 대시보드`,
        checked1: true,
        checked2: true,
-       checked3: true
+       checked3: true,
+       getCount: computed(() => store.getters["steam/getCount"])
     });
 
      onMounted(() => {
-       console.log(factory.title);
       sessionStorage.setItem("page", "steam");
+      store.state.loadPage = "steam";
+       store.dispatch("steam/getSteamData");
+      setInterval(() => {
+         store.dispatch("steam/getSteamData");
+       }, (15 * 60 * 1000));
     });
 
      const moveSteamView = (value) => {
-      const unity = document.getElementById("unityIFrame");
+       const unity = document.getElementById("unityIFrame");
       const steamView = unity.contentWindow || unity.contentDocument;
 
       steamView.handelSteamView(value);
@@ -165,7 +145,8 @@ chartOne: {
       state,
 factory,
       moveSteamView,
-      data
+      data,
+      store
     };
   }
 };

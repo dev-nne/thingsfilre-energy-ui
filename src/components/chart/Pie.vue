@@ -4,33 +4,40 @@
     <div class="chartLabel">
       <div class="label">
         <div class="name">전기</div>
-        <div class="num1 num">64mwh</div>
+        <div class="num1 num">{{state.elec}}<span>mwh</span> </div>
       </div>
       <div class="label">
         <div class="name">스팀</div>
-        <div class="num2 num">12.0t</div>
+        <div class="num2 num">{{state.steam}}<span>t</span></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, defineComponent } from "vue";
+import {
+ reactive, watch, computed
+} from "vue";
 
-export default defineComponent({
-  name: "HelloWorld",
-  components: {
-    VChart
-  },
-  provide: {
-    [THEME_KEY]: "dark"
-  },
-  setup() {
-    const option = ref({
+export default {
+   props: ["elecData", "steamData"],
+  setup(props) {
+    const state = reactive({
+      elec: computed(() => props.elecData.slice(-1)[0]),
+      steam: computed(() => props.steamData.slice(-1)[0]),
+      elecV: computed(() => (state.elec / (state.elec + state.steam)) * 100),
+      steamV: computed(() => (state.steam / (state.elec + state.steam)) * 100)
+    });
+
+    watch(state, () => {
+      option.series[0].data[0].value = state.elecV;
+      option.series[0].data[1].value = state.steamV;
+    });
+
+    const option = reactive({
       tooltip: {
         trigger: "item",
-        formatter: "{a} <br/>{b} : {c} ({d}%)",
+        formatter: "{b} : {c}%",
         position: "right",
         textStyle: {
           fontSize: 15,
@@ -45,10 +52,11 @@ export default defineComponent({
         bottom: 0,
         data: ["전기", "스팀"],
         textStyle: {
-          fontSize: 14
+          fontSize: 12,
+          color: "#fff"
         },
         itemHeight: 2,
-        itemWidth: 14,
+        itemWidth: 10,
         itemGap: 6,
         orient: "vertical"
       },
@@ -63,11 +71,11 @@ export default defineComponent({
         {
           type: "pie",
           radius: "60",
-          center: ["50%", "59%"],
+          center: ["55%", "59%"],
           data: [
             {
               name: "전기",
-              value: 64,
+              value: state.elecV,
               align: "center",
               label: {
                 position: "inside",
@@ -78,8 +86,8 @@ export default defineComponent({
               }
             },
             {
-              value: 36,
               name: "스팀",
+              value: state.steamV,
               align: "center",
               label: {
                 position: "inside",
@@ -101,9 +109,9 @@ export default defineComponent({
       ]
     });
 
-    return { option };
+    return { option, state };
   }
-});
+};
 </script>
 
 <style scoped></style>

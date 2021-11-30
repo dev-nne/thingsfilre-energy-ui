@@ -3,24 +3,36 @@
 </template>
 
 <script>
-import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, defineComponent } from "vue";
 
-export default defineComponent({
-  name: "HelloWorld",
-  components: {
-    VChart
-  },
-  provide: {
-    [THEME_KEY]: "dark"
-  },
-  setup() {
-    const option = ref({
+import {
+  reactive, computed, watch
+} from "vue";
+
+export default {
+
+
+  props: ["elecData", "time"],
+  setup(props) {
+    const state = reactive({
+      elec: computed(() => props.elecData),
+      time: computed(() => props.time)
+    });
+
+    watch(state, () => {
+      option.xAxis[0].data = state.time;
+      option.series[0].data = state.elec;
+    });
+
+    const option = reactive({
       tooltip: {
-        trigger: "item",
-        formatter: "{a} <br/>{b} : {c} ({d}%)",
+        trigger: "axis",
+        formatter (params) {
+          const rander = params.map((item) => (item.value !== undefined ? `<div> <span style="font-size:12px; color:#ddd">${item.seriesName}:</span> ${item.seriesName === "전기" ? `${item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} <span style="font-size:10px; color:#ccc">kWh</span>` : `${item.value} <span style="font-size:10px; color:#ccc">%</span>`}</div>` : "")).join("");
+          return `<span style="color:#84a9ff; font-size:16px;  font-weight:bold">${params[0].axisValue}월</span> ${rander}`;
+        },
         backgroundColor: "#12131a",
         padding: 4,
+        borderColor: "#1543AF",
         position: "right",
         textStyle: {
           fontSize: 14,
@@ -35,22 +47,13 @@ export default defineComponent({
       },
       backgroundColor: "rgba(0,0,0,0)",
       legend: {
-        right: 0,
-        data: ["전기", "스팀"],
-        textStyle: {
-          fontSize: 14
-        },
-        itemHeight: 2,
-        itemWidth: 14,
-        itemGap: 6,
-        orient: "horizontal"
+        show: false
       },
       grid: {
-        left: "3%",
-        right: "3%",
-        bottom: "0",
-        top: "30%",
-        containLabel: true
+        left: "18%",
+        right: "10",
+        bottom: "15%",
+        top: "18%"
       },
       polar: {
         tooltip: {
@@ -61,41 +64,111 @@ export default defineComponent({
         {
           type: "category",
           boundaryGap: false,
-          data: ["23", "24", "01", "02", "03", "04", "05", "06"],
-          axisLabel: { fontSize: 14 },
-          axisLine: { lineStyle: { width: 0.5 } },
-          axisTick: {
-            length: 2
-          }
+          data: state.time,
+          axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: "#5D96C4",
+                            padding: 2,
+                            fontSize: 12
+                        }
+                    },
+          axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: "#31526d"
+                        }
+                    },
+                     splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: "#31526d"
+                        }
+                    },
+         axisTick: {
+                        show: false
+                    }
         }
       ],
       yAxis: [
         {
           type: "value",
-          axisLabel: { fontSize: 14 }
+          scale: false,
+          splitNumber: 3,
+          interval: 1500000,
+          axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: "#31526d"
+                        }
+                    },
+          axisLabel: {
+              show: true,
+              textStyle: {
+                  color: "#5D96C4",
+                  padding: 2,
+                  fontSize: 11
+              },
+              overflow: "truncate",
+              width: 50,
+              formatter: "{value}kwh"
+          },
+          splitLine: {
+              show: true,
+              lineStyle: {
+                  color: "#31526d"
+              }
+          }
+        },
+         {
+          type: "value",
+          scale: false,
+          interval: 30,
+          splitNumber: 3,
+          axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: "#31526d"
+                        }
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: "#5D96C4",
+                            padding: 2,
+                            fontSize: 11
+                        },
+                         overflow: "truncate",
+                        width: 45,
+                        formatter: "{value}%"
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: "#31526d"
+                        }
+                    }
         }
       ],
+      dataZoom: [
+				{
+					type: "inside",
+					start: 0,
+					end: 100
+				}
+			],
       color: ["#316FFF", "#00BD56", "#85EF47", "#F9FD50"],
       series: [
         {
           name: "전기",
-          type: "line",
+          type: "bar",
           symbol: "emptyCircle",
           symbolSize: 4,
-          data: [20, 50, 150, 230, 200, 270, 350, 320],
+          data: state.elec,
+           barGap: "-100%",
+            barWidth: "60%",
           areaStyle: {
             color: "#316FFF",
-            opacity: 0.2
-          }
-        },
-        {
-          name: "스팀",
-          type: "line",
-          symbol: "emptyCircle",
-          symbolSize: 4,
-          data: [100, 85, 270, 360, 230, 160, 85, 135],
-          areaStyle: {
-            color: "#00BD56",
             opacity: 0.2
           }
         }
@@ -104,7 +177,7 @@ export default defineComponent({
 
     return { option };
   }
-});
+};
 </script>
 
 <style scoped></style>
