@@ -8,7 +8,6 @@ import VueAxios from "vue-axios";
 import ECharts from "vue-echarts";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import MarqueeText from "vue-marquee-text-component";
 
 
 import {
@@ -55,6 +54,5 @@ createApp(App)
     .use(store)
     .use(router)
     .use(VueAxios, axios)
-    .component("marquee-text", MarqueeText)
     .component("v-chart", ECharts)
     .mount("#app");

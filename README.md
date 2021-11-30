@@ -1,29 +1,10 @@
-# vue-energy
+## 에너지 효율화 대시보드
 
-## Project setup
-```
-npm install
-```
+    띵스파이어 에너지 효율화 대시보드 작업입니다.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### 시작하기
+    1. npm install
+    2. npm run dev
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+#### View
+    http://EUNYHE-SHIN.github.io/energy-dashboard-thingspire
