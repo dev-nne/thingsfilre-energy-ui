@@ -102,7 +102,7 @@
 import logoImg from "@/assets/logo.png";
 import Time from "@/components/topMenu/Time.vue";
 import {
- reactive, onMounted, ref, computed
+ reactive, onMounted, ref, computed, watch
 } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
@@ -144,24 +144,31 @@ export default {
         return data;
       }),
       idx: 0,
-      alarm: store.state.main.alarm
+      alarm: store.state.main.alarm,
+      mount: ""
+    });
+
+    watch(() => state.mount, () => {
+      const listDuration = document.querySelector(".list2").style;
+      const num = state.aiData.length;
+      listDuration.animationDuration = `${6 * num}s`;
     });
 
     const router = useRouter();
-    onMounted(async () => {
+
+    onMounted(
+      async () => {
       await kakaoAPI();
       await dashboardView();
       await weather();
       await weatherIcon();
       await translate();
-
-      const listDuration = document.querySelector(".list2").style;
-      const num = state.aiData.length;
-      listDuration.animationDuration = `${5 * num}s`;
-    });
+      state.mount = "watch";
+    }
+);
 
     const dashboardView = () => {
-      const linkName = sessionStorage.getItem("page");
+      const linkName = store.state.loadPage;
       if (linkName === "home") {
         state.dashboard = true;
       } else {
@@ -284,10 +291,8 @@ const goElec = () => {
     };
 
     const goAlertPage = (link, id) => {
-      console.log(id);
        const select = store.state.factorys.filter((x) => x.id === id);
 
-       sessionStorage.setItem("factory", JSON.stringify(select[0]));
        store.state.selectedFac = select[0];
        router.push(link);
     };

@@ -12,14 +12,7 @@ module.exports = {
     }
 },
     devServer: {
-      proxy: {
-          "/api": {
-              target: "http://localhost:8080" // 개발서버
-          },
-          "/comp": {
-            target: "http://175.123.142.155:28887" // 개발서버
-        }
-      }
+      proxy: "http://175.123.142.155:28887"
   }
     // 프록시 설정
     // proxy: {

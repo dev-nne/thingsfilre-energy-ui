@@ -204,14 +204,13 @@
       }
 
         .list1{
-          animation: ticker 35s linear infinite;
+          animation: ticker 80s linear infinite;
           .news{
             cursor: pointer;
           }
         }
         .list2{
           animation: ticker linear infinite;
-          animation-duration: 20s;
         }
         .newsList:hover{
           animation-play-state: paused;

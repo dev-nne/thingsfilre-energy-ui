@@ -399,7 +399,7 @@
       //오른쪽 스팀기계
       .steamsBox{
           position: absolute;
-          height: calc(100% - 30px);
+          height: calc(65% - 15px);
           width: calc(18% - 30px);
           z-index: 1;
           top: 15px;
@@ -426,7 +426,58 @@
                 font-size: 14px;
               }
             }
+
+            .trapTab{
+
+              .ant-tabs{
+                display: flex;
+                flex-direction: column;
+
+                .energy .steamsBox .trapTab .ant-tabs-bar{
+                  height: 30px;
+                  margin-bottom: 10px;
+                }
+
+              }
+            }
+            .ant-tabs.ant-tabs-card .ant-tabs-card-content>.ant-tabs-tabpane, .ant-tabs.ant-tabs-editable-card .ant-tabs-card-content>.ant-tabs-tabpane{
+              overflow-y: auto;
+              height: 100%;
+            }
+
+            .ant-tabs-bar{
+              border-bottom: none;
+              margin: 0;
+
+            }
+
+            .ant-tabs-nav-scroll{
+              margin-bottom: 10px;
+            }
+            .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab{
+              background: $blue;
+              height: auto;
+              border: none;
+              color: $white;
+              line-height: 30px;
+              border-radius: 20px;
+              margin-right: 4px;
+            }
+            .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active{
+              color: $primary;
+            }
            
+            .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-nav-container{
+              height: auto;
+            }
+
+            .ant-tabs .ant-tabs-bottom-content, .ant-tabs .ant-tabs-top-content{
+              height: calc(100% - 40px);
+            }
+            .ant-tabs.ant-tabs-card .ant-tabs-card-content > .ant-tabs-tabpane-inactive, .ant-tabs.ant-tabs-editable-card .ant-tabs-card-content > .ant-tabs-tabpane-inactive{
+              height: 0;
+            }
+
            .steams::-webkit-scrollbar {display:none;}
            .steams{
             flex: 1;
@@ -435,11 +486,10 @@
             overflow-y: auto;
             overflow-x: hidden;
             -ms-overflow-style: none;
-           
 
             .steam{
               width: 100%;
-              height: 15%;
+              height: 25%;
               background: #0e192ca4;
               border: 1px solid #213a60;
               border-radius: 15px;
@@ -449,6 +499,21 @@
               position: relative;
               overflow: hidden;
               margin-bottom: 10px;
+
+              &.selected{
+                background: rgb(7, 16, 31);
+                border: 1px solid #003f9e;
+                animation: selectItem 1.5s infinite both;
+
+                &.errInSteam {
+                  border: 1px solid #ca2323a6;
+                  animation: errItem 1.5s infinite both;
+                }
+
+                &.warnInSteam {
+                  border: 1px solid #f18b05a6;
+                  animation: warntItem 1.5s infinite both;}
+                }
               
               .steamImgbox {
                 width: 35%;
@@ -458,6 +523,22 @@
               justify-content: center;
               gap: 4px;
               cursor: pointer;
+
+              @keyframes selectItem {
+                from{border: 1px solid #003f9e;}
+                50%{border: 1px solid #1673ff;}
+                to{border: 1px solid #003f9e;}
+              }
+              @keyframes errItem {
+                from{border: 1px solid #ca2323a6;}
+                50%{border: 1px solid #ca2323;}
+                to{border: 1px solid #ca2323a6;}
+              }
+              @keyframes warntItem {
+                from{border: 1px solid #f18b05a6;}
+                50%{border: 1px solid #f18b05fa;}
+                to{border: 1px solid #f18b05a6;}
+              }
 
                 img {
                   width: 50%;
@@ -558,6 +639,13 @@
                       font-size: 20px;
                       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
                     }
+
+                    .fa-frown{
+                      color: #eca200;
+                    }
+                    .fa-dizzy{
+                      color: #ec0000;
+                    }
                   }
                 }
               }
@@ -593,13 +681,17 @@
               }
             }
 
+            .steam:last-child{
+              margin-bottom: 0;
+            }
+
             .steam:hover {
               transform: translate(0, 2px);
               background: rgb(14, 25, 44);
             }
 
             .steam.errInSteam {
-              border: 2px solid #ca2323a6;
+              border: 1px solid #ca2323a6;
               position: relative;
               overflow: hidden;
 
@@ -622,7 +714,7 @@
             }      
 
             .steam.warnInSteam {
-              border: 2px solid #f18b05a6;
+              border: 1px solid #f18b05a6;
               position: relative;
               overflow: hidden;
 
@@ -645,7 +737,341 @@
             }      
            }
 
-           
+           .elecs{
+            flex: 1;
+            flex-direction: column;
+            width: 100%;
+            justify-content: space-between;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -ms-overflow-style: none;
+
+            .elecEquip{
+              width: 100%;
+              margin-bottom: 10px;
+              background: #0e192ca4;
+              border: 1px solid #213a60;
+              border-radius: 15px;
+              display: flex;
+              transition: 0.2s;
+              justify-content: space-around;
+              position: relative;
+              overflow: hidden;
+              cursor: pointer;
+              flex-direction: row;
+              align-items: center;
+
+              .titlebox{
+                width: 50%;
+                display: flex;
+
+                .title{
+                  margin: 0;
+                  padding: 8px 0 8px 8px;
+                }
+              }
+
+              .elecInfo{
+                width: 50%;
+
+                .progress{
+                  width: 100%;
+
+                  span{
+                    color: $white;
+                    font-size: 12px;
+                    text-align: right;
+                    margin-left: 4px;
+                  }
+                }
+              }
+            }
+
+            .elecEquip:hover {
+              transform: translate(0, 2px);
+              background: rgb(14, 25, 44);
+            }
+           }
+      }
+
+      .steamMapBox{
+        position: absolute;
+        width: calc(25% - 30px);
+        right: 15px;
+        padding: 15px;
+        z-index: 1;
+        height: calc(35% - 30px);
+        background: rgba(0, 0, 0, 0.623);
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.452);
+        border-radius: 15px;
+        border: 1px solid $border_blue;
+        bottom: 15px;
+        display: flex;
+        flex-direction: column;
+
+        .title {
+          color: white;
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+  
+          i {
+            color: $primary;
+            margin-right: 6px;
+            transform: rotate(45deg);
+            font-size: 14px;
+          }
+        }
+
+        .steams{
+          width: 100%;
+          flex:1;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          position: relative;
+
+          img{
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+          }
+        }
+        .spot-box{
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+
+          .spot{
+            color: #1067FE;
+            transition: 0.3s;
+            position: absolute;
+            display: inline-block;
+            cursor: pointer;
+            animation: spot 1s infinite;
+            font-size: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.452);
+
+            &.selected{
+              color: #053ea1;
+              &.warn{
+                color: #a87300;
+              }
+              &.err{
+                color: #8d0000;
+              }
+            }
+
+            &.warn{
+              color: #eca200;
+            }
+            &.err{
+              color: #ec0000;
+            }
+          }
+
+          .spot401{
+            top: 55%;
+            left: 12%;
+          }
+          .spot402{
+            top: 88%;
+            left: 12%;
+          }
+          .spot403{
+            top: 88%;
+            left: 17%;
+          }
+          .spot404{
+            top: 78%;
+            left: 22%;
+          }
+          .spot405{
+            top: 78%;
+            left: 30%;
+          }
+          .spot406{
+            top: 88%;
+            left: 36%;
+          }
+          .spot407{
+            top: 88%;
+            left: 41%;
+          }
+          .spot408{
+            top: 88%;
+            left: 46%;
+          }
+          .spot409{
+            top: 88%;
+            left: 51%;
+          }
+          .spot410{
+            top: 55%;
+            left: 69%;
+          }
+          .spot411{
+            top: 62%;
+            left: 71%;
+          }
+          .spot412{
+            top: 70%;
+            left: 69%;
+          }
+          .spot413{
+            top: 70%;
+            left: 75%;
+          }
+          .spot414{
+            top: 55%;
+            left: 79%;
+          } 
+          .spot415{
+            top: 70%;
+            left: 83%;
+          }
+
+          //elecSpot
+
+          .spotmt1{
+            top: 62%;
+            left: 9%;
+          }
+
+          .spotmt2{
+            top: 70%;
+            left: 9%;
+          }
+
+          .spotmt3{
+            top: 65%;
+            left: 14%;
+          }
+
+          .spotmt4{
+            top: 53%;
+            left: 17%;
+          }
+
+          .spotmt5{
+            top: 53%;
+            left: 32%;
+          }
+
+          .spotmt6{
+            top: 53%;
+            left: 36%;
+          }
+
+          .spotmt7{
+            top: 53%;
+            left: 48%;
+          }
+
+          .spotmt8{
+            top: 53%;
+            left: 56%;
+          }
+
+          .spotmt9{
+            top: 73%;
+            left: 20%;
+          }
+
+          .spotmt10{
+            top: 74%;
+            left: 23%;
+          }
+
+          .spotmt11{
+            top: 75%;
+            left: 26%;
+          }
+
+          .spotmt12{
+            top: 75%;
+            left: 29%;
+          }
+          .spotmt13{
+            top: 75%;
+            left: 32%;
+          }
+          .spotmt14{
+            top: 77%;
+            left: 35%;
+          }
+          .spotmt15{
+            top: 77%;
+            left: 40%;
+          }
+          .spotmt16{
+            top: 77%;
+            left: 45%;
+          }
+          .spotmt17{
+            top: 65%;
+            left: 75%;
+          }
+          .spotmt18{
+            top: 75%;
+            left: 85%;
+          }
+          .spotmt19{
+            top: 38%;
+            left: 40%;
+          }
+
+          .spotmt20{
+            top: 6%;
+            left: 25%;
+            
+          }
+          .spotmt21{
+            top: 15%;
+            left: 29%;
+          }
+          .spotmt22{
+            top: 24%;
+            left: 29%;
+          }
+
+          .spot:hover{
+            animation-play-state: paused;
+            color: white;
+          }
+
+          @keyframes spot {
+            from{transform: translate(-50%,-50%);}
+            50%{transform: translate(-50%,-35%);}
+            to{transform: translate(-50%,-50%);}
+          }
+        }
+
+        .resetBtn{
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          font-size: 12px;
+          color: $white;
+          padding: 4px 8px;
+          border: 1px solid $primary;
+          border-radius: 10px;
+          background: rgba(0, 0, 0, 0.4);
+          transition: 0.2s;
+          cursor: pointer;
+
+          .reset{
+            color: $primary;
+          }
+        }
+
+        .resetBtn:hover {
+          background: rgba(0, 0, 0, 0.6);
+         
+        }
       }
       
   }

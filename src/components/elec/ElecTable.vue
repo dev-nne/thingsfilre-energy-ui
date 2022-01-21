@@ -21,7 +21,7 @@
             <div class="td right">{{data.maximum_wh}} <span>Wh</span></div>
             <div class="td progress">
               <a-tooltip :title="`시간 : ${data.femsTime} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 사용전력 : ${data.total_wh} Wh`" >
-              <a-progress stroke-linecap="square" :percent="data.percent" strokeColor="#316fff" strokeWidth="20"  status="active"  :stroke-color="{
+              <a-progress stroke-linecap="square" :percent="data.percent" strokeColor="#316fff" :strokeWidth="20"  status="active"  :stroke-color="{
         '0%': '#316fff',
         '100%': '#31c5ff',
       }" />

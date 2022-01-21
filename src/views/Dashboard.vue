@@ -193,7 +193,6 @@ export default {
     });
 
     onMounted(() => {
-       sessionStorage.setItem("page", "home");
        store.state.loadPage = "home";
        store.state.selectedFac = [];
        store.dispatch("main/getMainData");

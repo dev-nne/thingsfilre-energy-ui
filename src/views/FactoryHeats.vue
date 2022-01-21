@@ -56,25 +56,30 @@
    </div>
    </div>
   </div>
-       </div>
-
     </div>
-
+    </div>
      <div class="steamsBox">
-     <div class="title"><i class="fas fa-circle-notch"></i>스팀트랩 별 상태</div>
-
-     <div class="steams">
-       <Steam v-on:click="moveSteamView" />
-     </div>
+       <div class="title"><i class="fas fa-circle-notch"></i>설비별 상태</div>
+        <a-tabs type="card" v-model:activeKey="store.state.steam.trapTap" class="trapTab" @change="clickTab">
+          <a-tab-pane key="1" tab="스팀트랩">
+            <div class="steams" v-if="store.state.steam.mapkey === 1">
+                <Steam @clickEvent="moveSteamView"/>
+              </div>
+          </a-tab-pane>
+          <a-tab-pane key="2" tab="전력설비">
+            <div class="elecs"  v-if="store.state.steam.mapkey === 2">
+               <Elec @clickEvent="moveSteamView"/>
+              </div>
+          </a-tab-pane>
+        </a-tabs>
 
   </div>
+  <SteamPostion @clickEvent="moveSteamView"/>
 
   <div class="unity-view">
       <iframe src="./SewangFactory/index.html" class="unity" id="unityIFrame"/>
   </div>
   </div>
-
-
 </div>
 </template>
 
@@ -84,7 +89,11 @@ import Status from "@/components/chart/Status.vue";
 import SteamBar from "@/components/chart/SteamLine.vue";
 import SteamScatterChart from "@/components/chart/SteamScatterChart.vue";
 import Steam from "@/components/steams/Steam.vue";
-import { onMounted, reactive, computed } from "vue";
+import Elec from "@/components/steams/Elec.vue";
+import SteamPostion from "@/components/steams/SteamPosition.vue";
+import {
+ onMounted, reactive, computed, watch
+} from "vue";
 import { useStore } from "vuex";
 
 export default {
@@ -93,13 +102,14 @@ export default {
     Status,
     SteamBar,
     SteamScatterChart,
- Steam
+    Elec,
+ Steam,
+ SteamPostion
 },
   setup() {
       const store = useStore();
-       const factory = JSON.parse(sessionStorage.getItem("factory"));
-         const state = reactive({
-      title: `${factory.title} 스팀트랩 상태 대시보드`,
+       const state = reactive({
+        title: `${store.state.selectedFac.title} 스팀트랩 상태 대시보드`,
        checked1: true,
        checked2: true,
        checked3: true,
@@ -107,45 +117,52 @@ export default {
     });
 
      onMounted(() => {
-      sessionStorage.setItem("page", "steam");
-      store.state.loadPage = "steam";
+       store.state.loadPage = "steam";
        store.dispatch("steam/getSteamData");
       setInterval(() => {
          store.dispatch("steam/getSteamData");
        }, (15 * 60 * 1000));
     });
 
-     const moveSteamView = (value) => {
-       const unity = document.getElementById("unityIFrame");
+    watch(() => store.state.steam.steamStatusCall,
+        () => {
+      const unity = document.getElementById("unityIFrame");
       const steamView = unity.contentWindow || unity.contentDocument;
+      if(store.state.steam.steamStatus.length !== 0) {
+        steamView.setData(store.state.steam.steamStatus);
+      }
+    });
 
-      steamView.handelSteamView(value);
+     const moveSteamView = (value) => {
+       console.log(value);
+      const unity = document.getElementById("unityIFrame");
+      const steamView = unity.contentWindow || unity.contentDocument;
+         steamView.handelSteamView(value);
     };
 
-    const data = reactive({
-chartOne: {
-    key: "1",
-    time: ["01", "03", "05", "07", "09", "11", "13", "15"],
-    mount: [100, 85, 270, 360, 230, 160, 85, 135]
-  },
-  chartTwo: {
-    key: "2",
-    time: ["01", "03", "05", "07", "09", "11", "13", "15"],
-    mount: [100, 85, 270, 360, 230, 160, 85, 135]
-  },
-  chartThree: {
-    key: "3",
-    time: ["01", "03", "05", "07", "09", "11", "13", "15"],
-    mount: [100, 85, 270, 360, 230, 160, 85, 135]
-  }
-});
+     const moveElecView = (value) => {
+      const unity = document.getElementById("unityIFrame");
+      const steamView = unity.contentWindow || unity.contentDocument;
+         steamView.handelElecView(value);
+    };
+
+    const clickTab = (value) => {
+      const unity = document.getElementById("unityIFrame");
+      const steamView = unity.contentWindow || unity.contentDocument;
+      if(value === "1") {
+        store.state.steam.mapkey = 1;
+        steamView.ChangeTrapToElec(1000);
+      }else {
+        store.state.steam.mapkey = 2;
+        steamView.ChangeElecToTrap(2000);
+      }
+    };
 
 
     return {
       state,
-factory,
       moveSteamView,
-      data,
+      clickTab,
       store
     };
   }

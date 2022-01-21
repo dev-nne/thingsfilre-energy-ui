@@ -50,10 +50,11 @@ export default {
         show: false
       },
       grid: {
-        left: "18%",
+        left: "-15",
         right: "10",
-        bottom: "15%",
-        top: "18%"
+        bottom: "0%",
+        top: "18%",
+        containLabel: true
       },
       polar: {
         tooltip: {
@@ -139,7 +140,7 @@ export default {
                             fontSize: 11
                         },
                          overflow: "truncate",
-                        width: 45,
+                        width: 30,
                         formatter: "{value}%"
                     },
                     splitLine: {

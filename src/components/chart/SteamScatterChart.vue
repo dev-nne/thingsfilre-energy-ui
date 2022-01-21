@@ -37,7 +37,6 @@ export default {
     watch(state, () => {
       option.series[1].data = convertData(state.diagnosticData);
       option.series[2].data = convertData(state.errorDiagnosticData);
-      console.log(option.series[1].data);
     });
 
     const option = reactive({

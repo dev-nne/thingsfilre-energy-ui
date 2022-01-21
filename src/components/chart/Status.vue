@@ -1,7 +1,7 @@
 <template>
    <div class="statusInfo">
     <div class="title-box"><div class="title">
-      <i class="fas fa-circle-notch"></i>스팀스랩 상태현황</div>
+      <i class="fas fa-circle-notch"></i>스팀트랩 상태현황</div>
      <div class="toggle"  v-if="state.table" @click="toggleTable">
         <i class="fas fa-redo-alt"></i>
      </div>
@@ -10,22 +10,22 @@
     <div class="status-box" v-if="!state.table">
       <div class="status">
         <div class="label">정상</div>
-        <div class="numbering normal" @click="showTable(data1)">05</div>
+        <div class="numbering normal">{{store.state.steam.status.normal}}</div>
       </div>
 
        <div class="status">
         <div class="label">이상</div>
-        <div class="numbering warn" @click="showTable(data2)">01</div>
+        <div class="numbering warn">{{store.state.steam.status.anomaly}}</div>
       </div>
 
        <div class="status">
         <div class="label">고장</div>
-        <div class="numbering error" @click="showTable(data3)">01</div>
+        <div class="numbering error">{{store.state.steam.status.diagnosis}}</div>
       </div>
 
        <div class="status">
         <div class="label">7일예측</div>
-        <div class="numbering info" @click="showTable(data4)">02</div>
+        <div class="numbering info">02</div>
       </div>
     </div>
 

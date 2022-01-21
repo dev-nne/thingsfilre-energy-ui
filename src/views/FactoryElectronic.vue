@@ -21,7 +21,7 @@
       </div>
       <div class="bottom">
         <img :src="ElecChartBG2" alt="">
-        <ElecScatter />
+        <ElecScatter :data="store.state.elec.diagnosticData" :errData="store.state.elec.errorDiagnosticData" />
       </div>
     </div>
     </div>
@@ -48,10 +48,9 @@ export default {
 },
   setup() {
       const store = useStore();
-      const factory = JSON.parse(sessionStorage.getItem("factory"));
+      const factory = store.state.selectedFac;
 
      onMounted(() => {
-      sessionStorage.setItem("page", "elec");
       store.state.loadPage = "elec";
       store.dispatch("elec/getElecData");
       setInterval(() => {
@@ -67,7 +66,7 @@ export default {
 
 
     return {
-      state, factory, ElecBG, ElecChartBG2
+      state, factory, ElecBG, ElecChartBG2, store
     };
   }
 };

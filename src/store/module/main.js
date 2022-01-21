@@ -4,6 +4,63 @@ import moment from "moment";
 const main = {
   namespaced: true,
   state: {
+    factoryReload: false,
+    factorys: [
+      {
+        id: "2005007001",
+        title: "티엘비",
+        status: "가동중",
+        electronic: true,
+        heats: true,
+        error: false,
+        location: [126.7851598, 37.3196074]
+      },
+      {
+        id: "2005007002",
+        title: "우성염직",
+        status: "가동중",
+        electronic: true,
+        heats: true,
+        error: false,
+        location: [126.7993333, 37.3054562]
+      },
+      {
+        id: "2005007003",
+        title: "YH교역",
+        status: "가동중",
+        electronic: true,
+        heats: true,
+        error: false,
+        location: [126.7939726, 37.3044567]
+      },
+      {
+        id: "2005007004",
+        title: "세왕섬유",
+        status: "가동중",
+        electronic: true,
+        heats: true,
+        error: false,
+        location: [126.7785937, 37.3196284]
+      },
+      {
+        id: "2005007005",
+        title: "유트로닉스",
+        status: "가동중",
+        electronic: true,
+        heats: true,
+        error: false,
+        location: [126.7963612, 37.3040123]
+      },
+      {
+        id: "2005007006",
+        title: "화백엔지니어링",
+        status: "가동중",
+        electronic: true,
+        heats: true,
+        error: false,
+        location: [126.7933043, 37.3068236]
+      }
+    ],
     daily: {
       lastweek_elec: "",
       lastweek_time: "",
@@ -103,10 +160,26 @@ const main = {
     },
     getAlarm(state, datas) {
       state.alarm = datas;
+    },
+    getEnergyList(state, datas) {
+      state.factoryReload = true;
+      for(let i = 0; i < datas.length; i++) {
+        state.factorys.forEach((list) => {
+          const id = datas[i].siteid.toString();
+          if(list.id === id && datas[i].class === "steam") {
+            list.error = true;
+            list.heats = false;
+          }
+          if(list.id === id && datas[i].class === "elec") {
+            list.error = true;
+            list.electronic = false;
+          }
+        });
+      }
     }
   },
   actions: {
-    getMainData({ rootState, commit }) {
+    getMainData({ rootState, state, commit }) {
       axios.post(`${rootState.globalIP}/main/elec/daily-usage`).then((data) => {
         const datas = data.data;
 
@@ -201,6 +274,12 @@ const main = {
           dataArr.push(alarm);
         }
         commit("getAlarm", dataArr);
+      });
+
+      // 에너지효율현황
+      axios.post(`${rootState.globalIP}/main/current_status`).then((data) => {
+        state.factoryReload = false;
+        commit("getEnergyList", data.data);
       });
     }
   }

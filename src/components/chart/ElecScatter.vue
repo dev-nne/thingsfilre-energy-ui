@@ -6,145 +6,178 @@
 </template>
 
 <script>
-import dataArr from "@/components/data/data.json";
+import dataArr from "@/assets/scatterbg.json";
+import { computed, reactive, watch } from "vue";
 
 export default {
+ props: ["data", "errData"],
+  setup(props) {
+      const state = reactive({
+      tempInOutData: computed(() => {
+        const data = [];
+        for(let i = 0; i < dataArr.length; i++) {
+          data.push([dataArr[i].act_kwh, dataArr[i].react_kwh]);
+        }
+        return data;
+      }),
+      diagnosticData: computed(() => JSON.parse(JSON.stringify(props.data))),
+      errorDiagnosticData: computed(() => JSON.parse(JSON.stringify(props.errData)))
+    });
 
-  setup() {
-            const normalArr = [];
-            const cautionArr = [];
-            const warningArr = [];
-            const criticalArr = [];
-            const faultArr = [];
+    const convertData = (data) => {
+      const result = [];
+      for(let i = 0; i < data.inOut.length; i++) {
+        result.push({
+          seriesName: data.site_name[i],
+          name: `${data.site_name[i]}<br/>${data.time[i]}<br/>${data.point_Name[i]}`,
+          value: data.inOut[i]
+        });
+      }
+      return result;
+    };
 
-            const result = dataArr.filter((item, idx) => {
-              if(idx % 10 === 0) return item;
-            });
-            for (let i = 0; i < result.length; i++) {
-                const obj = result[i];
+    watch(state, () => {
+      option.series[1].data = convertData(state.diagnosticData);
+      option.series[2].data = convertData(state.errorDiagnosticData);
+    });
 
-                const l_arr = [parseFloat(obj.Feature1), parseFloat(obj.Feature2), obj.State];
-                if (obj.State === "0") normalArr.push(l_arr);
-                if (obj.State === "1") cautionArr.push(l_arr);
-                if (obj.State === "2") warningArr.push(l_arr);
-                if (obj.State === "3") criticalArr.push(l_arr);
-                if (obj.State === "4") faultArr.push(l_arr);
-            }
-
-
-        const option = {
+        const option = reactive({
 backgroundColor: "rgba(0,0,0,0)",
-                                    title: {
-                                        // text: 'Health Feature Space',
-                                        textStyle: {
-                                            color: "#fff"
-                                        },
-                                        left: "center"
-                                    },
-                                    legend: {
-                                        right: "0",
-                                        top: 26,
-                                        data: ["Normal", "Warning", "Critical", "Fault"],
-                                        textStyle: {
-                                            color: "#fff"
-                                        }
-                                    },
-                                    xAxis: {
-                                        name: "Feature 1",
-                                        nameLocation: "middle",
-                                        nameGap: 30,
-                                        nameTextStyle: {
-                                            color: "#777"
-                                        },
-                                        axisLabel: {
-                                            color: "rgb(193, 197, 206)"
-                                        },
-                                        splitLine: {
-                                            lineStyle: {
-                                                type: "dashed",
-                                                color: "rgba(255, 255, 255, 0.22)"
-                                            }
-                                        },
-                                        axisLine: {
-                                            lineStyle: {
-                                                color: "rgba(255, 255, 255, 0.22)"
-                                            }
-                                        }
-                                        // max: 8,
-                                        // min: -20,
-                                    },
-                                    yAxis: {
-                                        name: "Feature 2",
-                                        nameLocation: "middle",
-                                        nameGap: 30,
-                                        nameTextStyle: {
-                                            color: "#777"
-                                        },
-                                        axisLabel: {
-                                            color: "rgb(193, 197, 206)"
-                                        },
-                                        splitLine: {
-                                            lineStyle: {
-                                                type: "dashed",
-                                                color: "rgba(255, 255, 255, 0.22)"
-                                            }
-                                        },
-                                        axisLine: {
-                                            lineStyle: {
-                                                color: "rgba(255, 255, 255, 0.22)"
-                                            }
-                                        },
-                                        scale: true
-                                    },
-                                    tooltip: {
-                                    },
-                                    grid: {
-                                        left: "3%",
-                                        right: "3%",
-                                        top: "8%",
-                                        bottom: "10%",
-                                        containLabel: true
-                                    },
-                                    series: [
-                                        {
-                                            name: "0",
-                                            // data: jsonData.normal_data,
-                                            data: normalArr,
-                                            type: "scatter",
-                                            symbolSize: 2,
-                                            itemStyle: {
-                                                color: "#2B56D3"
-                                            },
-                                            large: true,
-                                            tooltip: {
-                                                formatter(obj) {
-                                                    return "";
-                                                }
-                                            },
-animation: false,
-animationThreshold: 10000
-                                        },
-                                        {
-										name: "1",
-										// data: jsonData.warning_data,
-										data: cautionArr,
-										type: "scatter",
-										symbolSize: 2,
+
+                                     legend: {
+        show: false
+      },
+                                          dataZoom: [
+                                      {
+                                        type: "inside",
+                                        start: 0,
+                                        end: 100
+                                      }
+                                    ],
+                                    xAxis: [{
+        type: "value",
+                boundaryGap: true,
+                axisLine: {
+                    lineStyle: {
+                        color: "#5D96C4"
+                    }
+                },
+                axisLabel: {
+                    show: true,
+                        color: "#5D96C4",
+                        fontSize: 10
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: "#192B45"
+                    }
+                },
+                axisTick: {
+                    show: true
+                }
+
+    }],
+                                    yAxis: [{
+        splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: "#192B45"
+                        }
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: "#192B45"
+                        }
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: "#5D96C4",
+                            padding: 2,
+                            fontSize: 12
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    }
+                  }],
+                                                  tooltip: {
+                      trigger: "item",
+                      backgroundColor: "#12131a",
+                      padding: 4,
+                      position: "right",
+                      textStyle: {
+                        fontSize: 12,
+                        color: "#fff"
+                      },
+                      confine: true,
+                      axisPointer: {
+                        snap: true
+                      }
+                    },
+                    grid: {
+                        left: "3%",
+                        right: "3%",
+                        top: "8%",
+                        bottom: "10%",
+                        containLabel: true
+                    },
+                    series: [
+                        {
+                            name: "0",
+                            // data: jsonData.normal_data,
+                            data: state.tempInOutData,
+                            type: "scatter",
+                            symbolSize: 2,
+                            itemStyle: {
+                                color: "#344a69"
+                            },
+                            large: true,
+                            tooltip: {
+                                formatter(obj) {
+                                    return "";
+                                }
+                            },
+                animation: false,
+                animationThreshold: 10000
+                        },
+        {
+          type: "scatter",
+										symbolSize: 8,
 										itemStyle: {
-											color: "#04E0F3"
+											color: "#85EF47"
 										},
 										large: true,
-										tooltip: {
-											formatter(obj) {
-												return "";
-											}
-										}
-									}
-                                    ]
-                              };
+          data: convertData(state.diagnosticData),
+          tooltip: {
+            formatter (params) {
+              return params.name;
+            }
+          }
+        },
+        {
+          type: "effectScatter",
+          symbolSize: 8,
+										itemStyle: {
+											color: "#f32424"
+										},
+										large: true,
+          rippleEffect: {
+            brushType: "stroke",
+            scale: 3.5
+          },
 
-
-
+          data: convertData(state.errorDiagnosticData),
+          tooltip: {
+            formatter (params) {
+              return params.name;
+            }
+          }
+        }
+                    ]
+              });
     return { option };
   }
 };

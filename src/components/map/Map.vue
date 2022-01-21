@@ -4,7 +4,7 @@
 
 <script>
 import mapboxgl from "mapbox-gl";
-import { reactive, ref, watch } from "vue";
+import { onMounted, reactive, watch } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import marker from "@/assets/marker.png";
@@ -16,15 +16,19 @@ export default {
     const router = useRouter();
 
     watch(
-      () => store.state.factorys,
+      () => store.state.main.factoryReload,
       () => {
-        state.factory = store.state.factorys;
+        state.factory = store.state.main.factorys;
         mapbox();
       }
     );
 
+    onMounted(() => {
+        mapbox();
+    });
+
     const state = reactive({
-      factory: Array
+      factory: store.state.main.factorys
     });
 
     const mapbox = async () => {
@@ -85,6 +89,7 @@ export default {
                 "icon-image": "custom-marker",
                 "icon-size": 0.14,
                 "icon-allow-overlap": true,
+                 "text-allow-overlap": true,
                 // get the title name from the source's "title" property
                 "text-field": ["get", "title"],
                 "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
@@ -101,8 +106,6 @@ export default {
             map.on("click", "points", (e) => {
               const { id } = e.features[0].properties;
               const target = nonErrMarker.filter((nonErr) => nonErr.id === id);
-
-              sessionStorage.setItem("factory", JSON.stringify(target[0]));
 
               store.state.selectedFac = JSON.parse(JSON.stringify(target[0]));
               store.state.factoryID = id;
@@ -195,9 +198,6 @@ export default {
               map.on("click", "points2", (e) => {
               const { id } = e.features[0].properties;
               const target = errMarker.filter((err) => err.id === id);
-
-              sessionStorage.setItem("factory", JSON.stringify(target[0]));
-
               store.state.selectedFac = JSON.parse(JSON.stringify(target[0]));
               store.state.factoryID = id;
               router.push("elec");

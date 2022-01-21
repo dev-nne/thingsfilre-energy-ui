@@ -5,7 +5,10 @@ import moment from "moment";
 const steam = {
   namespaced: true,
   state: {
+    steamStatusCall: 0,
+    trapTab: 1,
     steamStatus: [],
+    elecStatus: [],
     count: {
       trapType: [],
       count: []
@@ -26,7 +29,255 @@ const steam = {
       name: [],
       status: []
     },
-    alarm: []
+    alarm: [],
+    status: {
+      normal: 0,
+      anomaly: 0,
+      diagnosis: 0
+    },
+    mapkey: 1,
+    steamMapbox: [
+      {
+        id: 401,
+        select: false,
+        title: "R-04",
+        key: 401,
+        status: "정상"
+      },
+      {
+        id: 402,
+        select: false,
+        title: "V-14",
+        key: 402,
+        status: "정상"
+      },
+      {
+        id: 403,
+        select: false,
+        title: "V-20",
+        key: 403,
+        status: "정상"
+      },
+      {
+        id: 404,
+        select: false,
+        title: "V-25",
+        key: 404,
+        status: "정상"
+      },
+      {
+        id: 405,
+        select: false,
+        title: "V-30",
+        key: 405,
+        status: "정상"
+      },
+      {
+        id: 406,
+        select: false,
+        title: "D-19",
+        key: 406,
+        status: "정상"
+      },
+      {
+        id: 407,
+        select: false,
+        title: "D-17",
+        key: 407,
+        status: "정상"
+      },
+      {
+        id: 408,
+        select: false,
+        title: "D-16",
+        key: 408,
+        status: "정상"
+      },
+      {
+        id: 409,
+        select: false,
+        title: "D-12",
+        key: 409,
+        status: "정상"
+      },
+      {
+        id: 411,
+        select: false,
+        title: "VR-01",
+        key: 410,
+        status: "정상"
+      },
+      {
+        id: 412,
+        select: false,
+        title: "VR-07",
+        key: 411,
+        status: "정상"
+      },
+      {
+        id: 413,
+        select: false,
+        title: "VR-08",
+        key: 412,
+        status: "정상"
+      },
+      {
+        id: 414,
+        select: false,
+        title: "T-01",
+        key: 413,
+        status: "정상"
+      },
+      {
+        id: 410,
+        select: false,
+        title: "VR-06",
+        key: 414,
+        status: "정상"
+      },
+      {
+        id: 415,
+        select: false,
+        title: "T-03",
+        key: 415,
+        status: "정상"
+      }
+    ],
+    elecMapbox: [
+      {
+        id: "MT0000000023",
+        select: false,
+        title: "냉수펌프(부스터)",
+        key: "mt1"
+      },
+      {
+        id: "MT0000000009",
+        select: false,
+        title: "온수펌프(부스터)",
+        key: "mt2"
+      },
+      {
+        id: "MT0000000013",
+        select: false,
+        title: "콤퓨레샤",
+        key: "mt3"
+      },
+      {
+        id: "MT0000000019",
+        select: false,
+        title: "염색기#23",
+        key: "mt4"
+      },
+      {
+        id: "MT0000000014",
+        select: false,
+        title: "염색기#25",
+        key: "mt5"
+      },
+      {
+        id: "MT0000000005",
+        select: false,
+        title: "염색기#26",
+        key: "mt6"
+      },
+      {
+        id: "MT0000000011",
+        select: false,
+        title: "염색기#28",
+        key: "mt7"
+      },
+      {
+        id: "MT0000000003",
+        select: false,
+        title: "염색기#9",
+        key: "mt8"
+      },
+      {
+        id: "MT0000000012",
+        select: false,
+        title: "염색기#8",
+        key: "mt9"
+      },
+      {
+        id: "MT0000000007",
+        select: false,
+        title: "염색기#5",
+        key: "mt10"
+      },
+      {
+        id: "MT0000000016",
+        select: false,
+        title: "염색기#7",
+        key: "mt11"
+      },
+      {
+        id: "MT0000000024",
+        select: false,
+        title: "염색기#2",
+        key: "mt12"
+      },
+      {
+        id: "MT0000000020",
+        select: false,
+        title: "염색기#1",
+        key: "mt13"
+      },
+      {
+        id: "MT0000000001",
+        select: false,
+        title: "염색기#18",
+        key: "mt14"
+      },
+      {
+        id: "MT0000000010",
+        select: false,
+        title: "염색기#17",
+        key: "mt15"
+      },
+      {
+        id: "MT0000000022",
+        select: false,
+        title: "염색기#16",
+        key: "mt16"
+      },
+      {
+        id: "MT0000000018",
+        select: false,
+        title: "워싱덤블집진기",
+        key: "mt17"
+      },
+      {
+        id: "MT0000000002",
+        select: false,
+        title: "텐더5집진기",
+        key: "mt18"
+      },
+      {
+        id: "MT0000000025",
+        select: false,
+        title: "건조기",
+        key: "mt19"
+      },
+      {
+        id: "MT0000000017",
+        select: false,
+        title: "텐더1집진기",
+        key: "mt20"
+      },
+      {
+        id: "MT0000000006",
+        select: false,
+        title: "텐더2집진기",
+        key: "mt21"
+      },
+      {
+        id: "MT0000000008",
+        select: false,
+        title: "텐더3집진기",
+        key: "mt22"
+      }
+
+    ]
   },
   getters: {
     getCount: (state) => {
@@ -59,22 +310,119 @@ const steam = {
     steamTrapStatus(state, data) {
       const datas = [];
       for(let i = 0; i < data.length; i++) {
+        let status = "정상";
+        if(data[i].status === 1.0) {
+          status = "이상";
+        }
+        if(data[i].status === 2.0) {
+          status = "고장";
+        }
         const item = {
           devId: data[i].devId,
           inTemp: data[i].inTemp,
           outTemp: data[i].outTemp,
           pointName: data[i].pointName,
+          status,
           trapType: computed(() => {
             let j = 1;
             if(data[i].trapType.indexOf("플로트")) j = 3;
             if(data[i].trapType.indexOf("버켓")) j = 1;
             if(data[i].trapType.indexOf("디스크")) j = 2;
             return j;
-          })
+          }),
+          id: computed(() => {
+                    if(i === 0) return 0;
+                    if(i === 1) return 1;
+                    return 2;
+        }),
+        selected: false
         };
           datas.push(item);
-      }
+        }
+        state.steamStatusCall++;
       state.steamStatus = datas;
+
+      // 맵 상태
+       const statusWarn = state.steamStatus.filter((list) => list.status === "이상");
+       const statusErr = state.steamStatus.filter((list) => list.status === "고장");
+
+       for(let i = 0; i < statusWarn.length; i++) {
+        state.steamMapbox.filter((list) => {
+          if(list.id === statusWarn[i].devId) {
+            list.status = "이상";
+          }
+        });
+      }
+
+        for(let i = 0; i < statusErr.length; i++) {
+          state.steamMapbox.filter((list) => {
+            if(list.id === statusWarn[i].devId) {
+              list.status = "고장";
+            }
+          });
+       }
+    },
+    elecTrapStatus(state, data) {
+      const datas = [];
+      for(let i = 0; i < data.length; i++) {
+        const item = {
+          devId: data[i].devId,
+          total_wh: data[i].total_wh,
+          maximum_wh: data[i].maximum_wh,
+          pointName: data[i].pointName,
+          percent: Math.floor(data[i].percent * 100),
+          femsTime: data[i].femsTime,
+          selected: false
+        };
+          datas.push(item);
+        }
+      state.elecStatus = datas;
+    },
+    steamTrapAlign(state) {
+      const selectItem = state.steamStatus.filter((list, i) => list.selected);
+      const unSelectItem = state.steamStatus.filter((list, i) => !list.selected);
+      const itemArr = selectItem.concat(unSelectItem);
+      state.steamStatus = itemArr;
+    },
+    steamTapSelect(state, value) {
+      state.steamStatus.filter((list) => {
+        list.selected = false;
+        if(list.devId === value) {
+          list.selected = true;
+        }
+     });
+    },
+    steamTrapMapSelect(state, value) {
+      state.steamMapbox.filter((list) => {
+        list.select = false;
+        if(list.id === value) {
+          list.select = true;
+        }
+      });
+    },
+    elecTrapAlign(state) {
+      const selectItem = state.elecStatus.filter((list, i) => list.selected);
+      const unSelectItem = state.elecStatus.filter((list, i) => !list.selected);
+      const itemArr = selectItem.concat(unSelectItem);
+      state.elecStatus = itemArr;
+      console.log(selectItem);
+      console.log(unSelectItem);
+    },
+    elecTapSelect(state, value) {
+      state.elecStatus.filter((list) => {
+        list.selected = false;
+        if(list.devId === value) {
+          list.selected = true;
+        }
+     });
+    },
+    elecTrapMapSelect(state, value) {
+      state.elecMapbox.filter((list) => {
+        list.select = false;
+        if(list.id === value) {
+          list.select = true;
+        }
+      });
     },
     steamCount(state, { trapType, count }) {
       state.count = {
@@ -125,6 +473,13 @@ const steam = {
     },
     getAlarm(state, datas) {
       state.alarm = datas;
+    },
+    getSteamStatus(state, datas) {
+      state.status = {
+        normal: datas[0].normal,
+        anomaly: datas[0].anomaly,
+        diagnosis: datas[0].diagnosis
+      };
     }
   },
   actions: {
@@ -133,6 +488,11 @@ const steam = {
       axios.post(`${rootState.globalIP}/sub/steam/trap-condition`, { siteid }).then((data) => {
         commit("steamTrapStatus", data.data);
       });
+
+      axios.post(`${rootState.globalIP}/sub/elec/power_plant_details`, { siteid }).then((data) => {
+        commit("elecTrapStatus", data.data);
+      });
+
       axios.post(`${rootState.globalIP}/sub/steam/steam_dev_count`, { siteid }).then((data) => {
         const datas = data.data;
         const known = [];
@@ -189,6 +549,10 @@ const steam = {
           dataArr.push(alarm);
         }
         commit("getAlarm", dataArr);
+      });
+
+      axios.post(`${rootState.globalIP}/sub/steam/status_table`, { siteid }).then((data) => {
+        commit("getSteamStatus", data.data);
       });
     }
   }

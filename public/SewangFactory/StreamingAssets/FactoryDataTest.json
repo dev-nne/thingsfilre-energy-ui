@@ -1,0 +1,122 @@
+[
+    {
+        "devId": 401,
+        "inTemp": 32.0,
+        "outTemp": 35.0,
+        "pointName": "V-13번",
+        "trapType": "Unknown",
+        "status": 0.0
+    },
+    {
+        "devId": 402,
+        "inTemp": 37.0,
+        "outTemp": 45.0,
+        "pointName": "V-14번",
+        "trapType": "Unknown",//----------
+        "status": 0.0
+    },
+    {
+        "devId": 403,
+        "inTemp": 21.0,
+        "outTemp": 24.0,
+        "pointName": "V-20번",
+        "trapType": "플로트",//
+        "status": 0.0
+    },
+    {
+        "devId": 404,
+        "inTemp": 40.0,
+        "outTemp": 40.0,
+        "pointName": "V-25번",
+        "trapType": "Unknown",
+        "status": 0.0
+    },
+    {
+        "devId": 405,
+        "inTemp": 44.0,
+        "outTemp": 41.0,
+        "pointName": "V-30번",
+        "trapType": "플로트",
+        "status": 0.0
+    },
+    {
+        "devId": 406,
+        "inTemp": 20.0,
+        "outTemp": 20.0,
+        "pointName": "V-31번",
+        "trapType": "Unknown",
+        "status": 0.0
+    },
+    {
+        "devId": 407,
+        "inTemp": 62.0,
+        "outTemp": 63.0,
+        "pointName": "VR-01번",
+        "trapType": "Unknown",
+        "status": 0.0
+    },
+    {
+        "devId": 408,
+        "inTemp": 83.0,
+        "outTemp": 81.0,
+        "pointName": "VR-06번",
+        "trapType": "Unknown", //------
+        "status": 0.0
+    },
+    {
+        "devId": 409,
+        "inTemp": 28.0,
+        "outTemp": 30.0,
+        "pointName": "VR-07번",
+        "trapType": "버켓", //
+        "status": 0.1
+    },
+    {
+        "devId": 410,
+        "inTemp": 57.0,
+        "outTemp": 41.0,
+        "pointName": "VR-08번",
+        "trapType": "버켓",
+        "status": 0.0
+    },
+    {
+        "devId": 411,
+        "inTemp": 38.0,
+        "outTemp": 43.0,
+        "pointName": "염색기11번",
+        "trapType": "Unknown",
+        "status": 0.0
+    },
+    {
+        "devId": 412,
+        "inTemp": 30.0,
+        "outTemp": 47.0,
+        "pointName": "염색기16번",
+        "trapType": "플로트",
+        "status": 1.0
+    },
+    {
+        "devId": 413,
+        "inTemp": 0.0,
+        "outTemp": 21.0,
+        "pointName": "염색기17번",
+        "trapType": "플로트",
+        "status": 0.0
+    },
+    {
+        "devId": 414,
+        "inTemp": 106.0,
+        "outTemp": 87.0,
+        "pointName": "염색기19번",
+        "trapType": "플로트",
+        "status": 0.0
+    },
+    {
+        "devId": 415,
+        "inTemp": 134.0,
+        "outTemp": 73.0,
+        "pointName": "팀블러01번",//
+        "trapType": "버켓",
+        "status": 0.2
+    }
+]

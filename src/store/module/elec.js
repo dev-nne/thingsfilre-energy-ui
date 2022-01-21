@@ -26,7 +26,19 @@ const elec = {
       limit: []
     },
     powerData: [],
-    alarm: []
+    alarm: [],
+    errorDiagnosticData: {
+      inOut: [],
+      time: [],
+      site_name: [],
+      point_Name: []
+    },
+    diagnosticData: {
+      inOut: [],
+      time: [],
+      site_name: [],
+      point_Name: []
+    }
   },
   getters: {
     lineElec: (state) => {
@@ -135,6 +147,35 @@ const elec = {
     },
     getAlarm(state, datas) {
       state.alarm = datas;
+    },
+    errorDiagnosticChartData(state, datas) {
+      state.errorDiagnosticData = {
+        inOut: [],
+        time: [],
+        site_name: [],
+        point_Name: []
+      };
+      for(let i = 0; i < datas.length; i++) {
+        state.errorDiagnosticData.inOut.push([datas[i].act_kwh, datas[i].react_kwh]);
+        state.errorDiagnosticData.time.push(datas[i].time);
+        state.errorDiagnosticData.site_name.push(datas[i].site_name);
+        state.errorDiagnosticData.point_Name.push(datas[i].point_name);
+      }
+    },
+    diagnosticChartData(state, datas) {
+      state.diagnosticData = {
+        inOut: [],
+        time: [],
+        site_name: [],
+        point_Name: []
+      };
+
+      for(let i = 0; i < datas.length; i++) {
+        state.diagnosticData.inOut.push([datas[i].act_kwh, datas[i].react_kwh]);
+        state.diagnosticData.time.push(datas[i].time);
+        state.diagnosticData.site_name.push(datas[i].site_name);
+        state.diagnosticData.point_Name.push(datas[i].point_name);
+      }
     }
   },
   actions: {
@@ -172,6 +213,21 @@ const elec = {
           dataArr.push(alarm);
         }
         commit("getAlarm", dataArr);
+      });
+
+      axios.post(`${rootState.globalIP}/sub/elec/diagnostic_plane`, { siteid }).then((data) => {
+        const datas = data.data;
+        const normalData = [];
+        const errorData = [];
+        for(let i = 0; i < datas.length; i++) {
+          if(!datas[i].anomaly_labels) {
+            normalData.push(datas[i]);
+          }else{
+            errorData.push(datas[i]);
+          }
+        }
+        commit("diagnosticChartData", normalData);
+        commit("errorDiagnosticChartData", errorData);
       });
     }
   }
