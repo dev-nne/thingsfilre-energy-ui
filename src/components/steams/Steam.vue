@@ -80,7 +80,6 @@ export default {
     };
 
     const handleOk = (e) => {
-      console.log(e);
       visible.value = false;
     };
 

@@ -29,7 +29,6 @@ const steam = {
       name: [],
       status: []
     },
-    alarm: [],
     status: {
       normal: 0,
       anomaly: 0,
@@ -40,106 +39,106 @@ const steam = {
       {
         id: 401,
         select: false,
-        title: "R-04",
+        title: "V-13번",
         key: 401,
         status: "정상"
       },
       {
         id: 402,
         select: false,
-        title: "V-14",
+        title: "V-14번",
         key: 402,
         status: "정상"
       },
       {
         id: 403,
         select: false,
-        title: "V-20",
+        title: "V-20번",
         key: 403,
         status: "정상"
       },
       {
         id: 404,
         select: false,
-        title: "V-25",
+        title: "V-25번",
         key: 404,
         status: "정상"
       },
       {
         id: 405,
         select: false,
-        title: "V-30",
+        title: "V-30번",
         key: 405,
         status: "정상"
       },
       {
         id: 406,
         select: false,
-        title: "D-19",
-        key: 406,
+        title: "V-31번",
+        key: 415,
         status: "정상"
       },
       {
         id: 407,
         select: false,
-        title: "D-17",
-        key: 407,
+        title: "VR-01번",
+        key: 410,
         status: "정상"
       },
       {
         id: 408,
         select: false,
-        title: "D-16",
-        key: 408,
+        title: "VR-06번",
+        key: 414,
         status: "정상"
       },
       {
         id: 409,
         select: false,
-        title: "D-12",
-        key: 409,
-        status: "정상"
-      },
-      {
-        id: 411,
-        select: false,
-        title: "VR-01",
-        key: 410,
-        status: "정상"
-      },
-      {
-        id: 412,
-        select: false,
-        title: "VR-07",
+        title: "VR-07번",
         key: 411,
-        status: "정상"
-      },
-      {
-        id: 413,
-        select: false,
-        title: "VR-08",
-        key: 412,
-        status: "정상"
-      },
-      {
-        id: 414,
-        select: false,
-        title: "T-01",
-        key: 413,
         status: "정상"
       },
       {
         id: 410,
         select: false,
-        title: "VR-06",
-        key: 414,
+        title: "VR-08번",
+        key: 412,
+        status: "정상"
+      },
+      {
+        id: 411,
+        select: false,
+        title: "염색기 11번",
+        key: 409,
+        status: "정상"
+      },
+      {
+        id: 412,
+        select: false,
+        title: "염색기 16번",
+        key: 408,
+        status: "정상"
+      },
+      {
+        id: 413,
+        select: false,
+        title: "염색기 17번",
+        key: 407,
+        status: "정상"
+      },
+      {
+        id: 414,
+        select: false,
+        title: "염색기 19번",
+        key: 406,
         status: "정상"
       },
       {
         id: 415,
         select: false,
-        title: "T-03",
-        key: 415,
+        title: "텀블러 01번",
+        key: 413,
         status: "정상"
       }
     ],
@@ -307,6 +306,12 @@ const steam = {
     }
   },
   mutations: {
+    resetSelect(state) {
+      state.steamStatus.map((list) => list.selected = false);
+      state.elecStatus.map((list) => list.selected = false);
+      state.steamMapbox.map((list) => list.select = false);
+      state.elecMapbox.map((list) => list.select = false);
+    },
     steamTrapStatus(state, data) {
       const datas = [];
       for(let i = 0; i < data.length; i++) {
@@ -405,8 +410,6 @@ const steam = {
       const unSelectItem = state.elecStatus.filter((list, i) => !list.selected);
       const itemArr = selectItem.concat(unSelectItem);
       state.elecStatus = itemArr;
-      console.log(selectItem);
-      console.log(unSelectItem);
     },
     elecTapSelect(state, value) {
       state.elecStatus.filter((list) => {
@@ -433,6 +436,7 @@ const steam = {
       state.count.count = count;
     },
     diagnosticChartData(state, datas) {
+      console.log(datas);
       state.diagnosticData = {
         inOut: [],
         time: [],
@@ -548,7 +552,7 @@ const steam = {
           };
           dataArr.push(alarm);
         }
-        commit("getAlarm", dataArr);
+        commit("getAlarm", dataArr, { root: true });
       });
 
       axios.post(`${rootState.globalIP}/sub/steam/status_table`, { siteid }).then((data) => {

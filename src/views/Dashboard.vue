@@ -167,6 +167,7 @@ import BarHor from "@/components/chart/BarHor.vue";
 import Factory from "@/components/factory/Factory.vue";
 import { useStore } from "vuex";
 import { computed, onMounted, reactive } from "vue";
+import { useRouter } from "vue-router";
 
 
 export default {
@@ -180,9 +181,10 @@ export default {
   },
   setup() {
        const store = useStore();
+        const router = useRouter();
 
         const state = reactive({
-     title: "AI 에너지 효율화 종합 대시보드",
+        title: "AI 에너지 효율화 종합 대시보드",
        checked1: true,
        checked2: true,
        checked3: true,

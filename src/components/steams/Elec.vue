@@ -1,7 +1,7 @@
 <template>
   <div
     class="elecEquip"
-    v-for="elec in store.state.steam.elecStatus" :key="elec.devId"  @click="clickTrap(elec.devId)">
+    v-for="elec in store.state.steam.elecStatus" :key="elec.devId"  @click="clickTrap(elec.devId)" :class="{ selected : elec.selected }">
        <div class="titlebox">
         <div class="title">{{ elec.pointName }}</div>
       </div>

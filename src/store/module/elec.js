@@ -26,7 +26,6 @@ const elec = {
       limit: []
     },
     powerData: [],
-    alarm: [],
     errorDiagnosticData: {
       inOut: [],
       time: [],
@@ -146,6 +145,7 @@ const elec = {
       state.powerData = datas;
     },
     getAlarm(state, datas) {
+      console.log(datas);
       state.alarm = datas;
     },
     errorDiagnosticChartData(state, datas) {
@@ -157,7 +157,7 @@ const elec = {
       };
       for(let i = 0; i < datas.length; i++) {
         state.errorDiagnosticData.inOut.push([datas[i].act_kwh, datas[i].react_kwh]);
-        state.errorDiagnosticData.time.push(datas[i].time);
+        state.errorDiagnosticData.time.push(moment.unix(datas[i].time * 0.001).format("YYYY-MM-DD HH:mm:ss"));
         state.errorDiagnosticData.site_name.push(datas[i].site_name);
         state.errorDiagnosticData.point_Name.push(datas[i].point_name);
       }
@@ -172,7 +172,7 @@ const elec = {
 
       for(let i = 0; i < datas.length; i++) {
         state.diagnosticData.inOut.push([datas[i].act_kwh, datas[i].react_kwh]);
-        state.diagnosticData.time.push(datas[i].time);
+        state.diagnosticData.time.push(moment.unix(datas[i].time * 0.001).format("YYYY-MM-DD HH:mm:ss"));
         state.diagnosticData.site_name.push(datas[i].site_name);
         state.diagnosticData.point_Name.push(datas[i].point_name);
       }
@@ -212,7 +212,7 @@ const elec = {
           };
           dataArr.push(alarm);
         }
-        commit("getAlarm", dataArr);
+        commit("getAlarm", dataArr, { root: true });
       });
 
       axios.post(`${rootState.globalIP}/sub/elec/diagnostic_plane`, { siteid }).then((data) => {

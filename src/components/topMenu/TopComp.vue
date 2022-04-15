@@ -5,7 +5,7 @@
         <img :src="logoImg" alt="" />
       </div>
       <div class="menubox" v-else >
-        <i class="fas fa-home home" @click="goHome"></i>
+        <i class="fas fa-home home" @click="goHome" v-if="store.state.userId === 'admin'"></i>
         <div class="tabBox" v-if="store.state.factoryID !== '2005007005' && !state.dashboard">
           <div class="tab1 tab"
           :class="{onOff : state.elec}" @click="goElec">전기에너지</div>
@@ -13,7 +13,10 @@
         </div>
       </div>
       <div class="title">{{ title }}</div>
-      <Time class="time" />
+      <div class="right-box">
+        <div class="logout-btn" @click="clickLogout">Log Out</div>
+        <Time class="time" />
+      </div>
     </div>
 
     <div class="infoBox">
@@ -27,8 +30,8 @@
                 :key="index"
                 @click="golink(searchData.url)"
                 class="news"
+                v-html="searchData.title"
               >
-                {{ searchData.title }}
               </li>
               </ul>
           </div>
@@ -72,7 +75,7 @@
 
       <a-modal v-model:visible="visible" title="AI 공지" @ok="handleOk" :footer="null" dialogClass="Modal" :width="650">
         <ul>
-                  <li
+                <li
                 v-for="(ai, index) in state.aiData"
                 :key="index"
                 class="news"
@@ -102,13 +105,12 @@
 import logoImg from "@/assets/logo.png";
 import Time from "@/components/topMenu/Time.vue";
 import {
- reactive, onMounted, ref, computed, watch
+ reactive, onMounted, ref, createVNode, watch
 } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-
-
+import { Modal } from "ant-design-vue";
 
 
 export default {
@@ -118,6 +120,8 @@ export default {
   props: ["title"],
   setup() {
        const store = useStore();
+        const router = useRouter();
+
     const state = reactive({
       searchData: [],
       weatherKey: "",
@@ -130,42 +134,30 @@ export default {
       time: "",
       site: "",
       devId: "",
-      aiData: computed(() => {
-        let data = [];
-        if(store.state.loadPage === "home") {
-          data = JSON.parse(JSON.stringify(store.state.main.alarm));
-        }
-        if(store.state.loadPage === "elec") {
-          data = JSON.parse(JSON.stringify(store.state.elec.alarm));
-        }
-        if(store.state.loadPage === "steam") {
-          data = JSON.parse(JSON.stringify(store.state.steam.alarm));
-        }
-        return data;
-      }),
+      aiData: store.state.alarm,
       idx: 0,
-      alarm: store.state.main.alarm,
       mount: ""
     });
 
-    watch(() => state.mount, () => {
-      const listDuration = document.querySelector(".list2").style;
-      const num = state.aiData.length;
-      listDuration.animationDuration = `${6 * num}s`;
-    });
+    watch(() => store.state.alarm,
+      () => {
+        state.aiData = store.state.alarm;
+        const listDuration = document.querySelector(".list2").style;
+        const num = state.aiData.length;
+        if(num > 4) {
+          listDuration.animationDuration = `${7 * num}s`;
+        }else{
+          listDuration.animationDuration = `${12 * num}s`;
+        }
+      });
 
-    const router = useRouter();
-
-    onMounted(
-      async () => {
+    onMounted(async () => {
       await kakaoAPI();
       await dashboardView();
       await weather();
       await weatherIcon();
-      await translate();
       state.mount = "watch";
-    }
-);
+    });
 
     const dashboardView = () => {
       const linkName = store.state.loadPage;
@@ -202,7 +194,19 @@ export default {
 
       axios(options)
         .then((res) => {
-          state.searchData = res.data.documents;
+          const datas = res.data.documents;
+          const dataArr = [];
+          for(let i = 0; i < datas.length; i++) {
+            const data = {
+              contents: datas[i].contents,
+              datetime: datas[i].datetime,
+              title: datas[i].title,
+              url: datas[i].url
+            };
+            dataArr.push(data);
+          }
+
+          state.searchData = dataArr;
         })
         .catch((err) => console.log(err));
     };
@@ -218,6 +222,14 @@ export default {
       for (let i = 0; i < news.length; i++) {
         news[i].innerHTML = news[i].innerText;
       }
+    };
+
+    const changeText = (value) => {
+      let text = "";
+      //  text = value.replaceAll("<b>", "");
+      //  text = text.replaceAll("</b>", "");
+       text = new DOMParser().parseFromString(value, "text/html");
+       return text.body;
     };
 
     // 날씨 API
@@ -280,7 +292,7 @@ export default {
     };
 
     const goHome = () => {
-      router.push("/");
+      router.push("/home");
     };
 
 const goElec = () => {
@@ -301,7 +313,6 @@ const goElec = () => {
     const visible = ref(false);
 
     const showModal = () => {
-      console.log(visible);
       visible.value = true;
     };
 
@@ -327,6 +338,18 @@ const goElec = () => {
       const popover = document.querySelector(".tickerPopover");
       popover.classList.remove("showPop");
     };
+
+    const clickLogout = () => {
+      Modal.confirm({
+              title: "로그아웃 하시겠습니까?",
+              onOk() {
+                store.commit("resetState");
+                router.push("/");
+                sessionStorage.clear();
+              },
+              class: "logoutModal"
+            });
+    };
     return {
       kakaoAPI,
       state,
@@ -342,7 +365,9 @@ const goElec = () => {
  logoImg,
  goAlertPage,
  handleTickerEnter,
- handleTickerLeave
+ handleTickerLeave,
+ changeText,
+ clickLogout
     };
   }
 };

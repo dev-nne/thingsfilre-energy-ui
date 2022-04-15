@@ -104,11 +104,12 @@ export default {
             });
 
             map.on("click", "points", (e) => {
-              const { id } = e.features[0].properties;
+              const { id, title } = e.features[0].properties;
               const target = nonErrMarker.filter((nonErr) => nonErr.id === id);
 
               store.state.selectedFac = JSON.parse(JSON.stringify(target[0]));
               store.state.factoryID = id;
+              store.state.factoryTitle = title;
               router.push("elec");
             });
 
@@ -196,9 +197,10 @@ export default {
               });
 
               map.on("click", "points2", (e) => {
-              const { id } = e.features[0].properties;
+              const { id, title } = e.features[0].properties;
               const target = errMarker.filter((err) => err.id === id);
               store.state.selectedFac = JSON.parse(JSON.stringify(target[0]));
+              store.state.factoryTitle = title;
               store.state.factoryID = id;
               router.push("elec");
               });

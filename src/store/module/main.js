@@ -82,8 +82,7 @@ const main = {
     steamCount: {
       trapType: [],
       count: []
-    },
-    alarm: []
+    }
   },
   getters: {
     lineElec: (state) => {
@@ -273,7 +272,7 @@ const main = {
           };
           dataArr.push(alarm);
         }
-        commit("getAlarm", dataArr);
+        commit("getAlarm", dataArr, { root: true });
       });
 
       // 에너지효율현황

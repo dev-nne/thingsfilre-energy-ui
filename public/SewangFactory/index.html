@@ -65,24 +65,20 @@
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
-
-                  instance = unityInstance;
-                  
-          /*fullscreenButton.onclick = () => {
-            unityInstance.SetFullscreen(1);
-          };*/
+          instance = unityInstance;
         }).catch((message) => {
           alert(message);
         });
       };
       document.body.appendChild(script);
 
+      let data;
+      function handelElecView(value) {
+        instance.SendMessage('SceneManager', 'CamToElec', value);
+      }
+      
       function handelSteamView(value) {
       instance.SendMessage('SceneManager', 'CamToTrap', JSON.stringify(value));
-    }
-
-    function handelElecView(value) {
-      instance.SendMessage('SceneManager', 'CamToElec', JSON.stringify(value));
     }
 
     function ChangeTrapToElec(value) {
@@ -93,8 +89,14 @@
       instance.SendMessage('SceneManager', 'ChangeElecToTrap', JSON.stringify(value));
     }
 
+    function Ready(){
+    setTimeout(()=>{
+      instance.SendMessage('SceneManager', 'CallEquipData', JSON.stringify(data));
+    },2000)
+    }
+
     function setData (value) {
-      instance.SendMessage('SceneManager', 'CallEquipData', JSON.stringify(value));
+      data = value;
     }
     </script>
   </body>

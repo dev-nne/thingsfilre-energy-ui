@@ -90,8 +90,8 @@
               height: 100%;
             .thead{
               padding: 6px 0;
-              height: 12%;
               width: 100%;
+              height: 30%;
               display: flex;
               align-items: center;
               background:#2c497a7c ;
@@ -102,6 +102,7 @@
                 padding: 8px;
                 text-align: center;
                 position: relative;
+                width: 50%;
               }
 
 
@@ -123,20 +124,20 @@
 
             .tbody{
               width: 100%;
-              height: 88%;
+              height: 70%;
               background: #1d395a42;
               overflow: hidden;
-              
+              display: flex;
               .body-box{
                 display: flex;
                 width: 100%;
                 overflow-y: scroll;
                 height: 100%;
-
                 .tr{
                   display: flex;
-                  color: white;
                   flex-direction: column;
+                  color: white;
+                  width: 50%;
                   
                   .td{
                     width: 100%;
@@ -158,12 +159,13 @@
                   }
   
                 }
+              }
                 .lasttr{
                   .td{
                     border-right: none;
                   }
                 }
-              }
+              
               
             }
 
@@ -176,11 +178,53 @@
           }
           }
 
+          &.chartTwo{
+            height: 48%;
+            .table-box{
+              .table{
+                .thead{
+                  height: 12%;
+                }
+                .tbody{
+                  height: 88%;
+                }
+              }
+            }
+
+            .body-box{
+              display: flex;
+              width: 100%;
+              overflow-y: scroll;
+              height: 100%;
+
+            .tr{
+              display: flex;
+              color: white;
+              flex-direction: column;
+              
+              .td{
+                width: 100%;
+                padding: 8px;
+                text-align: center;
+                border-right: 1px solid #4562867c;
+                border-bottom: 1px solid #4562867c;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+              }
+              .errTd{
+                font-weight: 600;
+                color: $red;
+              }
+              .td:last-child{
+                border-bottom: none;
+              }
+
+            }}
+          }
           }
 
-          .chartTwo{
-            height: 48%;
-          }
            
             .statusInfo{
               display: flex;
@@ -396,6 +440,25 @@
             
           }
         }
+
+          .bg-view{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+            width: 100%;
+            z-index: -1;
+
+            &.woosung{
+              width: 60%;
+              height: auto;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%,-50%);
+            }
+          }
       //오른쪽 스팀기계
       .steamsBox{
           position: absolute;
@@ -411,6 +474,10 @@
           border: 1px solid $border_blue;
           display: flex;
           flex-direction: column;
+
+          &.longPannel{
+            height: calc(100% - 30px);
+          }
 
           .title {
               color: white;
@@ -502,17 +569,7 @@
 
               &.selected{
                 background: rgb(7, 16, 31);
-                border: 1px solid #003f9e;
-                animation: selectItem 1.5s infinite both;
-
-                &.errInSteam {
-                  border: 1px solid #ca2323a6;
-                  animation: errItem 1.5s infinite both;
-                }
-
-                &.warnInSteam {
-                  border: 1px solid #f18b05a6;
-                  animation: warntItem 1.5s infinite both;}
+                border: 2px solid rgba(255, 255, 255, 0.712);
                 }
               
               .steamImgbox {
@@ -523,22 +580,6 @@
               justify-content: center;
               gap: 4px;
               cursor: pointer;
-
-              @keyframes selectItem {
-                from{border: 1px solid #003f9e;}
-                50%{border: 1px solid #1673ff;}
-                to{border: 1px solid #003f9e;}
-              }
-              @keyframes errItem {
-                from{border: 1px solid #ca2323a6;}
-                50%{border: 1px solid #ca2323;}
-                to{border: 1px solid #ca2323a6;}
-              }
-              @keyframes warntItem {
-                from{border: 1px solid #f18b05a6;}
-                50%{border: 1px solid #f18b05fa;}
-                to{border: 1px solid #f18b05a6;}
-              }
 
                 img {
                   width: 50%;
@@ -718,6 +759,11 @@
               position: relative;
               overflow: hidden;
 
+              &.selected{
+                background: rgb(7, 16, 31);
+                border: 2px solid #f7c88c;
+                }
+
               .steamInfo{
                 .titlebox{
                   .status{
@@ -760,6 +806,11 @@
               cursor: pointer;
               flex-direction: row;
               align-items: center;
+
+              &.selected{
+                background: rgb(7, 16, 31);
+                border: 2px solid rgba(255, 255, 255, 0.712);
+                }
 
               .titlebox{
                 width: 50%;
@@ -855,21 +906,14 @@
             font-size: 20px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.452);
 
-            &.selected{
-              color: #053ea1;
-              &.warn{
-                color: #a87300;
-              }
-              &.err{
-                color: #8d0000;
-              }
-            }
-
             &.warn{
               color: #eca200;
             }
             &.err{
               color: #ec0000;
+            }
+            &.selected{
+              color: white;
             }
           }
 

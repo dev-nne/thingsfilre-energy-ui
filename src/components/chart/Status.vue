@@ -25,7 +25,7 @@
 
        <div class="status">
         <div class="label">7일예측</div>
-        <div class="numbering info">02</div>
+        <div class="numbering info">2</div>
       </div>
     </div>
 

@@ -79,13 +79,33 @@
     font-weight: 900;
   }
 
+ .right-box{
+   display: flex;
+   width: 20%;
+   justify-content: center;
+   align-items: center;
+  gap: 20px;
+
   .time {
-    width: 15%;
     letter-spacing: 1px;
     display: flex;
     justify-content: flex-end;
     color: $white;
   }
+
+  .logout-btn{
+    color: white;
+    font-size: 14px;
+    padding: 8px 20px;
+    transition: 0.3s;
+    font-weight: 600;
+    border-radius: 20px;
+  }
+  .logout-btn:hover{
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.12);
+  }
+ }
 }
 
 .infoBox {
@@ -204,7 +224,7 @@
       }
 
         .list1{
-          animation: ticker 80s linear infinite;
+          animation: ticker 50s linear infinite;
           .news{
             cursor: pointer;
           }
@@ -354,4 +374,19 @@
     }
   }
   
+  }
+
+  .logoutModal{
+    .ant-modal-content{
+    .ant-modal-body{
+      padding: 0;
+      
+      .ant-modal-confirm-body-wrapper{
+        padding: 20px;
+
+        .ant-modal-confirm-btns{
+          margin-top: 10px;
+        }
+      }
+    }}
   }

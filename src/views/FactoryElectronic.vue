@@ -59,7 +59,7 @@ export default {
     });
 
     const state = reactive({
-      title: `${factory.title} 전기 에너지 효율화 대시보드`,
+      title: `${store.state.factoryTitle} 전기 에너지 효율화 대시보드`,
        lineElec: computed(() => store.getters["elec/lineElec"]),
        dailyData: computed(() => store.getters["elec/dailyData"])
     });

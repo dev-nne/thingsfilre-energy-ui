@@ -21,11 +21,12 @@
        <div class="th">개수</div>
      </div>
    <div class="tbody">
+     <div class="body-box">
      <div  class="tr">
        <div class="num td" v-for="(data,index) in state.getCount.trapType" :key="index">{{data}}</div>  </div>
         <div  class="tr lasttr">
        <div class="name td" v-for="(data,index) in state.getCount.count" :key="index">{{data}}</div>
-        </div>
+        </div></div>
    </div>
    </div>
   </div>
@@ -58,7 +59,7 @@
   </div>
     </div>
     </div>
-     <div class="steamsBox">
+     <div class="steamsBox" :class="{longPannel : store.state.factoryID !== '2005007004'}">
        <div class="title"><i class="fas fa-circle-notch"></i>설비별 상태</div>
         <a-tabs type="card" v-model:activeKey="store.state.steam.trapTap" class="trapTab" @change="clickTab">
           <a-tab-pane key="1" tab="스팀트랩">
@@ -68,17 +69,20 @@
           </a-tab-pane>
           <a-tab-pane key="2" tab="전력설비">
             <div class="elecs"  v-if="store.state.steam.mapkey === 2">
-               <Elec @clickEvent="moveSteamView"/>
+               <Elec @clickEvent="moveElecView"/>
               </div>
           </a-tab-pane>
         </a-tabs>
 
   </div>
-  <SteamPostion @clickEvent="moveSteamView"/>
+  <SteamPostion @clickSteam="moveSteamView" @clickElec="moveElecView"
+  v-if="store.state.factoryID === '2005007004'"/>
 
-  <div class="unity-view">
+  <div class="unity-view" v-if="store.state.factoryID === '2005007004'">
       <iframe src="./SewangFactory/index.html" class="unity" id="unityIFrame"/>
   </div>
+  <img src="@/assets/woosung.png"  class="bg-view woosung" alt="" v-if='store.state.factoryID === "2005007002"'>
+  <img src="@/assets/eneryBG.png"  class="bg-view" alt="" v-else>
   </div>
 </div>
 </template>
@@ -109,7 +113,7 @@ export default {
   setup() {
       const store = useStore();
        const state = reactive({
-        title: `${store.state.selectedFac.title} 스팀트랩 상태 대시보드`,
+        title: `${store.state.factoryTitle} 스팀트랩 상태 대시보드`,
        checked1: true,
        checked2: true,
        checked3: true,
@@ -126,29 +130,42 @@ export default {
 
     watch(() => store.state.steam.steamStatusCall,
         () => {
-      const unity = document.getElementById("unityIFrame");
-      const steamView = unity.contentWindow || unity.contentDocument;
-      if(store.state.steam.steamStatus.length !== 0) {
-        steamView.setData(store.state.steam.steamStatus);
-      }
+          if(store.state.factoryID === "2005007004") {
+            const unity = document.getElementById("unityIFrame");
+            const steamView = unity.contentWindow || unity.contentDocument;
+            if(store.state.steam.steamStatus.length !== 0) {
+              steamView.setData(store.state.steam.steamStatus);
+              steamView.Ready();
+            }
+          }
     });
 
      const moveSteamView = (value) => {
-       console.log(value);
-      const unity = document.getElementById("unityIFrame");
-      const steamView = unity.contentWindow || unity.contentDocument;
-         steamView.handelSteamView(value);
+       const tapPan = document.querySelectorAll(".ant-tabs-tabpane")[0];
+       tapPan.scroll(0, 0);
+        if(store.state.factoryID === "2005007004") {
+          const unity = document.getElementById("unityIFrame");
+          const steamView = unity.contentWindow || unity.contentDocument;
+             steamView.handelSteamView(value);
+        }
     };
 
      const moveElecView = (value) => {
-      const unity = document.getElementById("unityIFrame");
-      const steamView = unity.contentWindow || unity.contentDocument;
-         steamView.handelElecView(value);
+       const tapPan = document.querySelectorAll(".ant-tabs-tabpane")[1];
+       tapPan.scroll(0, 0);
+         if(store.state.factoryID === "2005007004") {
+           const unity = document.getElementById("unityIFrame");
+           const steamView = unity.contentWindow || unity.contentDocument;
+              steamView.handelElecView(value);
+         }
     };
 
     const clickTab = (value) => {
+      if(store.state.factoryID === "2005007004") {
       const unity = document.getElementById("unityIFrame");
       const steamView = unity.contentWindow || unity.contentDocument;
+      steamView.handelSteamView(100);
+      store.commit("steam/resetSelect");
       if(value === "1") {
         store.state.steam.mapkey = 1;
         steamView.ChangeTrapToElec(1000);
@@ -156,6 +173,7 @@ export default {
         store.state.steam.mapkey = 2;
         steamView.ChangeElecToTrap(2000);
       }
+       }
     };
 
 
@@ -163,7 +181,8 @@ export default {
       state,
       moveSteamView,
       clickTab,
-      store
+      store,
+      moveElecView
     };
   }
 };

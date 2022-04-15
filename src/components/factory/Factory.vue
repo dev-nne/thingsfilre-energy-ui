@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div class="energyBox">
+      <div class="energyBox" v-if="factory.id !== '2005007005'">
         <div class="energyname">
           열에너지
           <div class="enerygyStatus" :class="{ errStatus: !factory.heats }">
@@ -58,6 +58,7 @@ export default {
     const linkFactory = (target) => {
       store.state.factoryID = target.id;
       store.state.selectedFac = target;
+      store.state.factoryTitle = target.title;
       router.push("elec");
     };
 
