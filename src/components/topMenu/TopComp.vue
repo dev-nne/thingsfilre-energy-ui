@@ -54,7 +54,6 @@
                 </li>
               </ul>
           </div>
-
         </div>
       </div>
 
@@ -317,7 +316,6 @@ const goElec = () => {
     };
 
     const handleOk = (e) => {
-      console.log(e);
       visible.value = false;
     };
 

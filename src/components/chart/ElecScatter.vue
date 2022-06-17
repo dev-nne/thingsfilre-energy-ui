@@ -1,6 +1,6 @@
 <template>
   <div class="elecChart">
-    <div class="title"><i class="fas fa-circle-notch"></i>스캐터차트</div>
+    <div class="title"><i class="fas fa-circle-notch"></i>전력설비 진단분석</div>
     <v-chart class="chart2" :option="option" />
   </div>
 </template>

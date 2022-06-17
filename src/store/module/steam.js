@@ -1,6 +1,8 @@
 import axios from "axios";
 import { computed } from "vue";
 import moment from "moment";
+import "url-search-params-polyfill";
+
 
 const steam = {
   namespaced: true,
@@ -276,7 +278,36 @@ const steam = {
         key: "mt22"
       }
 
-    ]
+    ],
+    selectFEMSDetail: "",
+    FEMSModalSelectKey: "today",
+    FEMSModalSelectOptions: [
+        {
+        value: "today",
+        label: "오늘"
+        },
+        {
+          value: "yesterday",
+          label: "어제"
+          },
+        {
+        value: "last_week",
+        label: "지난 주"
+        },
+        {
+          value: "last_month",
+          label: "지난 달"
+          },
+        {
+        value: "last_7days",
+        label: "최근 7일"
+        },
+        {
+          value: "last_30days",
+          label: "최근 30일"
+        }],
+        tempModalChartData: [],
+        searchType: "temp"
   },
   getters: {
     getCount: (state) => {
@@ -375,7 +406,7 @@ const steam = {
           total_wh: data[i].total_wh,
           maximum_wh: data[i].maximum_wh,
           pointName: data[i].pointName,
-          percent: Math.floor(data[i].percent * 100),
+          percent: Math.floor((data[i].percent * 100).toFixed(0)),
           femsTime: data[i].femsTime,
           selected: false
         };
@@ -436,7 +467,6 @@ const steam = {
       state.count.count = count;
     },
     diagnosticChartData(state, datas) {
-      console.log(datas);
       state.diagnosticData = {
         inOut: [],
         time: [],
@@ -484,6 +514,9 @@ const steam = {
         anomaly: datas[0].anomaly,
         diagnosis: datas[0].diagnosis
       };
+    },
+    getTempModalChartData(state, datas) {
+      state.tempModalChartData = datas;
     }
   },
   actions: {
@@ -558,8 +591,32 @@ const steam = {
       axios.post(`${rootState.globalIP}/sub/steam/status_table`, { siteid }).then((data) => {
         commit("getSteamStatus", data.data);
       });
-    }
+    },
+    getFEMSDetailModalData({ rootState, state, commit }) {
+      const siteid = rootState.factoryID;
+      axios.post(`${rootState.globalIP}/sub/fems_trend_graph`, {
+      siteid, devid: state.selectFEMSDetail.devId, search_period: state.FEMSModalSelectKey, search_type: state.searchType
+        }).then((res) => {
+          commit("getTempModalChartData", res.data);
+            });
+          },
+      getFEMScsvDownload({ rootState, state, commit }) {
+        const siteid = rootState.factoryID;
+        const time = moment().format("YYMMDD");
+        axios.post(`${rootState.globalIP}/sub/fems_trend_csv`, {
+        siteid, devid: state.selectFEMSDetail.devId, search_period: state.FEMSModalSelectKey, search_type: state.searchType
+          }).then((res) => {
+            const fileURL = window.URL.createObjectURL(new Blob([res.data]));
+            const fileLink = document.createElement("a");
+
+            fileLink.href = fileURL;
+            fileLink.setAttribute("download", `${time}_${state.selectFEMSDetail.devId}.csv`);
+            document.body.appendChild(fileLink);
+
+            fileLink.click();
+          });
+        }
   }
-  };
+};
 
 export default steam;

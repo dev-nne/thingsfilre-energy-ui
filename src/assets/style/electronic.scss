@@ -40,8 +40,9 @@
         justify-content: space-between;
         align-items: center;
         gap: 10px;
-
+        
         .elec-box{
+          cursor: pointer;
           padding: 10px 15px;
           background: $blue;
           width: calc((100% - 30px) / 4);
@@ -213,6 +214,8 @@
               display: flex;
               color: white;
               border-bottom: 1px solid #4562867c;
+              cursor: pointer;
+              transition: 0.2s;
 
               .td{
                 width: 30%;
@@ -254,6 +257,10 @@
 
             .tr:last-child{
               border-bottom: none;
+            }
+
+            .tr:hover{
+              background: rgba(0,0,0,0.3);
             }
 
            

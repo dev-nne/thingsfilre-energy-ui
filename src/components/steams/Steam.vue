@@ -15,7 +15,7 @@
 
 
     <div class="steamInfo">
-      <div class="energyBox tempClick">
+      <div class="energyBox tempClick" @click="showInfoModal(steam)">
         <div class="energyname">
         In/Out
           <div class="enerygyStatus" >
@@ -37,28 +37,21 @@
         </div>
       </div>
     </div>
-
   </div>
-
-
-  <a-modal dialogClass="Modal"
-  v-model:visible="visible"
-  @ok="handleOk" :footer="null">
-  <EX />
-  </a-modal>
-
+      <a-modal v-model:visible="state.visible" width="60vw"
+      @cancel="handleOk" :footer="null" :maskClosable="false" class="femsDetailModal">
+        <FEMSDetailModal/>
+      </a-modal>
 </template>
 
 <script>
-import {
- onMounted, reactive, ref
-} from "vue";
+import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import EX from "@/components/chart/ex.vue";
+import FEMSDetailModal from "@/components/steams/FEMSDetailModal";
 
 export default {
-  components: { EX },
+  components: { FEMSDetailModal },
   emits: ["click-event"],
   setup(props, { emit }) {
     const router = useRouter();
@@ -70,35 +63,37 @@ export default {
     };
 
     // 스팀트랩별 온도 그래프 모달
-    const visible = ref(false);
-
-    const showModal = (value) => {
-      const modal = document.querySelector(".steamModal");
-      console.log(modal);
-      store.state.steamsModalTitle = value;
-      visible.value = true;
-    };
+    const state = reactive({
+      visible: false
+    });
 
     const handleOk = (e) => {
-      visible.value = false;
+      state.visible = false;
+      store.state.steam.FEMSModalSelectKey = "today";
     };
 
     const clickTrap = (value) => {
       emit("click-event", value);
-
       store.commit("steam/steamTapSelect", value);
       store.commit("steam/steamTrapMapSelect", value);
       store.commit("steam/steamTrapAlign");
     };
 
+    const showInfoModal = (value) => {
+      state.visible = true;
+      store.state.steam.selectFEMSDetail = value;
+       store.state.steam.searchType = "temp";
+      store.dispatch("steam/getFEMSDetailModalData");
+    };
+
 
     return {
       linkFactory,
-       showModal,
       handleOk,
-      visible,
+      state,
       store,
-      clickTrap
+      clickTrap,
+      showInfoModal
     };
   }
 };

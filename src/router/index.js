@@ -11,7 +11,7 @@ const routes = [
     path: "/home",
     name: "home",
     component: () => import("@/views/Dashboard.vue"),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: false }
   },
   {
     path: "/elec",
@@ -47,8 +47,8 @@ router.beforeEach((to, from, next) => {
 		}
     window.history.forward();
 	} else if (to.path === "/" && store.state.isLogin) {
-    window.history.forward();
-    router.go(-1);
+      window.history.forward();
+      next("/home");
 		}else if(to.path === "/home" && store.state.userId !== "admin") {
       router.go(-1);
     }else {

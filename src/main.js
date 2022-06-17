@@ -4,7 +4,6 @@ import store from "@/store";
 import router from "@/router/index";
 import axios from "axios";
 import VueAxios from "vue-axios";
-
 import ECharts from "vue-echarts";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";

@@ -61,19 +61,18 @@
     </div>
      <div class="steamsBox" :class="{longPannel : store.state.factoryID !== '2005007004'}">
        <div class="title"><i class="fas fa-circle-notch"></i>설비별 상태</div>
-        <a-tabs type="card" v-model:activeKey="store.state.steam.trapTap" class="trapTab" @change="clickTab">
-          <a-tab-pane key="1" tab="스팀트랩">
+        <a-tabs type="card" v-model:activeKey="store.state.steam.mapkey" class="trapTab" @change="clickTab"  @tabClick="notReadyUnity">
+          <a-tab-pane :key="1" tab="스팀트랩">
             <div class="steams" v-if="store.state.steam.mapkey === 1">
                 <Steam @clickEvent="moveSteamView"/>
               </div>
           </a-tab-pane>
-          <a-tab-pane key="2" tab="전력설비">
+          <a-tab-pane :key="2" tab="전력설비">
             <div class="elecs"  v-if="store.state.steam.mapkey === 2">
                <Elec @clickEvent="moveElecView"/>
               </div>
           </a-tab-pane>
         </a-tabs>
-
   </div>
   <SteamPostion @clickSteam="moveSteamView" @clickElec="moveElecView"
   v-if="store.state.factoryID === '2005007004'"/>
@@ -99,6 +98,7 @@ import {
  onMounted, reactive, computed, watch
 } from "vue";
 import { useStore } from "vuex";
+import { message } from "ant-design-vue";
 
 export default {
     components: {
@@ -107,8 +107,8 @@ export default {
     SteamBar,
     SteamScatterChart,
     Elec,
- Steam,
- SteamPostion
+    Steam,
+    SteamPostion
 },
   setup() {
       const store = useStore();
@@ -117,7 +117,8 @@ export default {
        checked1: true,
        checked2: true,
        checked3: true,
-       getCount: computed(() => store.getters["steam/getCount"])
+       getCount: computed(() => store.getters["steam/getCount"]),
+       unityReady: false
     });
 
      onMounted(() => {
@@ -126,6 +127,7 @@ export default {
       setInterval(() => {
          store.dispatch("steam/getSteamData");
        }, (15 * 60 * 1000));
+       setTimeout(() => { state.unityReady = true; }, 2500);
     });
 
     watch(() => store.state.steam.steamStatusCall,
@@ -141,6 +143,7 @@ export default {
     });
 
      const moveSteamView = (value) => {
+        if(!state.unityReady)return;
        const tapPan = document.querySelectorAll(".ant-tabs-tabpane")[0];
        tapPan.scroll(0, 0);
         if(store.state.factoryID === "2005007004") {
@@ -151,6 +154,7 @@ export default {
     };
 
      const moveElecView = (value) => {
+        if(!state.unityReady)return;
        const tapPan = document.querySelectorAll(".ant-tabs-tabpane")[1];
        tapPan.scroll(0, 0);
          if(store.state.factoryID === "2005007004") {
@@ -161,28 +165,40 @@ export default {
     };
 
     const clickTab = (value) => {
+      store.state.steam.mapkey = value;
       if(store.state.factoryID === "2005007004") {
-      const unity = document.getElementById("unityIFrame");
-      const steamView = unity.contentWindow || unity.contentDocument;
-      steamView.handelSteamView(100);
-      store.commit("steam/resetSelect");
-      if(value === "1") {
-        store.state.steam.mapkey = 1;
-        steamView.ChangeTrapToElec(1000);
-      }else {
-        store.state.steam.mapkey = 2;
-        steamView.ChangeElecToTrap(2000);
+        if(!state.unityReady)return;
+        const unity = document.getElementById("unityIFrame");
+        const steamView = unity.contentWindow || unity.contentDocument;
+        steamView.handelSteamView(100);
+        store.commit("steam/resetSelect");
+        if(value === "1") {
+          steamView.ChangeTrapToElec(1000);
+        }else {
+          steamView.ChangeElecToTrap(2000);
+        }
       }
-       }
+      // else{
+      //   store.commit("steam/resetSelect");
+      //   if(value === "1") {
+      //     store.state.steam.mapkey = 1;
+      //   }else {
+      //     store.state.steam.mapkey = 2;
+      //   }
+      //  }
     };
 
-
+    const notReadyUnity = (key) => {
+      if(store.state.factoryID !== "2005007004") return;
+      if(key === "2" && !state.unityReady) message.success("뷰가 아직 로드되지 않았습니다. 다시 시도해주세요", 4);
+    };
     return {
       state,
       moveSteamView,
       clickTab,
       store,
-      moveElecView
+      moveElecView,
+      notReadyUnity
     };
   }
 };

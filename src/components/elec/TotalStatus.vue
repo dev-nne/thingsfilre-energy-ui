@@ -1,5 +1,5 @@
 <template>
-  <div class="total-status">
+  <div class="total-status" @click="showCostModal">
     <div class="elec-box">
       <div class="title">
         실시간 사용량
@@ -37,22 +37,41 @@
 
     </div>
   </div>
+  <a-modal v-model:visible="state.visible" width="60vw"
+    @cancel="handleOk" :footer="null" :maskClosable="false" class="ppTrendModal">
+      <PowerPlantDetailsModal/>
+  </a-modal>
 </template>
 
 <script>
-  import { computed, reactive } from "vue";
-  import { useStore } from "vuex";
+import { computed, reactive } from "vue";
+import { useStore } from "vuex";
+import PowerPlantDetailsModal from "@/components/elec/PowerPlantDetailsModal";
 
 export default {
-setup() {
-         const store = useStore();
+  components: { PowerPlantDetailsModal },
+  setup() {
+    const store = useStore();
+    const state = reactive({
+      visible: false
+    });
+
+    const handleOk = (e) => {
+      state.visible = false;
+      store.state.elec.ppModalSelectKey = "today";
+    };
+
+    const showCostModal = () => {
+      state.visible = true;
+      store.dispatch("elec/getPPDetailModalData");
+    };
 
 
-
-
-  return{ store };
-}
+    return{
+ store, showCostModal, state, handleOk
 };
+  }
+  };
 </script>
 
 <style>

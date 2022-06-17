@@ -115,7 +115,6 @@ const data4 = [
   }
 ];
    const showTable = (x) => {
-     console.log(x);
      store.state.datas = x;
      state.table = true;
    };

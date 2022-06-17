@@ -11,9 +11,23 @@ module.exports = {
         }
     }
 },
+  //   devServer: {
+  //     proxy: "http://175.123.142.155:28887"
+  // }
+// ,
     devServer: {
-      proxy: "http://175.123.142.155:28887"
+      proxy: "http://localhost:8081/"
   }
+//   devServer: {
+//     proxy: {
+//       "/": {
+//         target: "http://175.123.142.155:28887",
+//         pathRewrite: { "^/": "" },
+//         changeOrigin: true,
+//         secure: false
+//       }
+//     }
+// }
     // 프록시 설정
     // proxy: {
     //   "/": {

@@ -819,6 +819,10 @@
                 .title{
                   margin: 0;
                   padding: 8px 0 8px 8px;
+                  white-space: nowrap;
+                  width: 90%;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
                 }
               }
 

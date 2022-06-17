@@ -4,7 +4,7 @@
 
 <div class="content-box">
     <div class="title">
-  <i class="fas fa-circle-notch tableIcon"></i>Power Plant Details
+  <i class="fas fa-circle-notch tableIcon"></i>전력 사용 현황
   </div>
 
   <div class="table-box">
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="tbody">
-      <div class="tr" v-for="(data, index) in state.powerData" :key="index">
+      <div class="tr" v-for="(data, index) in state.powerData" :key="index" @click="clickTheDetail(data)">
             <div class="td">{{data.pointName}}</div>
             <div class="td right">{{data.maximum_wh}} <span>Wh</span></div>
             <div class="td progress">
@@ -26,27 +26,36 @@
         '100%': '#31c5ff',
       }" />
               </a-tooltip>
-      </div>
+          </div>
         </div>
     </div>
+
+
  </div>
   </div>
+  <a-modal v-model:visible="state.visible" width="60vw"
+      @cancel="handleOk" :footer="null" :maskClosable="false" class="femsDetailModal">
+        <FEMSDetailModal/>
+      </a-modal>
 </div>
 </template>
 
 <script>
 import { computed, reactive } from "vue";
 import { useStore } from "vuex";
+import FEMSDetailModal from "@/components/steams/FEMSDetailModal";
 
 export default {
    components: {
+     FEMSDetailModal
   },
 setup() {
   const store = useStore();
    const state = reactive({
       checked1: true,
       array: "",
-      powerData: computed(() => JSON.parse(JSON.stringify(store.state.elec.powerData)))
+      powerData: computed(() => JSON.parse(JSON.stringify(store.state.elec.powerData))),
+      visible: false
     });
 
     const listArray = () => {
@@ -61,12 +70,22 @@ setup() {
       }
     };
 
+    const handleOk = () => {
+      state.visible = false;
+      store.state.steam.FEMSModalSelectKey = "today";
+    };
 
-  return { state, store, listArray };
+    const clickTheDetail = (value) => {
+      console.log(store.state.steam.tempModalChartData);
+      state.visible = true;
+      store.state.steam.searchType = "kwh";
+        store.state.steam.selectFEMSDetail = value;
+        store.dispatch("steam/getFEMSDetailModalData");
+    };
+
+  return {
+    state, store, listArray, clickTheDetail, handleOk
+};
 }
 };
 </script>
-
-<style>
-
-</style>

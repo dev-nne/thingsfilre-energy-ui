@@ -37,7 +37,35 @@ const elec = {
       time: [],
       site_name: [],
       point_Name: []
-    }
+    },
+    selectPowerPlantDetail: "",
+    ppModalSelectKey: "today",
+    ppModalSelectOptions: [
+        {
+        value: "today",
+        label: "오늘"
+        },
+        {
+          value: "yesterday",
+          label: "어제"
+          },
+        {
+        value: "last_week",
+        label: "지난 주"
+        },
+        {
+          value: "last_month",
+          label: "지난 달"
+          },
+        {
+        value: "last_7days",
+        label: "최근 7일"
+        },
+        {
+          value: "last_30days",
+          label: "최근 30일"
+        }],
+        elecModalChartData: []
   },
   getters: {
     lineElec: (state) => {
@@ -134,6 +162,7 @@ const elec = {
       const datas = [];
       for(let i = 0; i < data.length; i++) {
         const item = {
+          devId: data[i].devId,
           femsTime: data[i].femsTime,
           maximum_wh: Math.floor(data[i].maximum_wh).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
           pointName: data[i].pointName,
@@ -145,7 +174,6 @@ const elec = {
       state.powerData = datas;
     },
     getAlarm(state, datas) {
-      console.log(datas);
       state.alarm = datas;
     },
     errorDiagnosticChartData(state, datas) {
@@ -176,6 +204,9 @@ const elec = {
         state.diagnosticData.site_name.push(datas[i].site_name);
         state.diagnosticData.point_Name.push(datas[i].point_name);
       }
+    },
+    getElecModalChartData(state, datas) {
+      state.elecModalChartData = datas;
     }
   },
   actions: {
@@ -229,8 +260,41 @@ const elec = {
         commit("diagnosticChartData", normalData);
         commit("errorDiagnosticChartData", errorData);
       });
+    },
+    getPowerPlantDetailsModal({ rootState, commit }) {
+      const siteid = rootState.factoryID;
+
+      axios.post(`${rootState.globalIP}/sub/elec/usage-charge`, { siteid }).then((data) => {
+        const datas = data.data[0];
+        commit("getUsageChargeData", datas);
+      });
+    },
+    getPPDetailModalData({ rootState, state, commit }) {
+    const siteid = rootState.factoryID;
+    axios.post(`${rootState.globalIP}/sub/pp_trend_graph`, {
+      siteid, search_period: state.ppModalSelectKey
+        }).then((res) => {
+        commit("getElecModalChartData", res.data);
+          });
+    },
+    getPPcsvDownload({ rootState, state }) {
+      const siteid = rootState.factoryID;
+      const time = moment().format("YYMMDD");
+
+      axios.post(`${rootState.globalIP}/sub/pp_trend_csv`, {
+      siteid, search_period: state.ppModalSelectKey
+        }).then((res) => {
+          const fileURL = window.URL.createObjectURL(new Blob([res.data]));
+          const fileLink = document.createElement("a");
+
+          fileLink.href = fileURL;
+          fileLink.setAttribute("download", `${time}_${siteid}.csv`);
+          document.body.appendChild(fileLink);
+
+          fileLink.click();
+        });
+      }
     }
-  }
 };
 
 export default elec;
