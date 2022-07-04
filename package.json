@@ -1,15 +1,16 @@
 {
   "name": "vue-energy",
   "version": "0.1.0",
-  "author": "SHIN EUN-HYE",
-  "private": true,
+  "author": "dev-nne",
+  "homepage": "http://dev-nne.github.io/thingsfilre-energy-ui",
+  "private": false,
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.0.1",
@@ -52,6 +53,5 @@
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0"
-  },
-  "homepage": "http://EUNYHE-SHIN.github.io/energy-dashboard-thingspire"
+  }
 }
