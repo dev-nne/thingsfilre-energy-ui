@@ -8,3 +8,8 @@
 
 ### View
     http://EUNYHE-SHIN.github.io/energy-dashboard-thingspire
+
+### Login
+```
+ID ADMIN  / PW ADMIN
+```
