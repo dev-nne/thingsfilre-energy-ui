@@ -6,8 +6,8 @@
     1. npm install
     2. npm run dev
 
-### View
-    http://EUNYHE-SHIN.github.io/energy-dashboard-thingspire
+### Demo
+    https://dev-nne.github.io/thingsfilre-energy-ui/
 
 ### Login
 ```
