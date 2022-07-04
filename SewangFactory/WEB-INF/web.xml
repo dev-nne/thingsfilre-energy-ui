@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0" metadata-complete="true">
+  <display-name>AI 에너지 효율화 종합대시보드</display-name>
+  <description>
+     설명
+  </description>
+  <!-- 이부분이 필요함 -->
+  <error-page>  
+   <error-code>404</error-code>  
+   <location>/</location>  
+  </error-page>  
+</web-app>

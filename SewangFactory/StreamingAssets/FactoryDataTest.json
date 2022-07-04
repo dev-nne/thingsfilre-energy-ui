@@ -1,0 +1,152 @@
+[
+  {
+    "devId": 401,
+    "inTemp": 107,
+    "outTemp": 88,
+    "pointName": "V-13번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 0,
+    "selected": false
+  },
+  {
+    "devId": 402,
+    "inTemp": 37,
+    "outTemp": 38,
+    "pointName": "V-14번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 1,
+    "selected": false
+  },
+  {
+    "devId": 403,
+    "inTemp": 45,
+    "outTemp": 46,
+    "pointName": "V-20번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 404,
+    "inTemp": 62,
+    "outTemp": 52,
+    "pointName": "V-25번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 405,
+    "inTemp": 23,
+    "outTemp": 25,
+    "pointName": "V-30번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 406,
+    "inTemp": 20,
+    "outTemp": 20,
+    "pointName": "V-31번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 407,
+    "inTemp": 49,
+    "outTemp": 48,
+    "pointName": "VR-01번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 408,
+    "inTemp": 15,
+    "outTemp": 14,
+    "pointName": "VR-06번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 409,
+    "inTemp": 9,
+    "outTemp": 9,
+    "pointName": "VR-07번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 410,
+    "inTemp": 53,
+    "outTemp": 55,
+    "pointName": "VR-08번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 411,
+    "inTemp": 35,
+    "outTemp": 38,
+    "pointName": "염색기11번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 412,
+    "inTemp": 33,
+    "outTemp": 31,
+    "pointName": "염색기16번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 413,
+    "inTemp": 0,
+    "outTemp": 11,
+    "pointName": "염색기17번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 414,
+    "inTemp": 74,
+    "outTemp": 74,
+    "pointName": "염색기19번",
+    "status": "정상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  },
+  {
+    "devId": 415,
+    "inTemp": 82,
+    "outTemp": 72,
+    "pointName": "팀블러01번",
+    "status": "이상",
+    "trapType": 2,
+    "id": 2,
+    "selected": false
+  }
+]
