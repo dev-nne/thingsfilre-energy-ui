@@ -1,0 +1,2131 @@
+{
+    "usage-charge": [
+        {
+            "now_kwh": "13,565",
+            "now_cost": "12,452,602",
+            "future_kwh": "250,525",
+            "future_cost": "46,113,821"
+        }
+    ],
+    "monthly-predict":[
+        {
+            "time": 1656601200,
+            "real_value": 6746,
+            "predict_value": null,
+            "sum_value": 6746,
+            "limit": 787152
+        },
+        {
+            "time": 1656687600,
+            "real_value": 944,
+            "predict_value": null,
+            "sum_value": 7690,
+            "limit": 787152
+        },
+        {
+            "time": 1656774000,
+            "real_value": null,
+            "predict_value": 1383,
+            "sum_value": 9073,
+            "limit": 787152
+        },
+        {
+            "time": 1656860400,
+            "real_value": null,
+            "predict_value": 13119,
+            "sum_value": 22192,
+            "limit": 787152
+        },
+        {
+            "time": 1656946800,
+            "real_value": null,
+            "predict_value": 21097,
+            "sum_value": 43289,
+            "limit": 787152
+        },
+        {
+            "time": 1657033200,
+            "real_value": null,
+            "predict_value": 21349,
+            "sum_value": 64638,
+            "limit": 787152
+        },
+        {
+            "time": 1657119600,
+            "real_value": null,
+            "predict_value": 22183,
+            "sum_value": 86821,
+            "limit": 787152
+        },
+        {
+            "time": 1657206000,
+            "real_value": null,
+            "predict_value": 22815,
+            "sum_value": 109636,
+            "limit": 787152
+        },
+        {
+            "time": 1657292400,
+            "real_value": null,
+            "predict_value": 15224,
+            "sum_value": 124860,
+            "limit": 787152
+        },
+        {
+            "time": 1657378800,
+            "real_value": null,
+            "predict_value": 1347,
+            "sum_value": 126207,
+            "limit": 787152
+        },
+        {
+            "time": 1657465200,
+            "real_value": null,
+            "predict_value": 12848,
+            "sum_value": 139055,
+            "limit": 787152
+        },
+        {
+            "time": 1657551600,
+            "real_value": null,
+            "predict_value": 21914,
+            "sum_value": 160969,
+            "limit": 787152
+        },
+        {
+            "time": 1657638000,
+            "real_value": null,
+            "predict_value": 21309,
+            "sum_value": 182278,
+            "limit": 787152
+        },
+        {
+            "time": 1657724400,
+            "real_value": null,
+            "predict_value": 20560,
+            "sum_value": 202838,
+            "limit": 787152
+        },
+        {
+            "time": 1657810800,
+            "real_value": null,
+            "predict_value": 20469,
+            "sum_value": 223307,
+            "limit": 787152
+        },
+        {
+            "time": 1657897200,
+            "real_value": null,
+            "predict_value": 12394,
+            "sum_value": 235701,
+            "limit": 787152
+        },
+        {
+            "time": 1657983600,
+            "real_value": null,
+            "predict_value": 698,
+            "sum_value": 236399,
+            "limit": 787152
+        },
+        {
+            "time": 1658070000,
+            "real_value": null,
+            "predict_value": 10816,
+            "sum_value": 247215,
+            "limit": 787152
+        },
+        {
+            "time": 1658156400,
+            "real_value": null,
+            "predict_value": 20660,
+            "sum_value": 267875,
+            "limit": 787152
+        },
+        {
+            "time": 1658242800,
+            "real_value": null,
+            "predict_value": 21392,
+            "sum_value": 289267,
+            "limit": 787152
+        },
+        {
+            "time": 1658329200,
+            "real_value": null,
+            "predict_value": 20801,
+            "sum_value": 310068,
+            "limit": 787152
+        },
+        {
+            "time": 1658415600,
+            "real_value": null,
+            "predict_value": 20485,
+            "sum_value": 330553,
+            "limit": 787152
+        },
+        {
+            "time": 1658502000,
+            "real_value": null,
+            "predict_value": 10947,
+            "sum_value": 341500,
+            "limit": 787152
+        },
+        {
+            "time": 1658588400,
+            "real_value": null,
+            "predict_value": 925,
+            "sum_value": 342425,
+            "limit": 787152
+        },
+        {
+            "time": 1658674800,
+            "real_value": null,
+            "predict_value": 11460,
+            "sum_value": 353885,
+            "limit": 787152
+        },
+        {
+            "time": 1658761200,
+            "real_value": null,
+            "predict_value": 22478,
+            "sum_value": 376363,
+            "limit": 787152
+        },
+        {
+            "time": 1658847600,
+            "real_value": null,
+            "predict_value": 20890,
+            "sum_value": 397253,
+            "limit": 787152
+        },
+        {
+            "time": 1658934000,
+            "real_value": null,
+            "predict_value": 20667,
+            "sum_value": 417920,
+            "limit": 787152
+        },
+        {
+            "time": 1659020400,
+            "real_value": null,
+            "predict_value": 22467,
+            "sum_value": 440387,
+            "limit": 787152
+        },
+        {
+            "time": 1659106800,
+            "real_value": null,
+            "predict_value": 12853,
+            "sum_value": 453240,
+            "limit": 787152
+        },
+        {
+            "time": 1659193200,
+            "real_value": null,
+            "predict_value": 614,
+            "sum_value": 453854,
+            "limit": 787152
+        },
+        {
+            "time": 1659279600,
+            "real_value": null,
+            "predict_value": 12949,
+            "sum_value": 466803,
+            "limit": 787152
+        }
+    ],
+    "power_plant_details":[
+        {
+            "devId": "MT0000000017",
+            "pointName": "텐타 1 집진기",
+            "femsTime": "2022-07-04 15:10:57",
+            "total_wh": 9269.0,
+            "maximum_wh": 39000.0,
+            "percent": 0.2376666667
+        },
+        {
+            "devId": "MT0000000006",
+            "pointName": "텐타 2 집진기",
+            "femsTime": "2022-07-04 15:10:01",
+            "total_wh": 10987.0,
+            "maximum_wh": 39000.0,
+            "percent": 0.2817179487
+        },
+        {
+            "devId": "MT0000000008",
+            "pointName": "텐타 3 집진기",
+            "femsTime": "2022-07-04 15:10:05",
+            "total_wh": 15293.0,
+            "maximum_wh": 148000.0,
+            "percent": 0.1033310811
+        },
+        {
+            "devId": "MT0000000002",
+            "pointName": "텐타 5 집진기",
+            "femsTime": "2022-07-04 15:10:01",
+            "total_wh": 8509.0,
+            "maximum_wh": 82000.0,
+            "percent": 0.1037682927
+        },
+        {
+            "devId": "MT0000000004",
+            "pointName": "워싱덤블 집진기",
+            "femsTime": "2022-07-04 15:10:05",
+            "total_wh": 3463.0,
+            "maximum_wh": 33000.0,
+            "percent": 0.1049393939
+        },
+        {
+            "devId": "MT0000000023",
+            "pointName": "냉수펌프(부스터)",
+            "femsTime": "2022-07-04 15:10:49",
+            "total_wh": 9669.0,
+            "maximum_wh": 132000.0,
+            "percent": 0.07325
+        },
+        {
+            "devId": "MT0000000009",
+            "pointName": "온수펌프(부스터)",
+            "femsTime": "2022-07-04 15:10:13",
+            "total_wh": 24914.0,
+            "maximum_wh": 132000.0,
+            "percent": 0.1887424242
+        },
+        {
+            "devId": "MT0000000020",
+            "pointName": "염색기#1",
+            "femsTime": "2022-07-04 15:10:41",
+            "total_wh": 8828.0,
+            "maximum_wh": 148000.0,
+            "percent": 0.0596486486
+        },
+        {
+            "devId": "MT0000000024",
+            "pointName": "염색기#2",
+            "femsTime": "2022-07-04 15:10:53",
+            "total_wh": 4857.0,
+            "maximum_wh": 66000.0,
+            "percent": 0.0735909091
+        },
+        {
+            "devId": "MT0000000007",
+            "pointName": "염색기#5",
+            "femsTime": "2022-07-04 15:10:09",
+            "total_wh": 78.0,
+            "maximum_wh": 66000.0,
+            "percent": 0.0011818182
+        },
+        {
+            "devId": "MT0000000016",
+            "pointName": "염색기#7",
+            "femsTime": "2022-07-04 15:10:37",
+            "total_wh": 57.0,
+            "maximum_wh": 26000.0,
+            "percent": 0.0021923077
+        },
+        {
+            "devId": "MT0000000012",
+            "pointName": "염색기#8",
+            "femsTime": "2022-07-04 15:11:01",
+            "total_wh": 2819.0,
+            "maximum_wh": 66000.0,
+            "percent": 0.0427121212
+        },
+        {
+            "devId": "MT0000000003",
+            "pointName": "염색기#9",
+            "femsTime": "2022-03-07 07:10:57",
+            "total_wh": 12503.0,
+            "maximum_wh": 39000.0,
+            "percent": 0.3205897436
+        },
+        {
+            "devId": "MT0000000022",
+            "pointName": "염색기#16",
+            "femsTime": "2022-07-04 15:10:45",
+            "total_wh": 2821.0,
+            "maximum_wh": 33000.0,
+            "percent": 0.0854848485
+        },
+        {
+            "devId": "MT0000000010",
+            "pointName": "염색기#17",
+            "femsTime": "2022-07-04 15:10:17",
+            "total_wh": 8323.0,
+            "maximum_wh": 66000.0,
+            "percent": 0.1261060606
+        },
+        {
+            "devId": "MT0000000001",
+            "pointName": "염색기#18",
+            "femsTime": "2022-07-04 15:10:25",
+            "total_wh": 7773.0,
+            "maximum_wh": 66000.0,
+            "percent": 0.1177727273
+        },
+        {
+            "devId": "MT0000000014",
+            "pointName": "염색기#25",
+            "femsTime": "2022-07-04 15:10:33",
+            "total_wh": 9047.0,
+            "maximum_wh": 46000.0,
+            "percent": 0.196673913
+        },
+        {
+            "devId": "MT0000000005",
+            "pointName": "염색기#26",
+            "femsTime": "2022-07-04 15:11:05",
+            "total_wh": 1803.0,
+            "maximum_wh": 26000.0,
+            "percent": 0.0693461538
+        },
+        {
+            "devId": "MT0000000011",
+            "pointName": "염색기#28",
+            "femsTime": "2022-07-04 15:10:21",
+            "total_wh": 140.0,
+            "maximum_wh": 26000.0,
+            "percent": 0.0053846154
+        },
+        {
+            "devId": "MT0000000025",
+            "pointName": "건조기",
+            "femsTime": "2022-07-01 15:10:53",
+            "total_wh": 1217.0,
+            "maximum_wh": 527000.0,
+            "percent": 0.0023092979
+        }
+    ],
+    "diagnostic_plane":[
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947181000,
+            "act_kwh": 154,
+            "react_kwh": 31,
+            "point_name": "텐타 1 집진기",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656946945000,
+            "act_kwh": 184,
+            "react_kwh": 119,
+            "point_name": "텐타 2 집진기",
+            "anomaly_labels": true
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947108000,
+            "act_kwh": 255,
+            "react_kwh": 171,
+            "point_name": "텐타 3 집진기",
+            "anomaly_labels": true
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947079000,
+            "act_kwh": 143,
+            "react_kwh": 99,
+            "point_name": "텐타 5 집진기",
+            "anomaly_labels": true
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947099000,
+            "act_kwh": 58,
+            "react_kwh": 9,
+            "point_name": "워싱덤블 집진기",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1631491322000,
+            "act_kwh": 136,
+            "react_kwh": 122,
+            "point_name": "워싱덤블 집진기",
+            "anomaly_labels": true
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656946982000,
+            "act_kwh": 135,
+            "react_kwh": 35,
+            "point_name": "냉수펌프(부스터)",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947112000,
+            "act_kwh": 430,
+            "react_kwh": 55,
+            "point_name": "온수펌프(부스터)",
+            "anomaly_labels": true
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947162000,
+            "act_kwh": 6,
+            "react_kwh": 1,
+            "point_name": "염색기#1",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947162000,
+            "act_kwh": 91,
+            "react_kwh": 32,
+            "point_name": "염색기#2",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947102000,
+            "act_kwh": 1,
+            "react_kwh": 1,
+            "point_name": "염색기#5",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947110000,
+            "act_kwh": 1,
+            "react_kwh": 1,
+            "point_name": "염색기#7",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947192000,
+            "act_kwh": 1,
+            "react_kwh": 1,
+            "point_name": "염색기#8",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1646638262000,
+            "act_kwh": 206,
+            "react_kwh": 36,
+            "point_name": "염색기#9",
+            "anomaly_labels": true
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947129000,
+            "act_kwh": 46,
+            "react_kwh": 10,
+            "point_name": "염색기#16",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947079000,
+            "act_kwh": 152,
+            "react_kwh": 32,
+            "point_name": "염색기#17",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947102000,
+            "act_kwh": 130,
+            "react_kwh": 31,
+            "point_name": "염색기#18",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1635521102000,
+            "act_kwh": 156,
+            "react_kwh": 41,
+            "point_name": "염색기#23",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947130000,
+            "act_kwh": 195,
+            "react_kwh": 61,
+            "point_name": "염색기#25",
+            "anomaly_labels": true
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947225000,
+            "act_kwh": 34,
+            "react_kwh": 10,
+            "point_name": "염색기#26",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656947069000,
+            "act_kwh": 2,
+            "react_kwh": 1,
+            "point_name": "염색기#28",
+            "anomaly_labels": false
+        },
+        {
+            "site_name": "세왕섬유",
+            "time": 1656689762000,
+            "act_kwh": 5,
+            "react_kwh": 1,
+            "point_name": "건조기",
+            "anomaly_labels": false
+        }
+    ],
+    "alarm":[
+        {
+            "time": 1652280300,
+            "api_title": "세왕섬유에서 05-11 23:45 시간에 피크전력이 예측됨",
+            "api_contents": "siteId_2005007004, devId_nan"
+        },
+        {
+            "time": 1652281200,
+            "api_title": "세왕섬유에서 05-12 00:00 시간에 피크전력이 예측됨",
+            "api_contents": "siteId_2005007004, devId_nan"
+        }
+    ],
+    "daily-predict":[
+        {
+            "time": 1656821700,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656822600,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656823500,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656824400,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656825300,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656826200,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656827100,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656828000,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656828900,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656829800,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656830700,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656831600,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656832500,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656833400,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656834300,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656835200,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656836100,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656837000,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656837900,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656838800,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656839700,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656840600,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656841500,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656842400,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656843300,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656844200,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656845100,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656846000,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656846900,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656847800,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656848700,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656849600,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656850500,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656851400,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656852300,
+            "real_value": 10,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656853200,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656854100,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656855000,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656855900,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656856800,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656861300,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656862200,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656863100,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656864000,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656864900,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656865800,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656866700,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656867600,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656868500,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656869400,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656870300,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656871200,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656872100,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656873000,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656873900,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656874800,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656875700,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656876600,
+            "real_value": 8,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656877500,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656878400,
+            "real_value": 9,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656879300,
+            "real_value": 11,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656880200,
+            "real_value": 12,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656881100,
+            "real_value": 12,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656882000,
+            "real_value": 12,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656882900,
+            "real_value": 12,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656883800,
+            "real_value": 13,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656884700,
+            "real_value": 21,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656885600,
+            "real_value": 41,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656886500,
+            "real_value": 58,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656887400,
+            "real_value": 85,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656888300,
+            "real_value": 115,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656889200,
+            "real_value": 174,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656890100,
+            "real_value": 175,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656891000,
+            "real_value": 182,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656891900,
+            "real_value": 227,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656892800,
+            "real_value": 225,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656893700,
+            "real_value": 223,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656894600,
+            "real_value": 244,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656897300,
+            "real_value": 226,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656898200,
+            "real_value": 185,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656899100,
+            "real_value": 172,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656900000,
+            "real_value": 167,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656900900,
+            "real_value": 170,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656901800,
+            "real_value": 167,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656902700,
+            "real_value": 165,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656903600,
+            "real_value": 142,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656904500,
+            "real_value": 137,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656905400,
+            "real_value": 133,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656906300,
+            "real_value": 143,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656907200,
+            "real_value": 171,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656908100,
+            "real_value": 168,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656909000,
+            "real_value": 164,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656909900,
+            "real_value": 158,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656910800,
+            "real_value": 153,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656911700,
+            "real_value": 160,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656912600,
+            "real_value": 163,
+            "limit": 1058,
+            "predict_value": null
+        },
+        {
+            "time": 1656913500,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 152
+        },
+        {
+            "time": 1656914400,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 132
+        },
+        {
+            "time": 1656915300,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 128
+        },
+        {
+            "time": 1656916200,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 143
+        },
+        {
+            "time": 1656917100,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 166
+        },
+        {
+            "time": 1656918000,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 182
+        },
+        {
+            "time": 1656918900,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 189
+        },
+        {
+            "time": 1656919800,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 187
+        },
+        {
+            "time": 1656920700,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 183
+        },
+        {
+            "time": 1656921600,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 180
+        },
+        {
+            "time": 1656922500,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 173
+        },
+        {
+            "time": 1656923400,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 169
+        },
+        {
+            "time": 1656924300,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 169
+        },
+        {
+            "time": 1656925200,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 169
+        },
+        {
+            "time": 1656926100,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 166
+        },
+        {
+            "time": 1656927000,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 164
+        },
+        {
+            "time": 1656927900,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 161
+        },
+        {
+            "time": 1656928800,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 161
+        },
+        {
+            "time": 1656929700,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 163
+        },
+        {
+            "time": 1656930600,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 164
+        },
+        {
+            "time": 1656931500,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 163
+        },
+        {
+            "time": 1656932400,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 163
+        },
+        {
+            "time": 1656933300,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 163
+        },
+        {
+            "time": 1656934200,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 165
+        },
+        {
+            "time": 1656935100,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 173
+        },
+        {
+            "time": 1656936000,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 186
+        },
+        {
+            "time": 1656936900,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 198
+        },
+        {
+            "time": 1656937800,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 206
+        },
+        {
+            "time": 1656938700,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 207
+        },
+        {
+            "time": 1656939600,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 209
+        },
+        {
+            "time": 1656940500,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 211
+        },
+        {
+            "time": 1656941400,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 212
+        },
+        {
+            "time": 1656942300,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 209
+        },
+        {
+            "time": 1656943200,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 206
+        },
+        {
+            "time": 1656944100,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 203
+        },
+        {
+            "time": 1656945000,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 202
+        },
+        {
+            "time": 1656945900,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 208
+        },
+        {
+            "time": 1656946800,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 216
+        },
+        {
+            "time": 1656947700,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 221
+        },
+        {
+            "time": 1656948600,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 226
+        },
+        {
+            "time": 1656949500,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 224
+        },
+        {
+            "time": 1656950400,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 220
+        },
+        {
+            "time": 1656951300,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 216
+        },
+        {
+            "time": 1656952200,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 214
+        },
+        {
+            "time": 1656953100,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 212
+        },
+        {
+            "time": 1656954000,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 204
+        },
+        {
+            "time": 1656954900,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 191
+        },
+        {
+            "time": 1656955800,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 174
+        },
+        {
+            "time": 1656956700,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 147
+        },
+        {
+            "time": 1656957600,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 133
+        },
+        {
+            "time": 1656958500,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 137
+        },
+        {
+            "time": 1656959400,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 160
+        },
+        {
+            "time": 1656960300,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 187
+        },
+        {
+            "time": 1656961200,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 204
+        },
+        {
+            "time": 1656962100,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 210
+        },
+        {
+            "time": 1656963000,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 209
+        },
+        {
+            "time": 1656963900,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 207
+        },
+        {
+            "time": 1656964800,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 209
+        },
+        {
+            "time": 1656965700,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 207
+        },
+        {
+            "time": 1656966600,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 204
+        },
+        {
+            "time": 1656967500,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 204
+        },
+        {
+            "time": 1656968400,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 200
+        },
+        {
+            "time": 1656969300,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 198
+        },
+        {
+            "time": 1656970200,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 203
+        },
+        {
+            "time": 1656971100,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 213
+        },
+        {
+            "time": 1656972000,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 220
+        },
+        {
+            "time": 1656972900,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 222
+        },
+        {
+            "time": 1656973800,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 220
+        },
+        {
+            "time": 1656974700,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 214
+        },
+        {
+            "time": 1656975600,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 207
+        },
+        {
+            "time": 1656976500,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 200
+        },
+        {
+            "time": 1656977400,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 196
+        },
+        {
+            "time": 1656978300,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 194
+        },
+        {
+            "time": 1656979200,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 194
+        },
+        {
+            "time": 1656980100,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 197
+        },
+        {
+            "time": 1656981000,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 199
+        },
+        {
+            "time": 1656981900,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 197
+        },
+        {
+            "time": 1656982800,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 201
+        },
+        {
+            "time": 1656983700,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 209
+        },
+        {
+            "time": 1656984600,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 218
+        },
+        {
+            "time": 1656985500,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 223
+        },
+        {
+            "time": 1656986400,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 226
+        },
+        {
+            "time": 1656987300,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 230
+        },
+        {
+            "time": 1656988200,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 229
+        },
+        {
+            "time": 1656989100,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 230
+        },
+        {
+            "time": 1656990000,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 230
+        },
+        {
+            "time": 1656990900,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 228
+        },
+        {
+            "time": 1656991800,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 226
+        },
+        {
+            "time": 1656992700,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 223
+        },
+        {
+            "time": 1656993600,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 219
+        },
+        {
+            "time": 1656994500,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 217
+        },
+        {
+            "time": 1656995400,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 215
+        },
+        {
+            "time": 1656996300,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 213
+        },
+        {
+            "time": 1656997200,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 203
+        },
+        {
+            "time": 1656998100,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 190
+        },
+        {
+            "time": 1656999000,
+            "real_value": null,
+            "limit": 1058,
+            "predict_value": 172
+        }
+    ],
+    "pp_trend_graph":{
+        "seg_count": 7,
+        "data": [
+            {
+                "dev_time": 1656860400,
+                "kwh": 8.38,
+                "cost": 17084473.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656861300,
+                "kwh": 8.4,
+                "cost": 17085072.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656862200,
+                "kwh": 8.16,
+                "cost": 17085660.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656863100,
+                "kwh": 8.28,
+                "cost": 17086256.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656864000,
+                "kwh": 8.52,
+                "cost": 17086869.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656864900,
+                "kwh": 8.4,
+                "cost": 17087473.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656865800,
+                "kwh": 8.76,
+                "cost": 17088104.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656866700,
+                "kwh": 8.64,
+                "cost": 17088726.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656867600,
+                "kwh": 8.88,
+                "cost": 17089365.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656868500,
+                "kwh": 8.88,
+                "cost": 17090004.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656869400,
+                "kwh": 8.76,
+                "cost": 17090634.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656870300,
+                "kwh": 9.24,
+                "cost": 17091299.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656871200,
+                "kwh": 9.0,
+                "cost": 17091527.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656872100,
+                "kwh": 9.48,
+                "cost": 17091754.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656873000,
+                "kwh": 9.48,
+                "cost": 17091982.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656873900,
+                "kwh": 9.6,
+                "cost": 17093346.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656874800,
+                "kwh": 9.84,
+                "cost": 17094711.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656875700,
+                "kwh": 9.0,
+                "cost": 17095359.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656876600,
+                "kwh": 8.52,
+                "cost": 17095972.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656877500,
+                "kwh": 9.84,
+                "cost": 17096680.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656878400,
+                "kwh": 12.0,
+                "cost": 17097544.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656879300,
+                "kwh": 12.0,
+                "cost": 17098407.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656880200,
+                "kwh": 12.48,
+                "cost": 17099306.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656881100,
+                "kwh": 13.08,
+                "cost": 17100247.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656882000,
+                "kwh": 14.16,
+                "cost": 17101266.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656882900,
+                "kwh": 12.96,
+                "cost": 17102199.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656883800,
+                "kwh": 12.96,
+                "cost": 17103132.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656884700,
+                "kwh": 66.12,
+                "cost": 17109432.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656885600,
+                "kwh": 108.96,
+                "cost": 17115732.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656886500,
+                "kwh": 134.04,
+                "cost": 17125380.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656887400,
+                "kwh": 166.44,
+                "cost": 17137359.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656888300,
+                "kwh": 216.0,
+                "cost": 17152905.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656889200,
+                "kwh": 254.16,
+                "cost": 17171197.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656890100,
+                "kwh": 266.88,
+                "cost": 17190405.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656891000,
+                "kwh": 274.92,
+                "cost": 17210191.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656891900,
+                "kwh": 279.0,
+                "cost": 17230272.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656892800,
+                "kwh": 280.68,
+                "cost": 17250473.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656893700,
+                "kwh": 294.48,
+                "cost": 17289379.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656894600,
+                "kwh": 302.4,
+                "cost": 17329332.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656895500,
+                "kwh": 308.88,
+                "cost": 17370141.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656896400,
+                "kwh": 317.1,
+                "cost": 17406816.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656897300,
+                "kwh": 325.32,
+                "cost": 17443490.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656898200,
+                "kwh": 323.88,
+                "cost": 17516515.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656899100,
+                "kwh": 322.2,
+                "cost": 17584439.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656900000,
+                "kwh": 325.8,
+                "cost": 17652363.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656900900,
+                "kwh": 335.04,
+                "cost": 17720288.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656901800,
+                "kwh": 330.24,
+                "cost": 17788212.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656902700,
+                "kwh": 302.64,
+                "cost": 17856136.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656903600,
+                "kwh": 311.64,
+                "cost": 17924060.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656904500,
+                "kwh": 300.36,
+                "cost": 17963743.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656905400,
+                "kwh": 287.52,
+                "cost": 18002578.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656906300,
+                "kwh": 300.36,
+                "cost": 18041414.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656907200,
+                "kwh": 335.16,
+                "cost": 18085695.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656908100,
+                "kwh": 336.6,
+                "cost": 18134532.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656909000,
+                "kwh": 338.76,
+                "cost": 18211155.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656909900,
+                "kwh": 341.04,
+                "cost": 18287777.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656910800,
+                "kwh": 339.72,
+                "cost": 18364400.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656911700,
+                "kwh": 330.72,
+                "cost": 18438967.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656912600,
+                "kwh": 344.4,
+                "cost": 18516618.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656913500,
+                "kwh": 339.24,
+                "cost": 18592172.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656914400,
+                "kwh": 330.96,
+                "cost": 18667726.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656915300,
+                "kwh": 314.28,
+                "cost": 18738585.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656916200,
+                "kwh": 312.0,
+                "cost": 18808931.0,
+                "holiday": 0
+            },
+            {
+                "dev_time": 1656917100,
+                "kwh": 328.8,
+                "cost": 18883065.0,
+                "holiday": 0
+            }
+        ]
+    }
+}

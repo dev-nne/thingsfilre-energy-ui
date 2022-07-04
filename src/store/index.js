@@ -22,7 +22,8 @@ export default createStore({
     alarm: [],
     isLogin: false,
     userId: "",
-    factoryTitle: ""
+    factoryTitle: "",
+    isLocal: true
   },
   mutations: {
     getAlarm(state, payload) {

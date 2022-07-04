@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import dashbaord from "@/components/data/dashboard.json";
 
 const main = {
   namespaced: true,
@@ -179,6 +180,93 @@ const main = {
   },
   actions: {
     getMainData({ rootState, state, commit }) {
+      // local일때 data✨
+      if(rootState.isLocal) {
+        commit("getDailyDatas", dashbaord["daily-usage"]);
+
+        const monthly = dashbaord["monthly-usage"];
+        const time = [];
+        const monthly_elec = [];
+
+        for(let i = 0; i < monthly.length; i++) {
+          time.push(new Date(monthly[i].time * 1000).getMonth() + 1);
+          monthly_elec.push(monthly[i].monthly_elec);
+        }
+        commit("monthlyUsage", { time, monthly_elec });
+
+        const steam = dashbaord["steam-percent"];
+        const site_name = [];
+        const site_max_avg_percent = [];
+        const site_in_out_percent = [];
+        for(let i = 0; i < steam.length; i++) {
+          const max = steam[i].site_max_avg_percent * 100;
+          const inOut = steam[i].site_in_out_percent * 100;
+          site_name.push(steam[i].site_name);
+          site_max_avg_percent.push(Math.floor(max));
+          site_in_out_percent.push(Math.floor(inOut));
+          }
+        commit("getMonthlySteam", { site_name, site_max_avg_percent, site_in_out_percent });
+
+        const steamCount = dashbaord.steam_dev_count;
+        const known = [];
+        const unknown = [];
+        for(let i = 0; i < steamCount.length; i++) {
+          if(steamCount[i].trapType === "Unknown") {
+           unknown.push(steamCount[i]);
+          }else{
+            known.push(steamCount[i]);
+          }
+        }
+        const dataArr = [
+          ...known,
+          ...unknown
+        ];
+        const trapType = [];
+        const count = [];
+
+        for(let i = 0; i < dataArr.length; i++) {
+          trapType.push(dataArr[i].trapType);
+          count.push(dataArr[i].count);
+          }
+        commit("getSteamCount", { trapType, count });
+
+         const { alarm } = dashbaord;
+        const alarmDataArr = [];
+
+        for(let i = 0; i < alarm.length; i++) {
+          const api_contents = alarm[i].api_contents.split(",");
+          const siteId = api_contents[0].split("_")[1];
+          let siteName = "";
+          switch(siteId) {
+            case "2005007001":
+              siteName = "티엘비"; break;
+            case "2005007002":
+              siteName = "우성염직"; break;
+              case "2005007003":
+                siteName = "YH교역"; break;
+                case "2005007004":
+                  siteName = "세왕섬유"; break;
+              case "2005007005":
+                siteName = "유트로닉스"; break;
+              case "2005007006":
+                siteName = "화백엔지니어링"; break;
+              default:
+                siteName = "알수없음"; break;
+          }
+          const alarmData = {
+            title: alarm[i].api_title,
+            time: moment(new Date(alarm[i].time * 1000)).format("YYYY년 MM월 DD일 HH분 mm분"),
+            site: siteName,
+            devId: api_contents[1].split("_")[1]
+          };
+          alarmDataArr.push(alarmData);
+        }
+        commit("getAlarm", alarmDataArr, { root: true });
+
+        state.factoryReload = false;
+        commit("getEnergyList", dashbaord.current_state);
+        return;
+      }
       axios.post(`${rootState.globalIP}/main/elec/daily-usage`).then((data) => {
         const datas = data.data;
 

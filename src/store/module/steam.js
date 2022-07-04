@@ -2,7 +2,7 @@ import axios from "axios";
 import { computed } from "vue";
 import moment from "moment";
 import "url-search-params-polyfill";
-
+import steamData from "@/components/data/steam.json";
 
 const steam = {
   namespaced: true,
@@ -521,6 +521,64 @@ const steam = {
   },
   actions: {
     getSteamData({ rootState, commit }) {
+      if(rootState.isLocal) {
+        commit("steamTrapStatus", steamData["trap-condition"]);
+        commit("elecTrapStatus", steamData.power_plant_details);
+        const steamCount = steamData.steam_dev_count;
+        const known = [];
+        const unknown = [];
+        for(let i = 0; i < steamCount.length; i++) {
+          if(steamCount[i].trapType === "Unknown") {
+           unknown.push(steamCount[i]);
+          }else{
+            known.push(steamCount[i]);
+          }
+        }
+        const dataArr = [
+          ...known,
+          ...unknown
+        ];
+
+        const trapType = [];
+        const count = [];
+
+        for(let i = 0; i < dataArr.length; i++) {
+          trapType.push(dataArr[i].trapType);
+          count.push(dataArr[i].count);
+          }
+        commit("steamCount", { trapType, count });
+
+        const diagnostic = steamData.diagnostic_plane;
+        const normalData = [];
+        const errorData = [];
+        for(let i = 0; i < diagnostic.length; i++) {
+          if(!diagnostic[i].anomaly_labels) {
+            normalData.push(diagnostic[i]);
+          }else{
+            errorData.push(diagnostic[i]);
+          }
+        }
+        commit("diagnosticChartData", normalData);
+        commit("errorDiagnosticChartData", errorData);
+        commit("diagnosticTableData", diagnostic);
+
+        const alarmData = steamData.alarm;
+        const alarmDataArr = [];
+
+        for(let i = 0; i < alarmData.length; i++) {
+          const api_contents = alarmData[i].api_contents.split(",");
+          const alarm = {
+            title: alarmData[i].api_title,
+            time: moment(new Date(alarmData[i].time * 1000)).format("YYYY년 MM월 DD일 HH분 mm분"),
+            devId: api_contents[1].split("_")[1]
+          };
+          alarmDataArr.push(alarm);
+        }
+        commit("getAlarm", alarmDataArr, { root: true });
+        commit("getSteamStatus", steamData.status_table);
+        return;
+      }
+
       const siteid = rootState.factoryID;
       axios.post(`${rootState.globalIP}/sub/steam/trap-condition`, { siteid }).then((data) => {
         commit("steamTrapStatus", data.data);
@@ -593,29 +651,37 @@ const steam = {
       });
     },
     getFEMSDetailModalData({ rootState, state, commit }) {
+      if(rootState.isLocal) {
+        commit("getTempModalChartData", steamData.fems_trend_graph);
+        console.log(steamData.fems_trend_graph);
+        return;
+      }
       const siteid = rootState.factoryID;
       axios.post(`${rootState.globalIP}/sub/fems_trend_graph`, {
       siteid, devid: state.selectFEMSDetail.devId, search_period: state.FEMSModalSelectKey, search_type: state.searchType
         }).then((res) => {
           commit("getTempModalChartData", res.data);
             });
-          },
-      getFEMScsvDownload({ rootState, state, commit }) {
-        const siteid = rootState.factoryID;
-        const time = moment().format("YYMMDD");
-        axios.post(`${rootState.globalIP}/sub/fems_trend_csv`, {
-        siteid, devid: state.selectFEMSDetail.devId, search_period: state.FEMSModalSelectKey, search_type: state.searchType
-          }).then((res) => {
-            const fileURL = window.URL.createObjectURL(new Blob([res.data]));
-            const fileLink = document.createElement("a");
+    },
+    getFEMScsvDownload({ rootState, state, commit }) {
+      if(rootState.isLocal) {
+        return;
+      }
+      const siteid = rootState.factoryID;
+      const time = moment().format("YYMMDD");
+      axios.post(`${rootState.globalIP}/sub/fems_trend_csv`, {
+      siteid, devid: state.selectFEMSDetail.devId, search_period: state.FEMSModalSelectKey, search_type: state.searchType
+        }).then((res) => {
+          const fileURL = window.URL.createObjectURL(new Blob([res.data]));
+          const fileLink = document.createElement("a");
 
-            fileLink.href = fileURL;
-            fileLink.setAttribute("download", `${time}_${state.selectFEMSDetail.devId}.csv`);
-            document.body.appendChild(fileLink);
+          fileLink.href = fileURL;
+          fileLink.setAttribute("download", `${time}_${state.selectFEMSDetail.devId}.csv`);
+          document.body.appendChild(fileLink);
 
-            fileLink.click();
-          });
-        }
+          fileLink.click();
+        });
+    }
   }
 };
 

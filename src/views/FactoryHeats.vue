@@ -135,7 +135,7 @@ export default {
           if(store.state.factoryID === "2005007004") {
             const unity = document.getElementById("unityIFrame");
             const steamView = unity.contentWindow || unity.contentDocument;
-            if(store.state.steam.steamStatus.length !== 0) {
+            if(store.state.steam.steamStatus.length !== 0 && !store.state.isLocal) {
               steamView.setData(store.state.steam.steamStatus);
               steamView.Ready();
             }

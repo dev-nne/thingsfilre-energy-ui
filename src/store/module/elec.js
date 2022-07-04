@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import elecData from "@/components/data/elec.json";
 
 const elec = {
   namespaced: true,
@@ -211,6 +212,40 @@ const elec = {
   },
   actions: {
     getElecData({ rootState, commit }) {
+      if(rootState.isLocal) {
+        commit("getUsageChargeData", elecData["usage-charge"][0]);
+        commit("monthlyElecChart", elecData["monthly-predict"]);
+        commit("dailyElecChart", elecData["daily-predict"]);
+        commit("powerPlantDetails", elecData.power_plant_details);
+        const alarmData = elecData.alarm;
+        const dataArr = [];
+
+        for(let i = 0; i < alarmData.length; i++) {
+          const api_contents = alarmData[i].api_contents.split(",");
+          const alarm = {
+            title: alarmData[i].api_title,
+            time: moment(new Date(alarmData[i].time * 1000)).format("YYYY년 MM월 DD일 HH분 mm분"),
+            devId: api_contents[1].split("_")[1]
+          };
+          dataArr.push(alarm);
+        }
+        commit("getAlarm", dataArr, { root: true });
+
+        const diagnostic = elecData.diagnostic_plane;
+        const normalData = [];
+        const errorData = [];
+        for(let i = 0; i < diagnostic.length; i++) {
+          if(!diagnostic[i].anomaly_labels) {
+            normalData.push(diagnostic[i]);
+          }else{
+            errorData.push(diagnostic[i]);
+          }
+        }
+        commit("diagnosticChartData", normalData);
+        commit("errorDiagnosticChartData", errorData);
+
+        return;
+      }
       const siteid = rootState.factoryID;
 
       axios.post(`${rootState.globalIP}/sub/elec/usage-charge`, { siteid }).then((data) => {
@@ -262,6 +297,9 @@ const elec = {
       });
     },
     getPowerPlantDetailsModal({ rootState, commit }) {
+      if(rootState.isLocal) {
+        return;
+      }
       const siteid = rootState.factoryID;
 
       axios.post(`${rootState.globalIP}/sub/elec/usage-charge`, { siteid }).then((data) => {
@@ -270,6 +308,10 @@ const elec = {
       });
     },
     getPPDetailModalData({ rootState, state, commit }) {
+      if(rootState.isLocal) {
+        commit("getElecModalChartData", elecData.pp_trend_graph);
+        return;
+      }
     const siteid = rootState.factoryID;
     axios.post(`${rootState.globalIP}/sub/pp_trend_graph`, {
       siteid, search_period: state.ppModalSelectKey
@@ -278,6 +320,9 @@ const elec = {
           });
     },
     getPPcsvDownload({ rootState, state }) {
+      if(rootState.isLocal) {
+        return;
+      }
       const siteid = rootState.factoryID;
       const time = moment().format("YYMMDD");
 

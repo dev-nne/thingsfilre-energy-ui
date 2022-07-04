@@ -32,7 +32,7 @@
         },
         {
             "id": "admin",
-            "pw" : "admin123",
+            "pw" : "admin",
             "name": "admin"
         }
     ]
